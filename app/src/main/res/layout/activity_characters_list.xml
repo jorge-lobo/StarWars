@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CharactersListActivity">
+
+    <View
+        android:id="@+id/star_wars_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/star_wars_bg" />
+
+    <View
+        android:id="@+id/star_wars_logo_small"
+        android:layout_width="@dimen/star_wars_logo_small_width"
+        android:layout_height="@dimen/star_wars_logo_small_height"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="27dp"
+        android:background="@drawable/star_wars_logo" />
+
+    <TextView
+        android:id="@+id/title_characters"
+        android:layout_width="wrap_content"
+        android:layout_height="51dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="98dp"
+        android:fontFamily="@font/starjedi_special_edition"
+        android:gravity="center_horizontal|top"
+        android:text="@string/characters"
+        android:textAppearance="@style/text_yellow"
+        android:textSize="@dimen/text_size_extra_large" />
+
+    <EditText
+        android:id="@+id/search_box"
+        android:layout_width="350dp"
+        android:layout_height="31dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="169dp"
+        android:autofillHints=""
+        android:background="@drawable/search_box"
+        android:drawableEnd="@drawable/x"
+        android:inputType="text"
+        android:paddingStart="15dp"
+        android:paddingEnd="5dp"
+        tools:ignore="LabelFor" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/filter_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="216dp"
+            android:contentDescription="@string/filter_button"
+            android:src="@drawable/sliders" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="103dp"
+            android:layout_marginTop="216dp"
+            android:foregroundGravity="fill">
+
+            <View
+                android:id="@+id/name_button"
+                android:layout_width="78dp"
+                android:layout_height="25dp"
+                android:background="@drawable/small_button_yellow" />
+
+            <TextView
+                android:id="@+id/name_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|top"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:text="@string/name"
+                android:textAppearance="@style/text_black"
+                android:textSize="@dimen/text_size_small" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="186dp"
+            android:layout_marginTop="216dp"
+            android:foregroundGravity="fill">
+
+            <View
+                android:id="@+id/year_button"
+                android:layout_width="78dp"
+                android:layout_height="25dp"
+                android:background="@drawable/small_button_white" />
+
+            <TextView
+                android:id="@+id/year_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|top"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:text="@string/name"
+                android:textAppearance="@style/text_black"
+                android:textSize="@dimen/text_size_small" />
+
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/button_asc"
+            android:layout_width="48dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="269dp"
+            android:layout_marginTop="216dp"
+            android:contentDescription="@string/ascending_order"
+            android:src="@drawable/arrow_up_white" />
+
+        <ImageView
+            android:id="@+id/button_desc"
+            android:layout_width="48dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="322dp"
+            android:layout_marginTop="215dp"
+            android:contentDescription="@string/descending_order"
+            android:src="@drawable/arrow_down_yellow" />
+
+    </RelativeLayout>
+
+
+    <!-- filters box-->
+    <RelativeLayout
+        android:id="@+id/filter_section"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:visibility="visible">
+
+        <View
+            android:id="@+id/curtain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#80000000" />
+
+        <View
+            android:id="@+id/filters_container"
+            android:layout_width="match_parent"
+            android:layout_height="477dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/black" />
+
+        <View
+            android:id="@+id/top_edge"
+            android:layout_width="60dp"
+            android:layout_height="3dp"
+            android:layout_above="@id/filter_icon"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="20dp"
+            android:background="@color/yellow" />
+
+        <ImageView
+            android:id="@+id/filter_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_above="@id/specie_gender_textview"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="25dp"
+            android:contentDescription="@string/filter_icon"
+            android:src="@drawable/sliders" />
+
+        <TextView
+            android:id="@+id/specie_gender_textview"
+            android:layout_width="148dp"
+            android:layout_height="26dp"
+            android:layout_above="@id/species_buttons1"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="29dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/starjedi_special_edition"
+            android:text="@string/specie_gender"
+            android:textAppearance="@style/text_yellow"
+            android:textSize="@dimen/text_size_medium" />
+
+        <LinearLayout
+            android:id="@+id/species_buttons1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/species_buttons2"
+            android:layout_alignParentStart="true"
+            android:layout_marginHorizontal="19dp"
+            android:layout_marginBottom="21dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:id="@+id/frameLayout_human"
+                android:layout_width="0dp"
+                android:layout_height="31dp"
+                android:layout_weight="1"
+                android:foregroundGravity="fill"
+                android:paddingHorizontal="10dp">
+
+                <ToggleButton
+                    android:id="@+id/human_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/human"
+                    android:textOn="@string/human"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/human_textview"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_gravity="center_horizontal|top"-->
+                <!--                    android:fontFamily="@font/starjedi_special_edition"-->
+                <!--                    android:text="@string/human"-->
+                <!--                    android:textAppearance="@style/text_black"-->
+                <!--                    android:textSize="@dimen/text_size_medium" />-->
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frameLayout_droid"
+                android:layout_width="0dp"
+                android:layout_height="31dp"
+                android:layout_weight="1"
+                android:foregroundGravity="fill"
+                android:paddingHorizontal="10dp">
+
+                <View
+                    android:id="@+id/droid_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/small_button_white" />
+
+                <TextView
+                    android:id="@+id/droid_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|top"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:text="@string/droid"
+                    android:textAppearance="@style/text_black"
+                    android:textSize="@dimen/text_size_medium" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frameLayout_ewoks"
+                android:layout_width="0dp"
+                android:layout_height="31dp"
+                android:layout_weight="1"
+                android:foregroundGravity="fill"
+                android:paddingHorizontal="10dp">
+
+                <View
+                    android:id="@+id/ewoks_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/small_button_white" />
+
+                <TextView
+                    android:id="@+id/ewoks_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|top"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:text="@string/ewoks"
+                    android:textAppearance="@style/text_black"
+                    android:textSize="@dimen/text_size_medium" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/species_buttons2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/side_force_textview"
+            android:layout_alignParentStart="true"
+            android:layout_marginHorizontal="19dp"
+            android:layout_marginBottom="50dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:id="@+id/frameLayout_keshiri"
+                android:layout_width="0dp"
+                android:layout_height="31dp"
+                android:layout_weight="1"
+                android:foregroundGravity="fill"
+                android:paddingHorizontal="10dp">
+
+                <View
+                    android:id="@+id/keshiri_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/small_button_white" />
+
+                <TextView
+                    android:id="@+id/keshiri_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|top"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:text="@string/keshiri"
+                    android:textAppearance="@style/text_black"
+                    android:textSize="@dimen/text_size_medium" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frameLayout_zeltrons"
+                android:layout_width="0dp"
+                android:layout_height="31dp"
+                android:layout_weight="1"
+                android:foregroundGravity="fill"
+                android:paddingHorizontal="10dp">
+
+                <View
+                    android:id="@+id/zeltrons_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/small_button_white" />
+
+                <TextView
+                    android:id="@+id/zeltrons_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|top"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:text="@string/zeltrons"
+                    android:textAppearance="@style/text_black"
+                    android:textSize="@dimen/text_size_medium" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frameLayout_jawas"
+                android:layout_width="0dp"
+                android:layout_height="31dp"
+                android:layout_weight="1"
+                android:foregroundGravity="fill"
+                android:paddingHorizontal="10dp">
+
+                <View
+                    android:id="@+id/jawas_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/small_button_white" />
+
+                <TextView
+                    android:id="@+id/jawas_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|top"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:text="@string/jawas"
+                    android:textAppearance="@style/text_black"
+                    android:textSize="@dimen/text_size_medium" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/side_force_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/mode_buttons"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="29dp"
+            android:layout_marginBottom="25dp"
+            android:fontFamily="@font/starjedi_special_edition"
+            android:text="@string/side_of_the_force"
+            android:textAppearance="@style/text_yellow"
+            android:textSize="@dimen/text_size_medium" />
+
+        <LinearLayout
+            android:id="@+id/mode_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/search_button"
+            android:layout_alignParentStart="true"
+            android:layout_marginHorizontal="19dp"
+            android:layout_marginBottom="51dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:id="@+id/frameLayout_light"
+                android:layout_width="0dp"
+                android:layout_height="31dp"
+                android:layout_weight="1"
+                android:foregroundGravity="fill"
+                android:paddingHorizontal="10dp">
+
+                <View
+                    android:id="@+id/light_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/small_button_white" />
+
+                <TextView
+                    android:id="@+id/light_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|top"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:text="@string/light"
+                    android:textAppearance="@style/text_black"
+                    android:textSize="@dimen/text_size_medium" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frameLayout_dark"
+                android:layout_width="0dp"
+                android:layout_height="31dp"
+                android:layout_weight="1"
+                android:foregroundGravity="fill"
+                android:paddingHorizontal="10dp">
+
+                <View
+                    android:id="@+id/dark_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/small_button_white" />
+
+                <TextView
+                    android:id="@+id/dark_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|top"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:text="@string/dark"
+                    android:textAppearance="@style/text_black"
+                    android:textSize="@dimen/text_size_medium" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frameLayout_empty"
+                android:layout_width="0dp"
+                android:layout_height="31dp"
+                android:layout_weight="1"
+                android:foregroundGravity="fill"
+                android:paddingHorizontal="10dp">
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <!--   search button     -->
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="350dp"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="39dp"
+            android:background="@drawable/button_full_width"
+            android:fontFamily="@font/starjedi_special_edition"
+            android:text="@string/search"
+            android:textAppearance="@style/text_black"
+            android:textSize="@dimen/text_size_extra_large" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Text Sizes -->
+    <dimen name="text_size_extra_small">12sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_small_title">20sp</dimen>
+    <dimen name="text_size_large">24sp</dimen>
+    <dimen name="text_size_extra_large">32sp</dimen>
+
+    <!-- Logo Sizes -->
+    <dimen name="star_wars_logo_large_width">272dp</dimen>
+    <dimen name="star_wars_logo_large_height">165dp</dimen>
+    <dimen name="star_wars_logo_small_width">118dp</dimen>
+    <dimen name="star_wars_logo_small_height">71dp</dimen>
+
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    default     -->
+    <item android:state_focused="false" android:state_pressed="false">
+        <shape android:width="78dp" android:height="25dp">
+            <solid android:color="@color/white" />
+            <stroke android:width="2dp" android:color="@color/yellow" />
+            <corners android:radius="36dp" />
+        </shape>
+    </item>
+
+    <!--    button pressed     -->
+    <item android:state_focused="false" android:state_pressed="true">
+        <shape android:width="78dp" android:height="25dp">
+            <solid android:color="@color/yellow" />
+            <stroke android:width="2dp" android:color="@color/yellow" />
+            <corners android:radius="36dp" />
+        </shape>
+    </item>
+</selector>

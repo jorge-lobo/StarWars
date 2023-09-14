@@ -18,9 +18,7 @@
         android:id="@+id/star_wars_logo_large"
         android:layout_width="@dimen/star_wars_logo_large_width"
         android:layout_height="@dimen/star_wars_logo_large_height"
-        android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
-        android:layout_marginTop="340dp"
         android:background="@drawable/star_wars_logo" />
 
 </RelativeLayout>

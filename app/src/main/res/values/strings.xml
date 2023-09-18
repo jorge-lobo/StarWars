@@ -37,4 +37,17 @@
     <string name="light">Light</string>
     <string name="dark">dark</string>
     <string name="search">Search</string>
+    <string name="year">year</string>
+    <string name="reset_button">Reset Button</string>
+    <string name="specie">Specie</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="undefined">undefined</string>
+    <string name="hair_color">Hair Color</string>
+    <string name="skin_color">Skin Color</string>
+    <string name="eye_color">Eye Color</string>
+    <string name="planet">Planet</string>
+    <string name="length">Length</string>
+    <string name="diameter">Diameter</string>
+    <string name="ship_name">Ship Name</string>
 </resources>

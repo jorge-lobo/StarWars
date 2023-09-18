@@ -10,8 +10,7 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="UselessParent">
+        android:layout_height="wrap_content">
 
         <View
             android:id="@+id/star_wars_bg"
@@ -19,150 +18,108 @@
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/star_wars_bg" />
+            android:background="@drawable/bg_dark_mode" />
 
-        <RelativeLayout
+        <View
+            android:id="@+id/star_wars_logo_small"
+            android:layout_width="@dimen/star_wars_logo_small_width"
+            android:layout_height="@dimen/star_wars_logo_small_height"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="27dp"
+            android:background="@drawable/star_wars_logo" />
+
+        <ScrollView
+            android:id="@+id/text_box"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <View
-                android:id="@+id/star_wars_logo_small"
-                android:layout_width="@dimen/star_wars_logo_small_width"
-                android:layout_height="@dimen/star_wars_logo_small_height"
-                android:layout_alignParentTop="true"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="27dp"
-                android:background="@drawable/star_wars_logo" />
-
-            <FrameLayout
-                android:id="@+id/switch_button_frameLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="27dp"
-                android:layout_marginEnd="20dp">
-
-                <ImageView
-                    android:id="@+id/image_dark_mode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/dark_mode"
-                    android:src="@drawable/switch_dark"
-                    android:visibility="visible" />
-
-                <ImageView
-                    android:id="@+id/image_light_mode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/light_mode"
-                    android:src="@drawable/switch_light"
-                    android:visibility="invisible" />
-
-                <Switch
-                    android:id="@+id/switch_mode_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/switch_selector"
-                    android:thumb="@android:color/transparent"
-                    android:track="@android:color/transparent"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-            </FrameLayout>
-
-        </RelativeLayout>
-
-            <ScrollView
-                android:id="@+id/text_box"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_above="@id/buttons_container"
-                android:layout_marginHorizontal="41dp"
-                android:layout_marginTop="144dp"
-                android:paddingTop="25dp"
-                android:paddingBottom="76dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/intro_textview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="266dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:gravity="center_horizontal|top"
-                        android:text="@string/here_you_will_find_all_the_information_you_need_about_your_favorite_characters_their_ships_and_their_planets"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_large" />
-
-                    <TextView
-                        android:id="@+id/slogan_textview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="102dp"
-                        android:layout_marginTop="73dp"
-                        android:layout_marginBottom="76dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:gravity="center_horizontal|top"
-                        android:text="@string/may_the_force_be_with_you"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_extra_large" />
-
-                </LinearLayout>
-
-            </ScrollView>
+            android:layout_height="match_parent"
+            android:layout_above="@id/buttons_container"
+            android:layout_marginHorizontal="41dp"
+            android:layout_marginTop="144dp"
+            android:paddingTop="25dp"
+            android:paddingBottom="76dp">
 
             <LinearLayout
-                android:id="@+id/buttons_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:orientation="vertical"
-                android:paddingBottom="61dp">
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/characters_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:background="@drawable/button_full_width"
+                <TextView
+                    android:id="@+id/intro_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="266dp"
                     android:fontFamily="@font/starjedi_special_edition"
                     android:gravity="center_horizontal|top"
-                    android:text="@string/characters"
-                    android:textAppearance="@style/text_black"
-                    android:textSize="@dimen/text_size_extra_large" />
+                    android:text="@string/here_you_will_find_all_the_information_you_need_about_your_favorite_characters_their_ships_and_their_planets"
+                    android:textAppearance="@style/text_yellow"
+                    android:textSize="@dimen/text_size_large" />
 
-                <Button
-                    android:id="@+id/planets_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="32dp"
-                    android:background="@drawable/button_full_width"
+                <TextView
+                    android:id="@+id/slogan_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="102dp"
+                    android:layout_marginTop="73dp"
+                    android:layout_marginBottom="76dp"
                     android:fontFamily="@font/starjedi_special_edition"
                     android:gravity="center_horizontal|top"
-                    android:text="@string/planets"
-                    android:textAppearance="@style/text_black"
-                    android:textSize="@dimen/text_size_extra_large" />
-
-                <Button
-                    android:id="@+id/ships_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="32dp"
-                    android:background="@drawable/button_full_width"
-                    android:fontFamily="@font/starjedi_special_edition"
-                    android:gravity="center_horizontal|top"
-                    android:text="@string/ships"
-                    android:textAppearance="@style/text_black"
+                    android:text="@string/may_the_force_be_with_you"
+                    android:textAppearance="@style/text_yellow"
                     android:textSize="@dimen/text_size_extra_large" />
 
             </LinearLayout>
 
-        </RelativeLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/buttons_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical"
+            android:paddingBottom="61dp">
+
+            <Button
+                android:id="@+id/characters_button"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/button_full_width"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center_horizontal|top"
+                android:text="@string/characters"
+                android:textAppearance="@style/text_black"
+                android:textSize="@dimen/text_size_extra_large" />
+
+            <Button
+                android:id="@+id/planets_button"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/button_full_width"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center_horizontal|top"
+                android:text="@string/planets"
+                android:textAppearance="@style/text_black"
+                android:textSize="@dimen/text_size_extra_large" />
+
+            <Button
+                android:id="@+id/ships_button"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/button_full_width"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center_horizontal|top"
+                android:text="@string/ships"
+                android:textAppearance="@style/text_black"
+                android:textSize="@dimen/text_size_extra_large" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

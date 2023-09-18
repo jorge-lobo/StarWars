@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/star_wars_bg" />
+        android:background="@drawable/bg_dark_mode" />
 
     <View
         android:id="@+id/star_wars_logo_small"
@@ -22,6 +22,15 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="27dp"
         android:background="@drawable/star_wars_logo" />
+
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="51dp"
+        android:contentDescription="@string/back_button"
+        android:src="@drawable/arrow_left" />
 
     <TextView
         android:id="@+id/title_characters"
@@ -34,29 +43,41 @@
         android:gravity="center_horizontal|top"
         android:text="@string/characters"
         android:textAppearance="@style/text_yellow"
-        android:textSize="@dimen/text_size_extra_large" />
+        android:textSize="@dimen/text_size_extra_large"
+        tools:ignore="RelativeOverlap" />
 
     <EditText
         android:id="@+id/search_box"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="31dp"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="169dp"
         android:autofillHints=""
         android:background="@drawable/search_box"
-        android:drawableEnd="@drawable/x"
         android:inputType="text"
-        android:paddingStart="15dp"
-        android:paddingEnd="5dp"
+        android:paddingHorizontal="15dp"
         tools:ignore="LabelFor" />
 
+    <ImageView
+        android:id="@+id/reset_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="173dp"
+        android:layout_marginEnd="25dp"
+        android:contentDescription="@string/reset_button"
+        android:src="@drawable/x" />
+
     <RelativeLayout
+        android:id="@+id/order_buttons_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/filter_button"
+            android:id="@+id/open_characters_bottom_sheet_button"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_alignParentStart="true"
@@ -66,85 +87,79 @@
             android:contentDescription="@string/filter_button"
             android:src="@drawable/sliders" />
 
-        <FrameLayout
-            android:id="@+id/frameLayout_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
+        <ToggleButton
+            android:id="@+id/name_button"
+            android:layout_width="78dp"
+            android:layout_height="25dp"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="103dp"
             android:layout_marginTop="216dp"
-            android:foregroundGravity="fill">
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@id/year_button"
+            android:background="@drawable/filter_buttons"
+            android:checked="true"
+            android:clickable="false"
+            android:fontFamily="@font/starjedi_special_edition"
+            android:gravity="center"
+            android:textAppearance="@style/text_black"
+            android:textOff="@string/name"
+            android:textOn="@string/name"
+            android:textSize="@dimen/text_size_small" />
 
-            <View
-                android:id="@+id/name_button"
-                android:layout_width="78dp"
-                android:layout_height="25dp"
-                android:background="@drawable/small_button_yellow" />
-
-            <TextView
-                android:id="@+id/name_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|top"
-                android:fontFamily="@font/starjedi_special_edition"
-                android:text="@string/name"
-                android:textAppearance="@style/text_black"
-                android:textSize="@dimen/text_size_small" />
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/frameLayout_year"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
+        <ToggleButton
+            android:id="@+id/year_button"
+            android:layout_width="78dp"
+            android:layout_height="25dp"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="186dp"
             android:layout_marginTop="216dp"
-            android:foregroundGravity="fill">
-
-            <View
-                android:id="@+id/year_button"
-                android:layout_width="78dp"
-                android:layout_height="25dp"
-                android:background="@drawable/small_button_white" />
-
-            <TextView
-                android:id="@+id/year_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|top"
-                android:fontFamily="@font/starjedi_special_edition"
-                android:text="@string/name"
-                android:textAppearance="@style/text_black"
-                android:textSize="@dimen/text_size_small" />
-
-        </FrameLayout>
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@id/asc_button"
+            android:background="@drawable/filter_buttons"
+            android:checked="false"
+            android:clickable="true"
+            android:fontFamily="@font/starjedi_special_edition"
+            android:gravity="center"
+            android:textAppearance="@style/text_black"
+            android:textOff="@string/year"
+            android:textOn="@string/year"
+            android:textSize="@dimen/text_size_small" />
 
         <ImageView
-            android:id="@+id/button_asc"
+            android:id="@+id/asc_button"
             android:layout_width="48dp"
             android:layout_height="25dp"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="269dp"
             android:layout_marginTop="216dp"
+            android:clickable="true"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@id/desc_button"
             android:contentDescription="@string/ascending_order"
-            android:src="@drawable/arrow_up_white" />
+            android:src="@drawable/arrow_up_white_group" />
 
         <ImageView
-            android:id="@+id/button_desc"
+            android:id="@+id/desc_button"
             android:layout_width="48dp"
             android:layout_height="25dp"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="322dp"
+            android:layout_alignParentEnd="true"
             android:layout_marginTop="215dp"
+            android:clickable="false"
+            android:layout_marginEnd="20dp"
             android:contentDescription="@string/descending_order"
-            android:src="@drawable/arrow_down_yellow" />
+            android:src="@drawable/arrow_down_yellow_group" />
 
     </RelativeLayout>
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/order_buttons_container"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 
     <!-- filters box-->
@@ -153,7 +168,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <View
             android:id="@+id/curtain"
@@ -172,23 +187,23 @@
             android:id="@+id/top_edge"
             android:layout_width="60dp"
             android:layout_height="3dp"
-            android:layout_above="@id/filter_icon"
+            android:layout_above="@id/close_filters_container_button"
             android:layout_centerInParent="true"
             android:layout_marginBottom="20dp"
             android:background="@color/yellow" />
 
         <ImageView
-            android:id="@+id/filter_icon"
+            android:id="@+id/close_filters_container_button"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_above="@id/specie_gender_textview"
+            android:layout_above="@id/specie_textview"
             android:layout_centerInParent="true"
             android:layout_marginBottom="25dp"
             android:contentDescription="@string/filter_icon"
             android:src="@drawable/sliders" />
 
         <TextView
-            android:id="@+id/specie_gender_textview"
+            android:id="@+id/specie_textview"
             android:layout_width="148dp"
             android:layout_height="26dp"
             android:layout_above="@id/species_buttons1"
@@ -196,7 +211,7 @@
             android:layout_marginStart="29dp"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/starjedi_special_edition"
-            android:text="@string/specie_gender"
+            android:text="@string/specie"
             android:textAppearance="@style/text_yellow"
             android:textSize="@dimen/text_size_medium" />
 
@@ -211,88 +226,47 @@
             android:baselineAligned="false"
             android:orientation="horizontal">
 
-            <FrameLayout
-                android:id="@+id/frameLayout_human"
+            <ToggleButton
+                android:id="@+id/human_button"
                 android:layout_width="0dp"
                 android:layout_height="31dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_weight="1"
-                android:foregroundGravity="fill"
-                android:paddingHorizontal="10dp">
+                android:background="@drawable/filter_buttons"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center"
+                android:textAppearance="@style/text_black"
+                android:textOff="@string/human"
+                android:textOn="@string/human"
+                android:textSize="@dimen/text_size_medium" />
 
-                <ToggleButton
-                    android:id="@+id/human_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/filter_buttons"
-                    android:fontFamily="@font/starjedi_special_edition"
-                    android:textAppearance="@style/text_black"
-                    android:textOff="@string/human"
-                    android:textOn="@string/human"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <!--                <TextView-->
-                <!--                    android:id="@+id/human_textview"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_gravity="center_horizontal|top"-->
-                <!--                    android:fontFamily="@font/starjedi_special_edition"-->
-                <!--                    android:text="@string/human"-->
-                <!--                    android:textAppearance="@style/text_black"-->
-                <!--                    android:textSize="@dimen/text_size_medium" />-->
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/frameLayout_droid"
+            <ToggleButton
+                android:id="@+id/droid_button"
                 android:layout_width="0dp"
                 android:layout_height="31dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_weight="1"
-                android:foregroundGravity="fill"
-                android:paddingHorizontal="10dp">
+                android:background="@drawable/filter_buttons"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center"
+                android:textAppearance="@style/text_black"
+                android:textOff="@string/droid"
+                android:textOn="@string/droid"
+                android:textSize="@dimen/text_size_medium" />
 
-                <View
-                    android:id="@+id/droid_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/small_button_white" />
-
-                <TextView
-                    android:id="@+id/droid_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|top"
-                    android:fontFamily="@font/starjedi_special_edition"
-                    android:text="@string/droid"
-                    android:textAppearance="@style/text_black"
-                    android:textSize="@dimen/text_size_medium" />
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/frameLayout_ewoks"
+            <ToggleButton
+                android:id="@+id/ewoks_button"
                 android:layout_width="0dp"
                 android:layout_height="31dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_weight="1"
-                android:foregroundGravity="fill"
-                android:paddingHorizontal="10dp">
-
-                <View
-                    android:id="@+id/ewoks_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/small_button_white" />
-
-                <TextView
-                    android:id="@+id/ewoks_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|top"
-                    android:fontFamily="@font/starjedi_special_edition"
-                    android:text="@string/ewoks"
-                    android:textAppearance="@style/text_black"
-                    android:textSize="@dimen/text_size_medium" />
-
-            </FrameLayout>
+                android:background="@drawable/filter_buttons"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center"
+                android:textAppearance="@style/text_black"
+                android:textOff="@string/ewoks"
+                android:textOn="@string/ewoks"
+                android:textSize="@dimen/text_size_medium" />
 
         </LinearLayout>
 
@@ -307,83 +281,47 @@
             android:baselineAligned="false"
             android:orientation="horizontal">
 
-            <FrameLayout
-                android:id="@+id/frameLayout_keshiri"
+            <ToggleButton
+                android:id="@+id/keshiri_button"
                 android:layout_width="0dp"
                 android:layout_height="31dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_weight="1"
-                android:foregroundGravity="fill"
-                android:paddingHorizontal="10dp">
+                android:background="@drawable/filter_buttons"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center"
+                android:textAppearance="@style/text_black"
+                android:textOff="@string/keshiri"
+                android:textOn="@string/keshiri"
+                android:textSize="@dimen/text_size_medium" />
 
-                <View
-                    android:id="@+id/keshiri_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/small_button_white" />
-
-                <TextView
-                    android:id="@+id/keshiri_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|top"
-                    android:fontFamily="@font/starjedi_special_edition"
-                    android:text="@string/keshiri"
-                    android:textAppearance="@style/text_black"
-                    android:textSize="@dimen/text_size_medium" />
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/frameLayout_zeltrons"
+            <ToggleButton
+                android:id="@+id/zeltrons_button"
                 android:layout_width="0dp"
                 android:layout_height="31dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_weight="1"
-                android:foregroundGravity="fill"
-                android:paddingHorizontal="10dp">
+                android:background="@drawable/filter_buttons"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center"
+                android:textAppearance="@style/text_black"
+                android:textOff="@string/zeltrons"
+                android:textOn="@string/zeltrons"
+                android:textSize="@dimen/text_size_medium" />
 
-                <View
-                    android:id="@+id/zeltrons_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/small_button_white" />
-
-                <TextView
-                    android:id="@+id/zeltrons_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|top"
-                    android:fontFamily="@font/starjedi_special_edition"
-                    android:text="@string/zeltrons"
-                    android:textAppearance="@style/text_black"
-                    android:textSize="@dimen/text_size_medium" />
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/frameLayout_jawas"
+            <ToggleButton
+                android:id="@+id/jawas_button"
                 android:layout_width="0dp"
                 android:layout_height="31dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_weight="1"
-                android:foregroundGravity="fill"
-                android:paddingHorizontal="10dp">
-
-                <View
-                    android:id="@+id/jawas_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/small_button_white" />
-
-                <TextView
-                    android:id="@+id/jawas_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|top"
-                    android:fontFamily="@font/starjedi_special_edition"
-                    android:text="@string/jawas"
-                    android:textAppearance="@style/text_black"
-                    android:textSize="@dimen/text_size_medium" />
-
-            </FrameLayout>
+                android:background="@drawable/filter_buttons"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center"
+                android:textAppearance="@style/text_black"
+                android:textOff="@string/jawas"
+                android:textOn="@string/jawas"
+                android:textSize="@dimen/text_size_medium" />
 
         </LinearLayout>
 
@@ -391,17 +329,17 @@
             android:id="@+id/side_force_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/mode_buttons"
+            android:layout_above="@id/gender_buttons_container"
             android:layout_alignParentStart="true"
             android:layout_marginStart="29dp"
             android:layout_marginBottom="25dp"
             android:fontFamily="@font/starjedi_special_edition"
-            android:text="@string/side_of_the_force"
+            android:text="@string/gender"
             android:textAppearance="@style/text_yellow"
             android:textSize="@dimen/text_size_medium" />
 
         <LinearLayout
-            android:id="@+id/mode_buttons"
+            android:id="@+id/gender_buttons_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/search_button"
@@ -411,80 +349,62 @@
             android:baselineAligned="false"
             android:orientation="horizontal">
 
-            <FrameLayout
-                android:id="@+id/frameLayout_light"
+            <ToggleButton
+                android:id="@+id/male_button"
                 android:layout_width="0dp"
                 android:layout_height="31dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_weight="1"
-                android:foregroundGravity="fill"
-                android:paddingHorizontal="10dp">
+                android:background="@drawable/filter_buttons"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center"
+                android:textAppearance="@style/text_black"
+                android:textOff="@string/male"
+                android:textOn="@string/male"
+                android:textSize="@dimen/text_size_medium" />
 
-                <View
-                    android:id="@+id/light_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/small_button_white" />
-
-                <TextView
-                    android:id="@+id/light_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|top"
-                    android:fontFamily="@font/starjedi_special_edition"
-                    android:text="@string/light"
-                    android:textAppearance="@style/text_black"
-                    android:textSize="@dimen/text_size_medium" />
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/frameLayout_dark"
+            <ToggleButton
+                android:id="@+id/female_button"
                 android:layout_width="0dp"
                 android:layout_height="31dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_weight="1"
-                android:foregroundGravity="fill"
-                android:paddingHorizontal="10dp">
+                android:background="@drawable/filter_buttons"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center"
+                android:textAppearance="@style/text_black"
+                android:textOff="@string/female"
+                android:textOn="@string/female"
+                android:textSize="@dimen/text_size_medium" />
 
-                <View
-                    android:id="@+id/dark_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/small_button_white" />
-
-                <TextView
-                    android:id="@+id/dark_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|top"
-                    android:fontFamily="@font/starjedi_special_edition"
-                    android:text="@string/dark"
-                    android:textAppearance="@style/text_black"
-                    android:textSize="@dimen/text_size_medium" />
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/frameLayout_empty"
+            <ToggleButton
+                android:id="@+id/undefined_button"
                 android:layout_width="0dp"
                 android:layout_height="31dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_weight="1"
-                android:foregroundGravity="fill"
-                android:paddingHorizontal="10dp">
-
-            </FrameLayout>
+                android:background="@drawable/filter_buttons"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center"
+                android:textAppearance="@style/text_black"
+                android:textOff="@string/undefined"
+                android:textOn="@string/undefined"
+                android:textSize="@dimen/text_size_medium" />
 
         </LinearLayout>
 
         <!--   search button     -->
         <Button
             android:id="@+id/search_button"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="39dp"
             android:background="@drawable/button_full_width"
             android:fontFamily="@font/starjedi_special_edition"
+            android:gravity="center"
             android:text="@string/search"
             android:textAppearance="@style/text_black"
             android:textSize="@dimen/text_size_extra_large" />

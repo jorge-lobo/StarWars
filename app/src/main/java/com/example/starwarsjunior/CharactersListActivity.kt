@@ -25,6 +25,7 @@ class CharactersListActivity : AppCompatActivity() {
             finish()
         }
 
+
         binding.resetButton.setOnClickListener {
             binding.searchBox.setText("")
         }

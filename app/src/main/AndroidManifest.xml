@@ -13,7 +13,7 @@
         android:theme="@style/Theme.StarWarsJunior"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="false" />
         <activity
             android:name=".CompareActivity"
@@ -22,25 +22,25 @@
             android:name=".FavoritesActivity"
             android:exported="false" />
         <activity
-            android:name=".ShipDetailActivity"
+            android:name=".ui.ships.ShipDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".PlanetDetailActivity"
+            android:name=".ui.planets.PlanetDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".CharacterDetailActivity"
+            android:name=".ui.characters.CharacterDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ShipsListActivity"
+            android:name=".ui.ships.ShipsListActivity"
             android:exported="false" />
         <activity
-            android:name=".PlanetsListActivity"
+            android:name=".ui.planets.PlanetsListActivity"
             android:exported="false" />
         <activity
-            android:name=".CharactersListActivity"
+            android:name=".ui.characters.CharactersListActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".ui.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

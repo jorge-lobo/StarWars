@@ -1,4 +1,4 @@
-package com.example.starwarsjunior
+package com.example.starwarsjunior.ui.characters
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.starwarsjunior.R
 import com.example.starwarsjunior.databinding.FragmentBottomSheetListDialogBinding
 import com.example.starwarsjunior.databinding.FragmentBottomSheetListDialogItemBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

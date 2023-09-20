@@ -1,9 +1,10 @@
-package com.example.starwarsjunior
+package com.example.starwarsjunior.ui.characters
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.starwarsjunior.R
 import com.example.starwarsjunior.databinding.ActivityCharactersListBinding
 
 class CharactersListActivity : AppCompatActivity() {

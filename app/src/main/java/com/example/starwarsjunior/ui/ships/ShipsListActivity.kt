@@ -1,4 +1,4 @@
-package com.example.starwarsjunior
+package com.example.starwarsjunior.ui.ships
 
 import android.content.Intent
 import android.os.Bundle

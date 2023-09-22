@@ -81,7 +81,7 @@
             android:paddingBottom="61dp">
 
             <Button
-                android:id="@+id/characters_button"
+                android:id="@+id/personages_button"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginHorizontal="20dp"

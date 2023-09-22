@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    tools:context=".ui.personage.BottomSheetFragment">
+
+        <View
+            android:id="@+id/filters_container"
+            android:layout_width="match_parent"
+            android:layout_height="477dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/black" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="39dp">
+
+            <View
+                android:id="@+id/top_edge"
+                android:layout_width="60dp"
+                android:layout_height="3dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rectangle" />
+
+            <ImageView
+                android:id="@+id/close_filters_container_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_below="@id/top_edge"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@string/filter_icon"
+                android:src="@drawable/sliders" />
+
+            <TextView
+                android:id="@+id/specie_textview"
+                android:layout_width="148dp"
+                android:layout_height="26dp"
+                android:layout_below="@id/close_filters_container_button"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="29dp"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:text="@string/specie"
+                android:textAppearance="@style/text_yellow"
+                android:textSize="@dimen/text_size_medium" />
+
+            <LinearLayout
+                android:id="@+id/species_buttons1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/specie_textview"
+                android:layout_alignParentStart="true"
+                android:layout_marginHorizontal="19dp"
+                android:layout_marginTop="24dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/human_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/human"
+                    android:textOn="@string/human"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <ToggleButton
+                    android:id="@+id/droid_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/droid"
+                    android:textOn="@string/droid"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <ToggleButton
+                    android:id="@+id/ewoks_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/ewoks"
+                    android:textOn="@string/ewoks"
+                    android:textSize="@dimen/text_size_medium" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/species_buttons2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/species_buttons1"
+                android:layout_alignParentStart="true"
+                android:layout_marginHorizontal="19dp"
+                android:layout_marginTop="21dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/keshiri_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/keshiri"
+                    android:textOn="@string/keshiri"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <ToggleButton
+                    android:id="@+id/zeltrons_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/zeltrons"
+                    android:textOn="@string/zeltrons"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <ToggleButton
+                    android:id="@+id/jawas_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/jawas"
+                    android:textOn="@string/jawas"
+                    android:textSize="@dimen/text_size_medium" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/gender_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/species_buttons2"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="29dp"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:text="@string/gender"
+                android:textAppearance="@style/text_yellow"
+                android:textSize="@dimen/text_size_medium" />
+
+            <LinearLayout
+                android:id="@+id/gender_buttons_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gender_textview"
+                android:layout_alignParentStart="true"
+                android:layout_marginHorizontal="19dp"
+                android:layout_marginTop="25dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/male_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/male"
+                    android:textOn="@string/male"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <ToggleButton
+                    android:id="@+id/female_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/female"
+                    android:textOn="@string/female"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <ToggleButton
+                    android:id="@+id/undefined_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/undefined"
+                    android:textOn="@string/undefined"
+                    android:textSize="@dimen/text_size_medium" />
+
+            </LinearLayout>
+
+            <!--   search button     -->
+            <Button
+                android:id="@+id/search_button"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_below="@id/gender_buttons_container"
+                android:background="@drawable/button_full_width"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
+                android:text="@string/search"
+                android:textAppearance="@style/text_black"
+                android:textSize="@dimen/text_size_extra_large" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>

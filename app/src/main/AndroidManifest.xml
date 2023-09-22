@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,28 +20,22 @@
             android:name=".ui.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".CompareActivity"
+            android:name=".ui.ship.details.ShipDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".FavoritesActivity"
+            android:name=".ui.planet.details.PlanetDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.ships.ShipDetailActivity"
+            android:name=".ui.personage.details.PersonageDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.planets.PlanetDetailActivity"
+            android:name=".ui.ship.ShipActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.characters.CharacterDetailActivity"
+            android:name=".ui.planet.PlanetActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.ships.ShipsListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.planets.PlanetsListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.characters.CharactersListActivity"
+            android:name=".ui.personage.PersonageActivity"
             android:exported="false" />
         <activity
             android:name=".ui.SplashScreenActivity"

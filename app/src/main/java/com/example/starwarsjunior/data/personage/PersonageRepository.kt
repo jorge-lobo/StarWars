@@ -14,7 +14,7 @@ object PersonageRepository : IPersonageDataSource.Main {
 
         result.result?.let {
             //saveDetails(it)
-            cachedPersonageResponse = it
+            cachedPersonageResponse = it.results
         }
 
         return result

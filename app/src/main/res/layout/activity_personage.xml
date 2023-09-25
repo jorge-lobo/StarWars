@@ -5,14 +5,13 @@
     tools:context=".ui.personage.PersonageActivity">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
-            type="com.example.starwarsjunior.ui.personage.PersonageViewModel"
-            />
+            type="com.example.starwarsjunior.ui.personage.PersonageViewModel" />
     </data>
-
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -162,6 +161,15 @@
                 android:contentDescription="@string/descending_order"
                 android:focusable="true"
                 android:src="@drawable/arrow_down_yellow_group" />
+
+            <ProgressBar
+                android:id="@+id/loading"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:indeterminate="true"
+                android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
 
         </RelativeLayout>
 

@@ -34,13 +34,14 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    /*viewBinding {
+/*    viewBinding {
         enable = true
     }*/
     buildFeatures {
         viewBinding = true
         dataBinding = true
     }
+
 }
 
 dependencies {
@@ -64,7 +65,7 @@ dependencies {
     implementation("com.jakewharton.threetenabp:threetenabp:1.4.6")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.2")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.2")
 
     // FastAdapter
     val latestFastAdapterRelease = "5.7.0"
@@ -83,5 +84,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    kapt ("com.android.databinding:compiler:3.1.4")
+    implementation("androidx.databinding:databinding-common:8.1.1")
+
+    kapt("com.android.databinding:compiler:3.1.4")
 }

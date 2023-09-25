@@ -1,3 +1,8 @@
 package com.example.starwarsjunior.data.personage.objects
 
-class PersonageListResponse : ArrayList<Personage>()
+import com.google.gson.annotations.SerializedName
+
+
+data class PersonageListResponse (
+    @SerializedName("results") val results : List<Personage>
+)

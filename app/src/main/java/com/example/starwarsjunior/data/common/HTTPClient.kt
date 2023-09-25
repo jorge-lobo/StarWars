@@ -80,6 +80,7 @@ class HTTPClient<T>(service: Class<T>) {
             .build()
 
         client = retrofit.create(service)
+
     }
 
     fun get() : T {

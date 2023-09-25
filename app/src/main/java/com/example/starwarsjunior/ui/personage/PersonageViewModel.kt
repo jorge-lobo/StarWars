@@ -47,11 +47,11 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
                 personagesResponse
             ) {
                 override fun onSuccess(data: PersonageListResponse) {
-                    personages.value = data
+                    personages.value = data.results
                     isLoading.value = false
                     isRefreshing.value = false
                     data.let {
-                        if (it.isEmpty()) {
+                        if (it.results.isEmpty()) {
                             noDataAvailable.value = true
                         }
                     }

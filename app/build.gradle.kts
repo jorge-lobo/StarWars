@@ -9,7 +9,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.starwarsjunior"
+        applicationId = "com.axians.starshutai"
         minSdk = 24
         targetSdk = 33
         versionCode = 1

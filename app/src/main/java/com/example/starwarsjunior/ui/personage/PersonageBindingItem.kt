@@ -33,7 +33,7 @@ class PersonageBindingItem(val personage: Personage) : AbstractItem<PersonageBin
     override fun bindView(holder: ViewHolder, payloads: List<Any>) {
         super.bindView(holder, payloads)
 
-        holder.name.text = personage.name
+        holder.name.text = personage.name.lowercase()
     }
 
     override fun unbindView(holder: ViewHolder) {
@@ -49,6 +49,6 @@ class PersonageBindingItem(val personage: Personage) : AbstractItem<PersonageBin
      * our ViewHolder
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        var name: TextView = view.findViewById(R.id.personage_name)
+        var name: TextView = view.findViewById(R.id.item_personage_name)
     }
 }

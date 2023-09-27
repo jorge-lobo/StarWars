@@ -3,7 +3,7 @@ package com.example.starwarsjunior.ui.personage.details
 import android.app.Application
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.*
+import androidx.lifecycle.viewModelScope
 import com.example.starwarsjunior.data.error.CallbackWrapper
 import com.example.starwarsjunior.data.personage.PersonageRepository
 import com.example.starwarsjunior.data.personage.objects.Personage
@@ -16,10 +16,10 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
     //Mutables change things directly in the View Layer, so in fragments and activities
     var personageName = MutableLiveData<String>().apply { value = "" }
     var personageBirthYear = MutableLiveData<String>().apply { value = "" }
-    var personageSpecies = MutableLiveData<String>().apply { value = "" }
+    var personageSpecie = MutableLiveData<String>().apply { value = "" }
     var personageGender = MutableLiveData<String>().apply { value = "" }
-    var personageHeight = MutableLiveData<Int>().apply { value = null }
-    var personageMass = MutableLiveData<Int>().apply { value = null }
+    var personageHeight = MutableLiveData<String>().apply { value = "" }
+    var personageMass = MutableLiveData<String>().apply { value = "" }
     var personageHairColor = MutableLiveData<String>().apply { value = "" }
     var personageSkinColor = MutableLiveData<String>().apply { value = "" }
     var personageEyeColor = MutableLiveData<String>().apply { value = "" }
@@ -41,25 +41,25 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
                     override fun onSuccess(data: Personage?) {
                         if (data != null) {
 
-                            var specieList = ""
-                            var homeWorldList = ""
+                            /*var specieList = ""
+                            var homeWorldList = ""*/
 
                             personageName.value = data.name.lowercase()
                             personageBirthYear.value = data.birthYear.lowercase()
                             personageGender.value = data.gender.lowercase()
-                            personageHeight.value = data.height
-                            personageMass.value = data.mass
+                            personageHeight.value = data.height.toString()
+                            personageMass.value = data.mass.toString()
                             personageHairColor.value = data.hairColor.lowercase()
                             personageSkinColor.value = data.skinColor.lowercase()
                             personageEyeColor.value = data.eyeColor.lowercase()
 
-                            if (!data.species.isEmpty()) {
-                                for (specie in data.species) {
+                            /*if (!data.specie.isEmpty()) {
+                                for (specie in data.specie) {
                                     specieList += specie.name + ";"
                                 }
-                                personageSpecies.value = specieList
+                                personageSpecie.value = specieList
                             } else {
-                                personageSpecies.value = "Data not available"
+                                personageSpecie.value = "Data not available"
                             }
                             isLoading.value = false
 
@@ -70,7 +70,7 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
                                 personageHomeWorld.value = homeWorldList
                             } else {
                                 personageHomeWorld.value = "Data not available"
-                            }
+                            }*/
                             isLoading.value = false
                         }
                     }

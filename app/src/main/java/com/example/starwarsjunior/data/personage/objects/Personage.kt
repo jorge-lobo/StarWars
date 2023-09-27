@@ -12,7 +12,7 @@ data class Personage(
     @SerializedName("eye_color") val eyeColor: String,
     @SerializedName("birth_year") val birthYear: String,
     @SerializedName("gender") val gender: String,
-    @SerializedName("homeworld") val homeWorld: List<String>,
+    @SerializedName("homeworld") val homeWorld: String,
     @SerializedName("species") val species: List<String>,
     @SerializedName("url") val url: String
 

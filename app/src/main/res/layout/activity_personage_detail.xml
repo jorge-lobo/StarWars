@@ -48,7 +48,7 @@
                 android:layout_height="32dp"
                 android:layout_gravity="center_horizontal|top"
                 android:fontFamily="@font/starjedi_special_edition"
-                android:text="@{viewModel.personageName"
+                android:text="@{viewModel.personageName}"
                 android:textAppearance="@style/text_yellow"
                 android:textSize="@dimen/text_size_small_title" />
 
@@ -95,7 +95,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/born_info"
+                        android:id="@+id/birthYear_info"
                         android:layout_width="match_parent"
                         android:layout_height="22dp"
                         android:layout_marginStart="12dp"
@@ -224,7 +224,7 @@
                         android:layout_marginStart="12dp"
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
-                        android:text="@{viewModel.personageSpecies}"
+                        android:text="@{viewModel.personageSpecie}"
                         android:textAppearance="@style/text_yellow"
                         android:textSize="@dimen/text_size_small" />
 
@@ -341,7 +341,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/planet_info"
+                        android:id="@+id/homeworld_info"
                         android:layout_width="match_parent"
                         android:layout_height="22dp"
                         android:layout_marginStart="12dp"

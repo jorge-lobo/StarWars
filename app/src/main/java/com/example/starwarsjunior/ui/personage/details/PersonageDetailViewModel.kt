@@ -24,7 +24,6 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
     //Mutables change things directly in the View Layer, so in fragments and activities
     var personageName = MutableLiveData<String>().apply { value = "" }
     var personageBirthYear = MutableLiveData<String>().apply { value = "" }
-    var personageSpecie = MutableLiveData<String>().apply { value = "" }
     var personageGender = MutableLiveData<String>().apply { value = "" }
     var personageHeight = MutableLiveData<String>().apply { value = "" }
     var personageMass = MutableLiveData<String>().apply { value = "" }
@@ -33,6 +32,8 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
     var personageEyeColor = MutableLiveData<String>().apply { value = "" }
     var personageHomeWorld = MutableLiveData<String>().apply { value = "" }
 
+    var personageSpecie = MutableLiveData<String>()
+    val isSpeciesLoading = MutableLiveData<Boolean>().apply { value = false }
 
     fun initialize(personageId: Int) {
         getPersonageDetails(personageId)
@@ -59,6 +60,10 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
                             personageEyeColor.value = data.eyeColor.lowercase()
 
                             getHomeWorldName(data.homeWorld)
+
+                            isSpeciesLoading.value = true
+
+                            getSpeciesNames(data.species)
 
                         }
                     }
@@ -103,5 +108,51 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
         }
         return null
     }
+
+    private fun getSpeciesNames(speciesUrls: List<String>) {
+        viewModelScope.launch {
+            val speciesNamesList = mutableListOf<String>()
+            for (speciesUrl in speciesUrls) {
+                val speciesName = fetchSpeciesName(speciesUrl)
+                speciesName?.let {
+                    speciesNamesList.add(it)
+                }
+            }
+
+            if (speciesNamesList.isNotEmpty()) {
+                val combinedSpeciesNames = speciesNamesList.joinToString(", ")
+                personageSpecie.postValue(combinedSpeciesNames)
+            } else {
+                personageSpecie.value = "human"
+            }
+            isSpeciesLoading.postValue(false)
+        }
+    }
+
+    private suspend fun fetchSpeciesName(speciesUrl: String): String? {
+        return withContext(Dispatchers.IO) {
+            val request = Request.Builder()
+                .url(speciesUrl)
+                .build()
+
+            val response = client.newCall(request).execute()
+            if (response.isSuccessful) {
+                val responseBody = response.body?.string()
+                return@withContext parseSpeciesNameFromJson(responseBody)
+            }
+            return@withContext null
+        }
+    }
+
+    private fun parseSpeciesNameFromJson(json: String?): String? {
+        try {
+            val jsonObject = JSONObject(json)
+            return jsonObject.optString("name", null)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
 
 }

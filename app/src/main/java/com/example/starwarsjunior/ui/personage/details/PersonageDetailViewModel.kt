@@ -8,10 +8,18 @@ import com.example.starwarsjunior.data.error.CallbackWrapper
 import com.example.starwarsjunior.data.personage.PersonageRepository
 import com.example.starwarsjunior.data.personage.objects.Personage
 import com.example.starwarsjunior.ui.common.BaseViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import org.json.JSONException
+import org.json.JSONObject
 
 class PersonageDetailViewModel(application: Application) : BaseViewModel(application),
     LifecycleObserver {
+
+    private val client = OkHttpClient()
 
     //Mutables change things directly in the View Layer, so in fragments and activities
     var personageName = MutableLiveData<String>().apply { value = "" }
@@ -24,6 +32,7 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
     var personageSkinColor = MutableLiveData<String>().apply { value = "" }
     var personageEyeColor = MutableLiveData<String>().apply { value = "" }
     var personageHomeWorld = MutableLiveData<String>().apply { value = "" }
+
 
     fun initialize(personageId: Int) {
         getPersonageDetails(personageId)
@@ -40,10 +49,6 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
                     CallbackWrapper<Personage?>(this@PersonageDetailViewModel, personageResponse) {
                     override fun onSuccess(data: Personage?) {
                         if (data != null) {
-
-                            /*var specieList = ""
-                            var homeWorldList = ""*/
-
                             personageName.value = data.name.lowercase()
                             personageBirthYear.value = data.birthYear.lowercase()
                             personageGender.value = data.gender.lowercase()
@@ -53,28 +58,12 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
                             personageSkinColor.value = data.skinColor.lowercase()
                             personageEyeColor.value = data.eyeColor.lowercase()
 
-                            /*if (!data.specie.isEmpty()) {
-                                for (specie in data.specie) {
-                                    specieList += specie.name + ";"
-                                }
-                                personageSpecie.value = specieList
-                            } else {
-                                personageSpecie.value = "Data not available"
-                            }
-                            isLoading.value = false
+                            getHomeWorldName(data.homeWorld)
 
-                            if (!data.homeWorld.isEmpty()) {
-                                for (homeWorld in data.homeWorld) {
-                                    homeWorldList += homeWorld.name + ";"
-                                }
-                                personageHomeWorld.value = homeWorldList
-                            } else {
-                                personageHomeWorld.value = "Data not available"
-                            }*/
-                            isLoading.value = false
                         }
                     }
                 }
+            isLoading.value = false
         }
     }
 
@@ -82,4 +71,37 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
         isLoading.value = false
         isRefreshing.value = false
     }
+
+    fun getHomeWorldName(planetUrl: String) {
+        viewModelScope.launch {
+            val planetName = fetchPlanetName(planetUrl)
+            personageHomeWorld.value = planetName ?: "N/A"
+        }
+    }
+
+    private suspend fun fetchPlanetName(planetUrl: String): String? {
+        return withContext(Dispatchers.IO) {
+            val request = Request.Builder()
+                .url(planetUrl)
+                .build()
+
+            val response = client.newCall(request).execute()
+            if (response.isSuccessful) {
+                val responseBody = response.body?.string()
+                return@withContext parsePlanetNameFromJson(responseBody)
+            }
+            return@withContext null
+        }
+    }
+
+    private fun parsePlanetNameFromJson(json: String?): String? {
+        try {
+            val jsonObject = JSONObject(json)
+            return jsonObject.optString("name", null)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
 }

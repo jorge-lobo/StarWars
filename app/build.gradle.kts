@@ -66,7 +66,10 @@ dependencies {
     implementation("com.jakewharton.threetenabp:threetenabp:1.4.6")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.2")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.3")
+
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
+
 
     // FastAdapter
     val latestFastAdapterRelease = "5.7.0"

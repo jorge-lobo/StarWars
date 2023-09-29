@@ -6,22 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.starwarsjunior.data.error.CallbackWrapper
 import com.example.starwarsjunior.data.personage.PersonageRepository
+import com.example.starwarsjunior.data.personage.PersonageRepository.fetchSpeciesName
 import com.example.starwarsjunior.data.personage.objects.Personage
+import com.example.starwarsjunior.data.planet.PlanetRepository.fetchPlanetName
 import com.example.starwarsjunior.ui.common.BaseViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import org.json.JSONException
-import org.json.JSONObject
 
 class PersonageDetailViewModel(application: Application) : BaseViewModel(application),
     LifecycleObserver {
 
-    private val client = OkHttpClient()
-
-    //Mutables change things directly in the View Layer, so in fragments and activities
     var personageName = MutableLiveData<String>().apply { value = "" }
     var personageBirthYear = MutableLiveData<String>().apply { value = "" }
     var personageGender = MutableLiveData<String>().apply { value = "" }
@@ -31,9 +24,7 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
     var personageSkinColor = MutableLiveData<String>().apply { value = "" }
     var personageEyeColor = MutableLiveData<String>().apply { value = "" }
     var personageHomeWorld = MutableLiveData<String>().apply { value = "" }
-
-    var personageSpecie = MutableLiveData<String>()
-    val isSpeciesLoading = MutableLiveData<Boolean>().apply { value = false }
+    var personageSpecie = MutableLiveData<String>().apply { value = "" }
 
     fun initialize(personageId: Int) {
         getPersonageDetails(personageId)
@@ -60,53 +51,20 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
                             personageEyeColor.value = data.eyeColor.lowercase()
 
                             getHomeWorldName(data.homeWorld)
-
-                            isSpeciesLoading.value = true
-
                             getSpeciesNames(data.species)
 
+                            isLoading.value = false
                         }
                     }
                 }
-            isLoading.value = false
         }
     }
 
-    override fun onError(message: String?, validationErrors: Map<String, ArrayList<String>>?) {
-        isLoading.value = false
-        isRefreshing.value = false
-    }
-
-    fun getHomeWorldName(planetUrl: String) {
+    private fun getHomeWorldName(planetUrl: String) {
         viewModelScope.launch {
             val planetName = fetchPlanetName(planetUrl)
             personageHomeWorld.value = planetName ?: "N/A"
         }
-    }
-
-    private suspend fun fetchPlanetName(planetUrl: String): String? {
-        return withContext(Dispatchers.IO) {
-            val request = Request.Builder()
-                .url(planetUrl)
-                .build()
-
-            val response = client.newCall(request).execute()
-            if (response.isSuccessful) {
-                val responseBody = response.body?.string()
-                return@withContext parsePlanetNameFromJson(responseBody)
-            }
-            return@withContext null
-        }
-    }
-
-    private fun parsePlanetNameFromJson(json: String?): String? {
-        try {
-            val jsonObject = JSONObject(json)
-            return jsonObject.optString("name", null)
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-        return null
     }
 
     private fun getSpeciesNames(speciesUrls: List<String>) {
@@ -125,34 +83,11 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
             } else {
                 personageSpecie.value = "human"
             }
-            isSpeciesLoading.postValue(false)
         }
     }
 
-    private suspend fun fetchSpeciesName(speciesUrl: String): String? {
-        return withContext(Dispatchers.IO) {
-            val request = Request.Builder()
-                .url(speciesUrl)
-                .build()
-
-            val response = client.newCall(request).execute()
-            if (response.isSuccessful) {
-                val responseBody = response.body?.string()
-                return@withContext parseSpeciesNameFromJson(responseBody)
-            }
-            return@withContext null
-        }
+    override fun onError(message: String?, validationErrors: Map<String, ArrayList<String>>?) {
+        isLoading.value = false
+        isRefreshing.value = false
     }
-
-    private fun parseSpeciesNameFromJson(json: String?): String? {
-        try {
-            val jsonObject = JSONObject(json)
-            return jsonObject.optString("name", null)
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-        return null
-    }
-
-
 }

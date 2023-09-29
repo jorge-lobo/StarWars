@@ -14,8 +14,6 @@ class PersonageDetailActivity : AppCompatActivity() {
     companion object {
 
         const val EXTRA_PERSONAGE_ID: String = "extra_personage_id"
-        private val PERSONAGE_ID = "personage_id"
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

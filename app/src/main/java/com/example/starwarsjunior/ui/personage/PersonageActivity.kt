@@ -2,7 +2,10 @@ package com.example.starwarsjunior.ui.personage
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -36,13 +39,27 @@ class PersonageActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_personage)
 
-
         binding.viewModel = mPersonageViewModel
         // This makes it possible to use @OnLifecycleEvent(Lifecycle.Event.ON_START) inside our ModelView
         // without having it to call our MV getUsers from the onStart fragment method
         this.lifecycle.addObserver(mPersonageViewModel)
         // We need to use this in case we are using MutableLiveData in our ModelView and we want to update state from the modelview
         binding.lifecycleOwner = this
+
+        //search box
+        val searchBox = findViewById<EditText>(R.id.search_box)
+
+        searchBox.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                mPersonageViewModel.searchQuery.value = s.toString()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
 
         //FastAdapter configuration
         val fastItemAdapter = FastAdapter.with(mPersonageItemAdapter)
@@ -83,19 +100,31 @@ class PersonageActivity : AppCompatActivity() {
             }
         )
 
+        //list with filtered personages
+        mPersonageViewModel.filteredPersonages.observe(
+            this,
+            Observer { personageList ->
 
-        //só para testar enquanto não tenho a lista
-        binding.starWarsLogoSmall.setOnClickListener {
-            startActivity(Intent(this, PersonageDetailActivity::class.java))
+                val items = ArrayList<PersonageBindingItem>()
+                mPersonageItemAdapter.clear()
+
+                items.clear()
+                if (personageList != null) {
+                    for (personage in personageList) {
+                        val item = PersonageBindingItem(personage)
+                        items.add(item)
+                    }
+                    mPersonageItemAdapter.add(items)
+                }
+            }
+        )
+
+        binding.resetButton.setOnClickListener {
+            binding.searchBox.setText("")
         }
 
         binding.backButton.setOnClickListener {
             finish()
-        }
-
-
-        binding.resetButton.setOnClickListener {
-            binding.searchBox.setText("")
         }
 
         //fragment bottom sheet
@@ -130,7 +159,5 @@ class PersonageActivity : AppCompatActivity() {
             binding.nameButton.isClickable = true
             binding.nameButton.isChecked = false
         }
-
     }
-
 }

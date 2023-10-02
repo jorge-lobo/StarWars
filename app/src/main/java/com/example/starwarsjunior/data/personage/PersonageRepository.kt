@@ -5,6 +5,12 @@ import com.example.starwarsjunior.data.personage.objects.Personage
 import com.example.starwarsjunior.data.personage.objects.PersonageListResponse
 import com.example.starwarsjunior.data.personage.remote.PersonageRemoteDataSource
 import com.example.starwarsjunior.utils.Utils.extractIdFromUrl
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import org.json.JSONException
+import org.json.JSONObject
 
 object PersonageRepository : IPersonageDataSource.Main {
     private var cachedPersonageResponse: List<Personage>? = null
@@ -33,5 +39,29 @@ object PersonageRepository : IPersonageDataSource.Main {
         return ResultWrapper(null, null)
     }
 
+    suspend fun fetchSpeciesName(speciesUrl: String): String? {
+        return withContext(Dispatchers.IO) {
+            val request = Request.Builder()
+                .url(speciesUrl)
+                .build()
 
+            val client = OkHttpClient()
+            val response = client.newCall(request).execute()
+            if (response.isSuccessful) {
+                val responseBody = response.body?.string()
+                return@withContext parseSpeciesNameFromJson(responseBody)
+            }
+            return@withContext null
+        }
+    }
+
+    private fun parseSpeciesNameFromJson(json: String?): String? {
+        try {
+            val jsonObject = JSONObject(json)
+            return jsonObject.optString("name", null)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        return null
+    }
 }

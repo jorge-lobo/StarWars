@@ -17,8 +17,14 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
     LifecycleObserver {
 
     var personages = MutableLiveData<List<Personage>>()
+    val filteredPersonages = MutableLiveData<List<Personage>?>()
+    val searchQuery = MutableLiveData<String>()
 
-    var forceRefresh = false
+    private var forceRefresh = false
+
+    init {
+        observerSearchQuery()
+    }
 
     fun onRefresh() {
         //isRefreshing.value = true
@@ -57,6 +63,16 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
                     }
                 }
             }
+        }
+    }
+
+    //SearchBox
+    private fun observerSearchQuery() {
+        searchQuery.observeForever { query ->
+            val filteredList = personages.value?.filter { personage ->
+                personage.name.contains(query, ignoreCase = true)
+            }
+            filteredPersonages.value = filteredList
         }
     }
 

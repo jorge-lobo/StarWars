@@ -32,10 +32,8 @@ class PersonageActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPersonageBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        val mViewModel = ViewModelProvider(this).get(PersonageViewModel::class.java)
-        mPersonageViewModel = mViewModel as PersonageViewModel
+
+        mPersonageViewModel = ViewModelProvider(this).get(PersonageViewModel::class.java)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_personage)
 

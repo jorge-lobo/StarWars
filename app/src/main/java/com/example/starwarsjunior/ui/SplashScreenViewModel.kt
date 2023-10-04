@@ -1,4 +1,4 @@
-package com.example.starwarsjunior.ui.personage
+package com.example.starwarsjunior.ui
 
 import android.app.Application
 import androidx.lifecycle.LifecycleObserver
@@ -11,37 +11,13 @@ import com.example.starwarsjunior.data.personage.objects.PersonageListResponse
 import com.example.starwarsjunior.ui.common.BaseViewModel
 import kotlinx.coroutines.launch
 
-class PersonageViewModel(application: Application) : BaseViewModel(application),
+class SplashScreenViewModel(application: Application) : BaseViewModel(application),
     LifecycleObserver {
 
     var personages = MutableLiveData<List<Personage>>()
-    val filteredPersonages = MutableLiveData<List<Personage>?>()
-    val searchQuery = MutableLiveData<String>()
-    private var isDataPreloaded = false
+    val preloadComplete = MutableLiveData<Boolean>()
 
-    init {
-        observerSearchQuery()
-    }
-
-    fun isDataPreloaded(): Boolean {
-        return isDataPreloaded
-    }
-
-    fun setPreloadedDataFlag(preloaded: Boolean) {
-        isDataPreloaded = preloaded
-    }
-
-    fun onRefresh() {
-        //isRefreshing.value = true
-        getPersonages(refresh = false)
-    }
-
-    fun onStart() {
-        //getPersonages(forceRefresh)
-        getPersonages(true)
-    }
-
-    fun getPersonages(refresh: Boolean) {
+    fun preloadDataFromAPI(refresh: Boolean) {
         if (refresh) {
             isLoading.value = true
         }
@@ -52,7 +28,7 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
         viewModelScope.launch {
             val personagesResponse = PersonageRepository.getPersonages()
             var result = object : CallbackWrapper<PersonageListResponse>(
-                this@PersonageViewModel,
+                this@SplashScreenViewModel,
                 personagesResponse
             ) {
                 override fun onSuccess(data: PersonageListResponse) {
@@ -64,24 +40,14 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
                             noDataAvailable.value = true
                         }
                     }
+                    preloadComplete.value = true
                 }
             }
-        }
-    }
-
-    //SearchBox
-    private fun observerSearchQuery() {
-        searchQuery.observeForever { query ->
-            val filteredList = personages.value?.filter { personage ->
-                personage.name.contains(query, ignoreCase = true)
-            }
-            filteredPersonages.value = filteredList
         }
     }
 
     override fun onError(message: String?, validationErrors: Map<String, ArrayList<String>>?) {
         isLoading.value = false
         isRefreshing.value = false
-        personages.value = arrayListOf()
     }
 }

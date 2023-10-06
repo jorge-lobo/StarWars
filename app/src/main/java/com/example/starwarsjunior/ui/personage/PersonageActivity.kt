@@ -44,6 +44,12 @@ class PersonageActivity : AppCompatActivity() {
         // We need to use this in case we are using MutableLiveData in our ModelView and we want to update state from the modelview
         binding.lifecycleOwner = this
 
+        if (mPersonageViewModel.isDataPreloaded()) {
+            mPersonageViewModel.onStart()
+        } else {
+            mPersonageViewModel.getPersonages(true)
+        }
+
         //search box
         val searchBox = findViewById<EditText>(R.id.search_box)
 

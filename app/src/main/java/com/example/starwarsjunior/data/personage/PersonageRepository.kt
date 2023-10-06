@@ -14,13 +14,21 @@ import org.json.JSONObject
 
 object PersonageRepository : IPersonageDataSource.Main {
     private var cachedPersonageResponse: List<Personage>? = null
+    private val dataCache = DataCache()
 
     override suspend fun getPersonages(): ResultWrapper<PersonageListResponse> {
+        //check if the data are already cached
+        cachedPersonageResponse?.let {
+            return ResultWrapper(PersonageListResponse(it), null)
+        }
+
+        //if not cached, make a call to API
         val result = PersonageRemoteDataSource.getPersonages()
 
         result.result?.let {
             //saveDetails(it)
             cachedPersonageResponse = it.results
+            dataCache.put("personages", it.results)
         }
 
         return result

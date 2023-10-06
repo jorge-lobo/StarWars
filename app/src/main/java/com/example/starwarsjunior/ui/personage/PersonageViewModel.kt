@@ -19,8 +19,9 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
     val searchQuery = MutableLiveData<String>()
     private var isDataPreloaded = false
 
-    val sortNameAscending = MutableLiveData<Boolean>(true)
-    val sortedPersonages = MutableLiveData<List<Personage>>()
+    val sortedPersonages = MutableLiveData<List<Personage>?>()
+    private var sortBy = "name"
+    private var isDescending = false
 
     init {
         observerSearchQuery()
@@ -88,5 +89,34 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
         isLoading.value = false
         isRefreshing.value = false
         personages.value = arrayListOf()
+    }
+
+    fun toggleSortNameOrder() {
+        sortBy = "name"
+        isDescending = !isDescending
+        updateSortedPersonages()
+    }
+
+    fun toggleSortYearOrder() {
+        sortBy = "birthYear"
+        isDescending = !isDescending
+        updateSortedPersonages()
+    }
+
+    private fun updateSortedPersonages() {
+        val sortedList = when (sortBy) {
+            "name" -> {
+                if (isDescending) sortedPersonages.value?.sortedByDescending { it.name }
+                else sortedPersonages.value?.sortedBy { it.name }
+            }
+
+            "birthYear" -> {
+                if (isDescending) sortedPersonages.value?.sortedByDescending { it.birthYear }
+                else sortedPersonages.value?.sortedBy { it.birthYear }
+            }
+
+            else -> sortedPersonages.value
+        }
+        sortedPersonages.value = sortedList
     }
 }

@@ -25,7 +25,7 @@ class PersonageActivity : AppCompatActivity() {
     lateinit var personageBottomSheetButton: Button
     lateinit var bottomSheetFragment: BottomSheetFragment
 
-    private lateinit var mPersonageViewModel : PersonageViewModel
+    private lateinit var mPersonageViewModel: PersonageViewModel
 
     private val mPersonageItemAdapter = FastItemAdapter<PersonageBindingItem>()
 
@@ -138,30 +138,46 @@ class PersonageActivity : AppCompatActivity() {
 
         }
 
-        binding.ascButton.setOnClickListener {
-            binding.ascButton.setImageResource(R.drawable.arrow_up_yellow_group)
-            binding.descButton.setImageResource(R.drawable.arrow_down_white_group)
-            binding.ascButton.isClickable = false
-            binding.descButton.isClickable = true
+        binding.upButton.setOnClickListener {
+            binding.upButton.setImageResource(R.drawable.arrow_up_yellow_group)
+            binding.downButton.setImageResource(R.drawable.arrow_down_white_group)
+            binding.upButton.isClickable = false
+            binding.downButton.isClickable = true
+
+            if (binding.sortNameButton.isChecked) {
+                mPersonageViewModel.toggleSortNameOrder()
+            } else {
+                mPersonageViewModel.toggleSortYearOrder()
+            }
         }
 
-        binding.descButton.setOnClickListener {
-            binding.ascButton.setImageResource(R.drawable.arrow_up_white_group)
-            binding.descButton.setImageResource(R.drawable.arrow_down_yellow_group)
-            binding.ascButton.isClickable = true
-            binding.descButton.isClickable = false
+        binding.downButton.setOnClickListener {
+            binding.upButton.setImageResource(R.drawable.arrow_up_white_group)
+            binding.downButton.setImageResource(R.drawable.arrow_down_yellow_group)
+            binding.upButton.isClickable = true
+            binding.downButton.isClickable = false
+
+            if (binding.sortNameButton.isChecked) {
+                mPersonageViewModel.toggleSortNameOrder()
+            } else {
+                mPersonageViewModel.toggleSortYearOrder()
+            }
         }
 
         binding.sortNameButton.setOnClickListener {
             binding.sortNameButton.isClickable = false
             binding.sortYearButton.isClickable = true
             binding.sortYearButton.isChecked = false
+
+            mPersonageViewModel.toggleSortNameOrder()
         }
 
         binding.sortYearButton.setOnClickListener {
             binding.sortYearButton.isClickable = false
             binding.sortNameButton.isClickable = true
             binding.sortNameButton.isChecked = false
+
+            mPersonageViewModel.toggleSortYearOrder()
         }
     }
 }

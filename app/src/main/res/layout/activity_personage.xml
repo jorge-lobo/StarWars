@@ -99,13 +99,13 @@
                 android:src="@drawable/sliders" />
 
             <ToggleButton
-                android:id="@+id/name_button"
+                android:id="@+id/sort_name_button"
                 android:layout_width="78dp"
                 android:layout_height="25dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="216dp"
                 android:layout_marginEnd="5dp"
-                android:layout_toStartOf="@id/year_button"
+                android:layout_toStartOf="@id/sort_year_button"
                 android:background="@drawable/filter_buttons"
                 android:checked="true"
                 android:clickable="false"
@@ -118,7 +118,7 @@
                 android:textSize="@dimen/text_size_small" />
 
             <ToggleButton
-                android:id="@+id/year_button"
+                android:id="@+id/sort_year_button"
                 android:layout_width="78dp"
                 android:layout_height="25dp"
                 android:layout_alignParentTop="true"

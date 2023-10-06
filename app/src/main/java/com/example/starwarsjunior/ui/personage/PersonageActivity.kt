@@ -86,7 +86,7 @@ class PersonageActivity : AppCompatActivity() {
         }
 
         //Observers for when variables change in the viewModel and need some code
-        mPersonageViewModel.personages.observe(
+        mPersonageViewModel.sortedPersonages.observe(
             this,
             Observer { personageList ->
 
@@ -152,16 +152,16 @@ class PersonageActivity : AppCompatActivity() {
             binding.descButton.isClickable = false
         }
 
-        binding.nameButton.setOnClickListener {
-            binding.nameButton.isClickable = false
-            binding.yearButton.isClickable = true
-            binding.yearButton.isChecked = false
+        binding.sortNameButton.setOnClickListener {
+            binding.sortNameButton.isClickable = false
+            binding.sortYearButton.isClickable = true
+            binding.sortYearButton.isChecked = false
         }
 
-        binding.yearButton.setOnClickListener {
-            binding.yearButton.isClickable = false
-            binding.nameButton.isClickable = true
-            binding.nameButton.isChecked = false
+        binding.sortYearButton.setOnClickListener {
+            binding.sortYearButton.isClickable = false
+            binding.sortNameButton.isClickable = true
+            binding.sortNameButton.isChecked = false
         }
     }
 }

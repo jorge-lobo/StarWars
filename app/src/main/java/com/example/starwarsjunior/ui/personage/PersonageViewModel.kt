@@ -19,6 +19,9 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
     val searchQuery = MutableLiveData<String>()
     private var isDataPreloaded = false
 
+    val sortNameAscending = MutableLiveData<Boolean>(true)
+    val sortedPersonages = MutableLiveData<List<Personage>>()
+
     init {
         observerSearchQuery()
     }
@@ -56,7 +59,9 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
                 personagesResponse
             ) {
                 override fun onSuccess(data: PersonageListResponse) {
-                    personages.value = data.results
+                    // sort list by personage's name
+                    personages.value = data.results.sortedBy { it.name }
+                    sortedPersonages.value = personages.value
                     isLoading.value = false
                     isRefreshing.value = false
                     data.let {

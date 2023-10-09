@@ -77,6 +77,7 @@ class PersonageActivity : AppCompatActivity() {
             val idFromUrl = Utils.extractIdFromUrl(item.personage.url)
             intent.putExtra(PersonageDetailActivity.EXTRA_PERSONAGE_ID, idFromUrl)
             startActivity(intent)
+            binding.searchBox.setText("")
             false
         }
 
@@ -133,11 +134,12 @@ class PersonageActivity : AppCompatActivity() {
 
         //fragment bottom sheet
         binding.personageBottomSheetButton.setOnClickListener {
-            bottomSheetFragment = BottomSheetFragment()
+            bottomSheetFragment = BottomSheetFragment(mPersonageViewModel)
             bottomSheetFragment.show(supportFragmentManager, "BSDialogFragment")
 
         }
 
+        //Order buttons
         binding.upButton.setOnClickListener {
             binding.upButton.setImageResource(R.drawable.arrow_up_yellow_group)
             binding.downButton.setImageResource(R.drawable.arrow_down_white_group)
@@ -179,5 +181,7 @@ class PersonageActivity : AppCompatActivity() {
 
             mPersonageViewModel.toggleSortYearOrder()
         }
+
+        //Filter buttons
     }
 }

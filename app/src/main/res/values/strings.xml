@@ -67,4 +67,8 @@
     <string name="length">Length</string>
     <string name="diameter">Diameter</string>
     <string name="ship_name">Ship Name</string>
+    <string name="wookie">wookie</string>
+    <string name="rodian">rodian</string>
+    <string name="twi_lek">twi\'lek</string>
+    <string name="ewok">ewok</string>
 </resources>

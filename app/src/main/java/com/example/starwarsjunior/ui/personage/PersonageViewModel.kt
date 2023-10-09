@@ -23,6 +23,8 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
     private var sortBy = "name"
     private var isDescending = false
 
+    private val selectedFilters = mutableSetOf<String>()
+
     init {
         observerSearchQuery()
     }
@@ -91,6 +93,7 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
         personages.value = arrayListOf()
     }
 
+    // Order buttons
     fun toggleSortNameOrder() {
         sortBy = "name"
         isDescending = !isDescending
@@ -118,5 +121,27 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
             else -> sortedPersonages.value
         }
         sortedPersonages.value = sortedList
+    }
+
+    // Filter buttons
+
+    //add or remove a selected filter
+    fun toggleFilter(filter: String) {
+        if (selectedFilters.contains(filter)) {
+            selectedFilters.remove(filter)
+        } else {
+            selectedFilters.add(filter)
+        }
+    }
+
+    fun applyFilters() {
+        val filteredList = personages.value?.filter { personage ->
+            selectedFilters.isEmpty() || selectedFilters.contains(personage.gender)
+        }
+        filteredPersonages.value = filteredList
+    }
+
+    fun isFilterSelected(filter: String): Boolean {
+        return selectedFilters.contains(filter)
     }
 }

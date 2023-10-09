@@ -91,7 +91,7 @@
                     android:textSize="@dimen/text_size_medium" />
 
                 <ToggleButton
-                    android:id="@+id/ewoks_button"
+                    android:id="@+id/ewok_button"
                     android:layout_width="0dp"
                     android:layout_height="31dp"
                     android:layout_marginHorizontal="10dp"
@@ -100,8 +100,8 @@
                     android:fontFamily="@font/starjedi_special_edition"
                     android:gravity="center"
                     android:textAppearance="@style/text_black"
-                    android:textOff="@string/ewoks"
-                    android:textOn="@string/ewoks"
+                    android:textOff="@string/ewok"
+                    android:textOn="@string/ewok"
                     android:textSize="@dimen/text_size_medium" />
 
             </LinearLayout>
@@ -118,7 +118,7 @@
                 android:orientation="horizontal">
 
                 <ToggleButton
-                    android:id="@+id/keshiri_button"
+                    android:id="@+id/wookie_button"
                     android:layout_width="0dp"
                     android:layout_height="31dp"
                     android:layout_marginHorizontal="10dp"
@@ -127,12 +127,12 @@
                     android:fontFamily="@font/starjedi_special_edition"
                     android:gravity="center"
                     android:textAppearance="@style/text_black"
-                    android:textOff="@string/keshiri"
-                    android:textOn="@string/keshiri"
+                    android:textOff="@string/wookie"
+                    android:textOn="@string/wookie"
                     android:textSize="@dimen/text_size_medium" />
 
                 <ToggleButton
-                    android:id="@+id/zeltrons_button"
+                    android:id="@+id/rodian_button"
                     android:layout_width="0dp"
                     android:layout_height="31dp"
                     android:layout_marginHorizontal="10dp"
@@ -141,12 +141,12 @@
                     android:fontFamily="@font/starjedi_special_edition"
                     android:gravity="center"
                     android:textAppearance="@style/text_black"
-                    android:textOff="@string/zeltrons"
-                    android:textOn="@string/zeltrons"
+                    android:textOff="@string/rodian"
+                    android:textOn="@string/rodian"
                     android:textSize="@dimen/text_size_medium" />
 
                 <ToggleButton
-                    android:id="@+id/jawas_button"
+                    android:id="@+id/twilek_button"
                     android:layout_width="0dp"
                     android:layout_height="31dp"
                     android:layout_marginHorizontal="10dp"
@@ -155,8 +155,8 @@
                     android:fontFamily="@font/starjedi_special_edition"
                     android:gravity="center"
                     android:textAppearance="@style/text_black"
-                    android:textOff="@string/jawas"
-                    android:textOn="@string/jawas"
+                    android:textOff="@string/twi_lek"
+                    android:textOn="@string/twi_lek"
                     android:textSize="@dimen/text_size_medium" />
 
             </LinearLayout>

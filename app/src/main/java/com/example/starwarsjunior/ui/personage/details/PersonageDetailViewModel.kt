@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.starwarsjunior.MyApplication
+import com.example.starwarsjunior.R
 import com.example.starwarsjunior.data.error.CallbackWrapper
 import com.example.starwarsjunior.data.personage.PersonageRepository
 import com.example.starwarsjunior.data.personage.PersonageRepository.fetchSpeciesName
@@ -63,7 +65,11 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
     private fun getHomeWorldName(planetUrl: String) {
         viewModelScope.launch {
             val planetName = fetchPlanetName(planetUrl)
-            personageHomeWorld.value = planetName ?: "N/A"
+            if (planetUrl.isNotEmpty()) {
+                personageHomeWorld.value = planetName?.lowercase()
+            } else {
+                personageHomeWorld.value = MyApplication.getAppContext().getString(R.string.n_a)
+            }
         }
     }
 
@@ -78,7 +84,7 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
             }
 
             if (speciesNamesList.isNotEmpty()) {
-                val combinedSpeciesNames = speciesNamesList.joinToString(", ")
+                val combinedSpeciesNames = speciesNamesList.joinToString(", ").lowercase()
                 personageSpecie.postValue(combinedSpeciesNames)
             } else {
                 personageSpecie.value = "human"

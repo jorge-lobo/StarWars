@@ -24,7 +24,7 @@ const val ARG_ITEM_COUNT = "item_count"
  *    BottomSheetFragment.newInstance(30).show(supportFragmentManager, "dialog")
  * </pre>
  */
-class BottomSheetFragment : BottomSheetDialogFragment() {
+class BottomSheetFragment(private val mainViewModel: PersonageViewModel) : BottomSheetDialogFragment() {
 
     private var _binding: FragmentBottomSheetPersonageDialogBinding? = null
 
@@ -47,6 +47,35 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             LinearLayoutManager(context)
         activity?.findViewById<RecyclerView>(R.id.list)?.adapter =
             arguments?.getInt(ARG_ITEM_COUNT)?.let { ItemAdapter(it) }
+
+        //Filter buttons
+        binding.maleButton.isChecked = mainViewModel.isFilterSelected("male")
+        binding.femaleButton.isChecked = mainViewModel.isFilterSelected("female")
+        binding.undefinedButton.isChecked = mainViewModel.isFilterSelected("n/a")
+
+        binding.maleButton.setOnClickListener {
+            mainViewModel.toggleFilter("male")
+            binding.maleButton.isChecked = mainViewModel.isFilterSelected("male")
+        }
+
+        binding.femaleButton.setOnClickListener {
+            mainViewModel.toggleFilter("female")
+            binding.femaleButton.isChecked = mainViewModel.isFilterSelected("female")
+        }
+
+        binding.undefinedButton.setOnClickListener {
+            mainViewModel.toggleFilter("n/a")
+            binding.undefinedButton.isChecked = mainViewModel.isFilterSelected("n/a")
+        }
+
+        //SearchButton
+        binding.searchButton.setOnClickListener {
+
+            mainViewModel.applyFilters()
+
+            //close BottomSheetFragment
+            dismiss()
+        }
     }
 
     private inner class ViewHolder internal constructor(binding: FragmentBottomSheetListDialogItemBinding) :
@@ -82,8 +111,8 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     companion object {
 
         // TODO: Customize parameters
-        fun newInstance(itemCount: Int): BottomSheetFragment =
-            BottomSheetFragment().apply {
+        fun newInstance(itemCount: Int, mainViewModel: PersonageViewModel): BottomSheetFragment =
+            BottomSheetFragment(mainViewModel).apply {
                 arguments = Bundle().apply {
                     putInt(ARG_ITEM_COUNT, itemCount)
                 }

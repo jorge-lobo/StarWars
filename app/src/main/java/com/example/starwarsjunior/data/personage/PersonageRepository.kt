@@ -14,10 +14,9 @@ import org.json.JSONObject
 
 object PersonageRepository : IPersonageDataSource.Main {
     private var cachedPersonageResponse: List<Personage>? = null
-    private val dataCache = DataCache()
 
     override suspend fun getPersonages(): ResultWrapper<PersonageListResponse> {
-        //check if the data are already cached
+        //check if the data is already cached
         cachedPersonageResponse?.let {
             return ResultWrapper(PersonageListResponse(it), null)
         }
@@ -28,9 +27,7 @@ object PersonageRepository : IPersonageDataSource.Main {
         result.result?.let {
             //saveDetails(it)
             cachedPersonageResponse = it.results
-            dataCache.put("personages", it.results)
         }
-
         return result
     }
 
@@ -43,7 +40,6 @@ object PersonageRepository : IPersonageDataSource.Main {
                 return ResultWrapper(item, null)
             }
         }
-
         return ResultWrapper(null, null)
     }
 

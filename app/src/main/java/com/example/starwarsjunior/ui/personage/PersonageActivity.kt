@@ -25,7 +25,7 @@ class PersonageActivity : AppCompatActivity() {
     lateinit var personageBottomSheetButton: Button
     lateinit var bottomSheetFragment: BottomSheetFragment
 
-    private lateinit var mPersonageViewModel : PersonageViewModel
+    private lateinit var mPersonageViewModel: PersonageViewModel
 
     private val mPersonageItemAdapter = FastItemAdapter<PersonageBindingItem>()
 
@@ -77,6 +77,7 @@ class PersonageActivity : AppCompatActivity() {
             val idFromUrl = Utils.extractIdFromUrl(item.personage.url)
             intent.putExtra(PersonageDetailActivity.EXTRA_PERSONAGE_ID, idFromUrl)
             startActivity(intent)
+            binding.searchBox.setText("")
             false
         }
 
@@ -86,7 +87,7 @@ class PersonageActivity : AppCompatActivity() {
         }
 
         //Observers for when variables change in the viewModel and need some code
-        mPersonageViewModel.personages.observe(
+        mPersonageViewModel.sortedPersonages.observe(
             this,
             Observer { personageList ->
 
@@ -133,35 +134,54 @@ class PersonageActivity : AppCompatActivity() {
 
         //fragment bottom sheet
         binding.personageBottomSheetButton.setOnClickListener {
-            bottomSheetFragment = BottomSheetFragment()
+            bottomSheetFragment = BottomSheetFragment(mPersonageViewModel)
             bottomSheetFragment.show(supportFragmentManager, "BSDialogFragment")
 
         }
 
-        binding.ascButton.setOnClickListener {
-            binding.ascButton.setImageResource(R.drawable.arrow_up_yellow_group)
-            binding.descButton.setImageResource(R.drawable.arrow_down_white_group)
-            binding.ascButton.isClickable = false
-            binding.descButton.isClickable = true
+        //Order buttons
+        binding.upButton.setOnClickListener {
+            binding.upButton.setImageResource(R.drawable.arrow_up_yellow_group)
+            binding.downButton.setImageResource(R.drawable.arrow_down_white_group)
+            binding.upButton.isClickable = false
+            binding.downButton.isClickable = true
+
+            if (binding.sortNameButton.isChecked) {
+                mPersonageViewModel.toggleSortNameOrder()
+            } else {
+                mPersonageViewModel.toggleSortYearOrder()
+            }
         }
 
-        binding.descButton.setOnClickListener {
-            binding.ascButton.setImageResource(R.drawable.arrow_up_white_group)
-            binding.descButton.setImageResource(R.drawable.arrow_down_yellow_group)
-            binding.ascButton.isClickable = true
-            binding.descButton.isClickable = false
+        binding.downButton.setOnClickListener {
+            binding.upButton.setImageResource(R.drawable.arrow_up_white_group)
+            binding.downButton.setImageResource(R.drawable.arrow_down_yellow_group)
+            binding.upButton.isClickable = true
+            binding.downButton.isClickable = false
+
+            if (binding.sortNameButton.isChecked) {
+                mPersonageViewModel.toggleSortNameOrder()
+            } else {
+                mPersonageViewModel.toggleSortYearOrder()
+            }
         }
 
-        binding.nameButton.setOnClickListener {
-            binding.nameButton.isClickable = false
-            binding.yearButton.isClickable = true
-            binding.yearButton.isChecked = false
+        binding.sortNameButton.setOnClickListener {
+            binding.sortNameButton.isClickable = false
+            binding.sortYearButton.isClickable = true
+            binding.sortYearButton.isChecked = false
+
+            mPersonageViewModel.toggleSortNameOrder()
         }
 
-        binding.yearButton.setOnClickListener {
-            binding.yearButton.isClickable = false
-            binding.nameButton.isClickable = true
-            binding.nameButton.isChecked = false
+        binding.sortYearButton.setOnClickListener {
+            binding.sortYearButton.isClickable = false
+            binding.sortNameButton.isClickable = true
+            binding.sortNameButton.isChecked = false
+
+            mPersonageViewModel.toggleSortYearOrder()
         }
+
+        //Filter buttons
     }
 }

@@ -19,6 +19,12 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
     val searchQuery = MutableLiveData<String>()
     private var isDataPreloaded = false
 
+    val sortedPersonages = MutableLiveData<List<Personage>?>()
+    private var sortBy = "name"
+    private var isDescending = false
+
+    private val selectedFilters = mutableSetOf<String>()
+
     init {
         observerSearchQuery()
     }
@@ -56,7 +62,9 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
                 personagesResponse
             ) {
                 override fun onSuccess(data: PersonageListResponse) {
-                    personages.value = data.results
+                    // sort list by personage's name
+                    personages.value = data.results.sortedBy { it.name }
+                    sortedPersonages.value = personages.value
                     isLoading.value = false
                     isRefreshing.value = false
                     data.let {
@@ -83,5 +91,57 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
         isLoading.value = false
         isRefreshing.value = false
         personages.value = arrayListOf()
+    }
+
+    // Order buttons
+    fun toggleSortNameOrder() {
+        sortBy = "name"
+        isDescending = !isDescending
+        updateSortedPersonages()
+    }
+
+    fun toggleSortYearOrder() {
+        sortBy = "birthYear"
+        isDescending = !isDescending
+        updateSortedPersonages()
+    }
+
+    private fun updateSortedPersonages() {
+        val sortedList = when (sortBy) {
+            "name" -> {
+                if (isDescending) sortedPersonages.value?.sortedByDescending { it.name }
+                else sortedPersonages.value?.sortedBy { it.name }
+            }
+
+            "birthYear" -> {
+                if (isDescending) sortedPersonages.value?.sortedByDescending { it.birthYear }
+                else sortedPersonages.value?.sortedBy { it.birthYear }
+            }
+
+            else -> sortedPersonages.value
+        }
+        sortedPersonages.value = sortedList
+    }
+
+    // Filter buttons
+
+    //add or remove a selected filter
+    fun toggleFilter(filter: String) {
+        if (selectedFilters.contains(filter)) {
+            selectedFilters.remove(filter)
+        } else {
+            selectedFilters.add(filter)
+        }
+    }
+
+    fun applyFilters() {
+        val filteredList = personages.value?.filter { personage ->
+            selectedFilters.isEmpty() || selectedFilters.contains(personage.gender)
+        }
+        filteredPersonages.value = filteredList
+    }
+
+    fun isFilterSelected(filter: String): Boolean {
+        return selectedFilters.contains(filter)
     }
 }

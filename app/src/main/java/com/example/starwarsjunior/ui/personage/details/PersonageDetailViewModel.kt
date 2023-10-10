@@ -4,13 +4,11 @@ import android.app.Application
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.starwarsjunior.MyApplication
-import com.example.starwarsjunior.R
 import com.example.starwarsjunior.data.error.CallbackWrapper
 import com.example.starwarsjunior.data.personage.PersonageRepository
 import com.example.starwarsjunior.data.personage.PersonageRepository.fetchSpeciesName
 import com.example.starwarsjunior.data.personage.objects.Personage
-import com.example.starwarsjunior.data.planet.PlanetRepository.fetchPlanetName
+import com.example.starwarsjunior.data.planet.PlanetRepository
 import com.example.starwarsjunior.ui.common.BaseViewModel
 import kotlinx.coroutines.launch
 
@@ -33,12 +31,11 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
     }
 
     private fun getPersonageDetails(personageId: Int) {
-
         isLoading.value = true
 
         viewModelScope.launch {
             val personageResponse = PersonageRepository.getCachedPersonage(personageId)
-            var result =
+            val result =
                 object :
                     CallbackWrapper<Personage?>(this@PersonageDetailViewModel, personageResponse) {
                     override fun onSuccess(data: Personage?) {
@@ -56,6 +53,8 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
                             getSpeciesNames(data.species)
 
                             isLoading.value = false
+                        } else {
+                            onError("Unknown error")
                         }
                     }
                 }
@@ -64,13 +63,23 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
 
     private fun getHomeWorldName(planetUrl: String) {
         viewModelScope.launch {
-            val planetName = fetchPlanetName(planetUrl)
-            if (planetUrl.isNotEmpty()) {
-                personageHomeWorld.value = planetName?.lowercase()
-            } else {
-                personageHomeWorld.value = MyApplication.getAppContext().getString(R.string.n_a)
+            val planetID = extractPlanetID(planetUrl)
+
+            planetID?.let {
+                val planetObject = PlanetRepository.getCachedPlanet(it)
+                personageHomeWorld.value = planetObject?.name
             }
         }
+    }
+
+    private fun extractPlanetID(planetUrl: String): Int? {
+        // Split the URL by '/' and get the second part from the end, which should be the planet ID
+        val parts = planetUrl.split("/")
+        if (parts.isNotEmpty()) {
+            val planetID = parts[parts.size - 2]
+            return planetID.toIntOrNull()
+        }
+        return null
     }
 
     private fun getSpeciesNames(speciesUrls: List<String>) {

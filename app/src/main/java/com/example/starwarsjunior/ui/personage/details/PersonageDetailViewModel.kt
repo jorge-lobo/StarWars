@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.starwarsjunior.data.error.CallbackWrapper
 import com.example.starwarsjunior.data.personage.PersonageRepository
-import com.example.starwarsjunior.data.personage.PersonageRepository.fetchSpeciesName
+/*import com.example.starwarsjunior.data.personage.PersonageRepository.fetchSpeciesName*/
 import com.example.starwarsjunior.data.personage.objects.Personage
 import com.example.starwarsjunior.data.planet.PlanetRepository
 import com.example.starwarsjunior.ui.common.BaseViewModel
@@ -50,12 +50,17 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
                             personageEyeColor.value = data.eyeColor.lowercase()
 
                             getHomeWorldName(data.homeWorld)
-                            getSpeciesNames(data.species)
 
-                            isLoading.value = false
+                            if (data.species.isNullOrEmpty()) {
+                                personageSpecie.value = "human"
+                            } else {
+                                getSpeciesNames(data.species)
+                            }
+
                         } else {
                             onError("Unknown error")
                         }
+                        isLoading.value = false
                     }
                 }
         }
@@ -67,7 +72,8 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
 
             planetID?.let {
                 val planetObject = PlanetRepository.getCachedPlanet(it)
-                personageHomeWorld.value = planetObject?.name
+                val planetName = planetObject?.name?.lowercase() ?: "n/a"
+                personageHomeWorld.value = planetName
             }
         }
     }
@@ -84,21 +90,28 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
 
     private fun getSpeciesNames(speciesUrls: List<String>) {
         viewModelScope.launch {
-            val speciesNamesList = mutableListOf<String>()
-            for (speciesUrl in speciesUrls) {
-                val speciesName = fetchSpeciesName(speciesUrl)
-                speciesName?.let {
-                    speciesNamesList.add(it)
+            var concatSpecies = ""
+
+            for (item in speciesUrls) {
+                val speciesID = extractSpecieID(item)
+
+                speciesID?.let {
+                    val specieObject = PersonageRepository.getCachedSpecie(it)
+                    concatSpecies += specieObject?.name
                 }
             }
-
-            if (speciesNamesList.isNotEmpty()) {
-                val combinedSpeciesNames = speciesNamesList.joinToString(", ").lowercase()
-                personageSpecie.postValue(combinedSpeciesNames)
-            } else {
-                personageSpecie.value = "human"
-            }
+            personageSpecie.value = concatSpecies.lowercase()
         }
+    }
+
+    private fun extractSpecieID(specieUrl: String): Int? {
+        // Split the URL by '/' and get the second part from the end, which should be the planet ID
+        val parts = specieUrl.split("/")
+        if (parts.isNotEmpty()) {
+            val specieID = parts[parts.size - 2]
+            return specieID.toIntOrNull()
+        }
+        return null
     }
 
     override fun onError(message: String?, validationErrors: Map<String, ArrayList<String>>?) {

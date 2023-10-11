@@ -19,7 +19,7 @@ class SplashScreenActivity : AppCompatActivity() {
         viewModel.preloadDataFromAPI()
 
         viewModel.preloadComplete.observe(this, Observer { isComplete ->
-            if (isComplete == 2) {
+            if (isComplete == 3) {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }

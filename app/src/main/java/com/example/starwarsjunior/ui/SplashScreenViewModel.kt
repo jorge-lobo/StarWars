@@ -8,6 +8,8 @@ import com.example.starwarsjunior.data.error.CallbackWrapper
 import com.example.starwarsjunior.data.personage.PersonageRepository
 import com.example.starwarsjunior.data.personage.objects.Personage
 import com.example.starwarsjunior.data.personage.objects.PersonageListResponse
+import com.example.starwarsjunior.data.personage.objects.Specie
+import com.example.starwarsjunior.data.personage.objects.SpecieListResponse
 import com.example.starwarsjunior.data.planet.PlanetRepository
 import com.example.starwarsjunior.data.planet.objects.Planet
 import com.example.starwarsjunior.data.planet.objects.PlanetListResponse
@@ -19,6 +21,7 @@ class SplashScreenViewModel(application: Application) : BaseViewModel(applicatio
 
     private var personages = MutableLiveData<List<Personage>>()
     private var planets = MutableLiveData<List<Planet>>()
+    private var species = MutableLiveData<List<Specie>>()
     val preloadComplete = MutableLiveData<Int>().apply { value = 0 }
 
     fun preloadDataFromAPI() {
@@ -28,12 +31,14 @@ class SplashScreenViewModel(application: Application) : BaseViewModel(applicatio
         noDataAvailable.value = false
         personages.value = emptyList()
         planets.value = emptyList()
+        species.value = emptyList()
 
         viewModelScope.launch {
             val personagesResponse = PersonageRepository.getPersonages()
             val planetsResponse = PlanetRepository.getPlanets()
+            val speciesResponse = PersonageRepository.getSpecies()
 
-            var result = object : CallbackWrapper<PersonageListResponse>(
+            object : CallbackWrapper<PersonageListResponse>(
                 this@SplashScreenViewModel,
                 personagesResponse
             ) {
@@ -48,6 +53,15 @@ class SplashScreenViewModel(application: Application) : BaseViewModel(applicatio
             ) {
                 override fun onSuccess(data: PlanetListResponse) {
                     preloadComplete.value = preloadComplete.value!! + 1
+                }
+            }
+
+            object : CallbackWrapper<SpecieListResponse>(
+                this@SplashScreenViewModel,
+                speciesResponse
+            ) {
+                override fun onSuccess(data: SpecieListResponse) {
+                    preloadComplete.value = preloadComplete.value!! +1
                 }
             }
         }

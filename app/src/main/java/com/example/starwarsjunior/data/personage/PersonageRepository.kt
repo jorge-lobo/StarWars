@@ -3,17 +3,17 @@ package com.example.starwarsjunior.data.personage
 import com.example.starwarsjunior.data.common.ResultWrapper
 import com.example.starwarsjunior.data.personage.objects.Personage
 import com.example.starwarsjunior.data.personage.objects.PersonageListResponse
+import com.example.starwarsjunior.data.personage.objects.Specie
+import com.example.starwarsjunior.data.personage.objects.SpecieListResponse
 import com.example.starwarsjunior.data.personage.remote.PersonageRemoteDataSource
+import com.example.starwarsjunior.utils.Utils
 import com.example.starwarsjunior.utils.Utils.extractIdFromUrl
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import okhttp3.OkHttpClient
-import okhttp3.Request
 import org.json.JSONException
 import org.json.JSONObject
 
 object PersonageRepository : IPersonageDataSource.Main {
     private var cachedPersonageResponse: List<Personage>? = null
+    private var cachedSpecieResponse: List<Specie>? = null
 
     override suspend fun getPersonages(): ResultWrapper<PersonageListResponse> {
         //check if the data is already cached
@@ -31,6 +31,22 @@ object PersonageRepository : IPersonageDataSource.Main {
         return result
     }
 
+    override suspend fun getSpecies(): ResultWrapper<SpecieListResponse> {
+        //check if the data is already cached
+        cachedSpecieResponse?.let {
+            return ResultWrapper(SpecieListResponse(it), null)
+        }
+
+        //if not cached, make a call to API
+        val result = PersonageRemoteDataSource.getSpecies()
+
+        result.result?.let {
+            //saveDetails(it)
+            cachedSpecieResponse = it.results
+        }
+        return result
+    }
+
     override suspend fun getCachedPersonage(personageID: Int): ResultWrapper<Personage?> {
         for (item in cachedPersonageResponse!!) {
             //Extract ID number from URL
@@ -43,7 +59,17 @@ object PersonageRepository : IPersonageDataSource.Main {
         return ResultWrapper(null, null)
     }
 
-    suspend fun fetchSpeciesName(speciesUrl: String): String? {
+    override suspend fun getCachedSpecie(specieID: Int): Specie? {
+        for (item in cachedSpecieResponse.orEmpty()) {
+            //Extract ID number from URL
+            if (Utils.extractIdFromUrl(item.url) == specieID) {
+                return item; null
+            }
+        }
+        return null; null
+    }
+
+    /*suspend fun fetchSpeciesName(speciesUrl: String): String? {
         return withContext(Dispatchers.IO) {
             val request = Request.Builder()
                 .url(speciesUrl)
@@ -57,7 +83,7 @@ object PersonageRepository : IPersonageDataSource.Main {
             }
             return@withContext null
         }
-    }
+    }*/
 
     private fun parseSpeciesNameFromJson(json: String?): String? {
         try {

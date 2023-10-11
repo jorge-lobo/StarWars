@@ -13,6 +13,9 @@ import com.example.starwarsjunior.data.personage.objects.SpecieListResponse
 import com.example.starwarsjunior.data.planet.PlanetRepository
 import com.example.starwarsjunior.data.planet.objects.Planet
 import com.example.starwarsjunior.data.planet.objects.PlanetListResponse
+import com.example.starwarsjunior.data.ship.ShipRepository
+import com.example.starwarsjunior.data.ship.objects.Ship
+import com.example.starwarsjunior.data.ship.objects.ShipListResponse
 import com.example.starwarsjunior.ui.common.BaseViewModel
 import kotlinx.coroutines.launch
 
@@ -22,6 +25,7 @@ class SplashScreenViewModel(application: Application) : BaseViewModel(applicatio
     private var personages = MutableLiveData<List<Personage>>()
     private var planets = MutableLiveData<List<Planet>>()
     private var species = MutableLiveData<List<Specie>>()
+    private var ships = MutableLiveData<List<Ship>>()
     val preloadComplete = MutableLiveData<Int>().apply { value = 0 }
 
     fun preloadDataFromAPI() {
@@ -32,11 +36,13 @@ class SplashScreenViewModel(application: Application) : BaseViewModel(applicatio
         personages.value = emptyList()
         planets.value = emptyList()
         species.value = emptyList()
+        ships.value = emptyList()
 
         viewModelScope.launch {
             val personagesResponse = PersonageRepository.getPersonages()
             val planetsResponse = PlanetRepository.getPlanets()
             val speciesResponse = PersonageRepository.getSpecies()
+            val shipsResponse = ShipRepository.getShips()
 
             object : CallbackWrapper<PersonageListResponse>(
                 this@SplashScreenViewModel,
@@ -61,6 +67,15 @@ class SplashScreenViewModel(application: Application) : BaseViewModel(applicatio
                 speciesResponse
             ) {
                 override fun onSuccess(data: SpecieListResponse) {
+                    preloadComplete.value = preloadComplete.value!! +1
+                }
+            }
+
+            object : CallbackWrapper<ShipListResponse>(
+                this@SplashScreenViewModel,
+                shipsResponse
+            ) {
+                override fun onSuccess(data: ShipListResponse) {
                     preloadComplete.value = preloadComplete.value!! +1
                 }
             }

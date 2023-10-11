@@ -23,7 +23,7 @@ class PersonageBindingItem(val personage: Personage) : AbstractItem<PersonageBin
      * @return the layout for this item
      */
     override val layoutRes: Int
-        get() = R.layout.personage_item
+        get() = R.layout.rv_item
 
     /**
      * binds the data of this item onto the viewHolder
@@ -49,6 +49,6 @@ class PersonageBindingItem(val personage: Personage) : AbstractItem<PersonageBin
      * our ViewHolder
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        var name: TextView = view.findViewById(R.id.item_personage_name)
+        var name: TextView = view.findViewById(R.id.item_name)
     }
 }

@@ -1,149 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".ui.planet.PlanetActivity">
 
-    <View
-        android:id="@+id/star_wars_bg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/bg_dark_mode" />
+    <data>
 
-    <View
-        android:id="@+id/star_wars_logo_small"
-        android:layout_width="@dimen/star_wars_logo_small_width"
-        android:layout_height="@dimen/star_wars_logo_small_height"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="27dp"
-        android:background="@drawable/star_wars_logo" />
+        <import type="android.view.View" />
 
-    <ImageView
-        android:id="@+id/back_button"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="51dp"
-        android:contentDescription="@string/back_button"
-        android:src="@drawable/arrow_left_yellow" />
-
-    <TextView
-        android:id="@+id/title_planets"
-        android:layout_width="wrap_content"
-        android:layout_height="51dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="98dp"
-        android:fontFamily="@font/starjedi_special_edition"
-        android:gravity="center_horizontal|top"
-        android:text="@string/planets"
-        android:textAppearance="@style/text_yellow"
-        android:textSize="@dimen/text_size_extra_large"
-        tools:ignore="RelativeOverlap" />
-
-    <EditText
-        android:id="@+id/search_box"
-        android:layout_width="match_parent"
-        android:layout_height="31dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="169dp"
-        android:autofillHints=""
-        android:background="@drawable/search_box"
-        android:inputType="text"
-        android:paddingHorizontal="15dp"
-        tools:ignore="LabelFor" />
-
-    <ImageView
-        android:id="@+id/reset_button"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="173dp"
-        android:layout_marginEnd="25dp"
-        android:contentDescription="@string/reset_button"
-        android:src="@drawable/x" />
+        <variable
+            name="viewModel"
+            type="com.example.starwarsjunior.ui.personage.PersonageViewModel" />
+    </data>
 
     <RelativeLayout
-        android:id="@+id/order_buttons_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/planets_bottom_sheet_button"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+        <View
+            android:id="@+id/star_wars_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="34dp"
-            android:layout_marginTop="216dp"
-            android:contentDescription="@string/filter_button"
-            android:src="@drawable/sliders" />
+            android:background="@drawable/bg_dark_mode" />
 
-        <ToggleButton
-            android:id="@+id/name_button"
-            android:layout_width="78dp"
-            android:layout_height="25dp"
+        <View
+            android:id="@+id/star_wars_logo_small"
+            android:layout_width="@dimen/star_wars_logo_small_width"
+            android:layout_height="@dimen/star_wars_logo_small_height"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="216dp"
-            android:layout_marginEnd="5dp"
-            android:layout_toStartOf="@id/diameter_button"
-            android:background="@drawable/filter_buttons"
-            android:checked="true"
-            android:fontFamily="@font/starjedi_special_edition"
-            android:gravity="center"
-            android:textAppearance="@style/text_black"
-            android:textOff="@string/name"
-            android:textOn="@string/name"
-            android:textSize="@dimen/text_size_small" />
-
-        <ToggleButton
-            android:id="@+id/diameter_button"
-            android:layout_width="78dp"
-            android:layout_height="25dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="216dp"
-            android:layout_marginEnd="5dp"
-            android:layout_toStartOf="@id/asc_button"
-            android:background="@drawable/filter_buttons"
-            android:checked="false"
-            android:fontFamily="@font/starjedi_special_edition"
-            android:gravity="center"
-            android:textAppearance="@style/text_black"
-            android:textOff="@string/diameter"
-            android:textOn="@string/diameter"
-            android:textSize="@dimen/text_size_small" />
+            android:layout_centerInParent="true"
+            android:layout_marginTop="27dp"
+            android:background="@drawable/star_wars_logo" />
 
         <ImageView
-            android:id="@+id/asc_button"
-            android:layout_width="48dp"
-            android:layout_height="25dp"
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="51dp"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/arrow_left_yellow" />
+
+        <TextView
+            android:id="@+id/title_planets"
+            android:layout_width="wrap_content"
+            android:layout_height="51dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="216dp"
-            android:layout_marginEnd="5dp"
-            android:layout_toStartOf="@id/desc_button"
-            android:contentDescription="@string/ascending_order"
-            android:src="@drawable/arrow_up_white_group" />
+            android:layout_centerInParent="true"
+            android:layout_marginTop="98dp"
+            android:fontFamily="@font/starjedi_special_edition"
+            android:gravity="center_horizontal|top"
+            android:text="@string/planets"
+            android:textAppearance="@style/text_yellow"
+            android:textSize="@dimen/text_size_extra_large"
+            tools:ignore="RelativeOverlap" />
+
+        <EditText
+            android:id="@+id/search_box"
+            android:layout_width="match_parent"
+            android:layout_height="31dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="169dp"
+            android:autofillHints=""
+            android:background="@drawable/search_box"
+            android:inputType="text"
+            android:paddingHorizontal="15dp"
+            tools:ignore="LabelFor" />
 
         <ImageView
-            android:id="@+id/desc_button"
-            android:layout_width="48dp"
-            android:layout_height="25dp"
+            android:id="@+id/reset_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="215dp"
-            android:layout_marginEnd="20dp"
-            android:contentDescription="@string/descending_order"
-            android:src="@drawable/arrow_down_yellow_group" />
+            android:layout_marginTop="173dp"
+            android:layout_marginEnd="25dp"
+            android:contentDescription="@string/reset_button"
+            android:src="@drawable/x" />
+
+        <RelativeLayout
+            android:id="@+id/order_buttons_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/planets_bottom_sheet_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="34dp"
+                android:layout_marginTop="216dp"
+                android:contentDescription="@string/filter_button"
+                android:src="@drawable/sliders" />
+
+            <ToggleButton
+                android:id="@+id/name_button"
+                android:layout_width="78dp"
+                android:layout_height="25dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="216dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toStartOf="@id/size_button"
+                android:background="@drawable/filter_buttons"
+                android:checked="true"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center"
+                android:textAppearance="@style/text_black"
+                android:textOff="@string/name"
+                android:textOn="@string/name"
+                android:textSize="@dimen/text_size_small" />
+
+            <ToggleButton
+                android:id="@+id/size_button"
+                android:layout_width="78dp"
+                android:layout_height="25dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="216dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toStartOf="@id/asc_button"
+                android:background="@drawable/filter_buttons"
+                android:checked="false"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center"
+                android:textAppearance="@style/text_black"
+                android:textOff="@string/size"
+                android:textOn="@string/size"
+                android:textSize="@dimen/text_size_small" />
+
+            <ImageView
+                android:id="@+id/asc_button"
+                android:layout_width="48dp"
+                android:layout_height="25dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="216dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toStartOf="@id/desc_button"
+                android:contentDescription="@string/ascending_order"
+                android:src="@drawable/arrow_up_white_group" />
+
+            <ImageView
+                android:id="@+id/desc_button"
+                android:layout_width="48dp"
+                android:layout_height="25dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="215dp"
+                android:layout_marginEnd="20dp"
+                android:contentDescription="@string/descending_order"
+                android:src="@drawable/arrow_down_yellow_group" />
+
+            <ProgressBar
+                android:id="@+id/loading"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/yellow"
+                android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/planets_list_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_buttons_container"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="50dp" />
 
     </RelativeLayout>
-
-
-</RelativeLayout>
+</layout>

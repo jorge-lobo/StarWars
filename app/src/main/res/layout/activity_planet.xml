@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.starwarsjunior.ui.personage.PersonageViewModel" />
+            type="com.example.starwarsjunior.ui.planet.PlanetViewModel" />
     </data>
 
     <RelativeLayout
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/planets_bottom_sheet_button"
+                android:id="@+id/planet_bottom_sheet_button"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_alignParentStart="true"
@@ -99,13 +99,13 @@
                 android:src="@drawable/sliders" />
 
             <ToggleButton
-                android:id="@+id/name_button"
+                android:id="@+id/sort_name_button"
                 android:layout_width="78dp"
                 android:layout_height="25dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="216dp"
                 android:layout_marginEnd="5dp"
-                android:layout_toStartOf="@id/size_button"
+                android:layout_toStartOf="@id/sort_size_button"
                 android:background="@drawable/filter_buttons"
                 android:checked="true"
                 android:fontFamily="@font/starjedi_special_edition"
@@ -116,13 +116,13 @@
                 android:textSize="@dimen/text_size_small" />
 
             <ToggleButton
-                android:id="@+id/size_button"
+                android:id="@+id/sort_size_button"
                 android:layout_width="78dp"
                 android:layout_height="25dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="216dp"
                 android:layout_marginEnd="5dp"
-                android:layout_toStartOf="@id/asc_button"
+                android:layout_toStartOf="@id/up_button"
                 android:background="@drawable/filter_buttons"
                 android:checked="false"
                 android:fontFamily="@font/starjedi_special_edition"
@@ -133,25 +133,29 @@
                 android:textSize="@dimen/text_size_small" />
 
             <ImageView
-                android:id="@+id/asc_button"
+                android:id="@+id/up_button"
                 android:layout_width="48dp"
                 android:layout_height="25dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="216dp"
                 android:layout_marginEnd="5dp"
-                android:layout_toStartOf="@id/desc_button"
+                android:layout_toStartOf="@id/down_button"
+                android:clickable="true"
                 android:contentDescription="@string/ascending_order"
+                android:focusable="true"
                 android:src="@drawable/arrow_up_white_group" />
 
             <ImageView
-                android:id="@+id/desc_button"
+                android:id="@+id/down_button"
                 android:layout_width="48dp"
                 android:layout_height="25dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="215dp"
                 android:layout_marginEnd="20dp"
+                android:clickable="false"
                 android:contentDescription="@string/descending_order"
+                android:focusable="true"
                 android:src="@drawable/arrow_down_yellow_group" />
 
             <ProgressBar

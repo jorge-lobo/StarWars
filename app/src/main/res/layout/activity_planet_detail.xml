@@ -24,7 +24,7 @@
         android:src="@drawable/arrow_left_yellow" />
 
     <ScrollView
-        android:id="@+id/personage_details"
+        android:id="@+id/planet_details"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="33dp"

@@ -31,7 +31,7 @@ object PlanetRepository : IPlanetDataSource.Main {
         return null
     }
 
-    override suspend fun getCachedPlanet(planetID: Int): Planet? {
+    override suspend fun getCachedPlanetName(planetID: Int): Planet? {
         for (item in cachedPlanetResponse.orEmpty()) {
             //Extract ID number from URL
             if (Utils.extractIdFromUrl(item.url) == planetID) {

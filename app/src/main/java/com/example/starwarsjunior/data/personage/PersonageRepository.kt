@@ -7,9 +7,6 @@ import com.example.starwarsjunior.data.personage.objects.Specie
 import com.example.starwarsjunior.data.personage.objects.SpecieListResponse
 import com.example.starwarsjunior.data.personage.remote.PersonageRemoteDataSource
 import com.example.starwarsjunior.utils.Utils
-import com.example.starwarsjunior.utils.Utils.extractIdFromUrl
-import org.json.JSONException
-import org.json.JSONObject
 
 object PersonageRepository : IPersonageDataSource.Main {
     private var cachedPersonageResponse: List<Personage>? = null
@@ -48,11 +45,9 @@ object PersonageRepository : IPersonageDataSource.Main {
     }
 
     override suspend fun getCachedPersonage(personageID: Int): ResultWrapper<Personage?> {
-        for (item in cachedPersonageResponse!!) {
+        for (item in cachedPersonageResponse.orEmpty()) {
             //Extract ID number from URL
-            val idFromUrl = extractIdFromUrl(item.url)
-
-            if (idFromUrl == personageID) {
+            if (Utils.extractIdFromUrl(item.url) == personageID) {
                 return ResultWrapper(item, null)
             }
         }
@@ -69,29 +64,4 @@ object PersonageRepository : IPersonageDataSource.Main {
         return null; null
     }
 
-    /*suspend fun fetchSpeciesName(speciesUrl: String): String? {
-        return withContext(Dispatchers.IO) {
-            val request = Request.Builder()
-                .url(speciesUrl)
-                .build()
-
-            val client = OkHttpClient()
-            val response = client.newCall(request).execute()
-            if (response.isSuccessful) {
-                val responseBody = response.body?.string()
-                return@withContext parseSpeciesNameFromJson(responseBody)
-            }
-            return@withContext null
-        }
-    }*/
-
-    private fun parseSpeciesNameFromJson(json: String?): String? {
-        try {
-            val jsonObject = JSONObject(json)
-            return jsonObject.optString("name", null)
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-        return null
-    }
 }

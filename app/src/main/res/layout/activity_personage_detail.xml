@@ -34,11 +34,10 @@
             android:contentDescription="@string/back_button"
             android:src="@drawable/arrow_left_yellow" />
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="33dp"
+            android:layout_marginHorizontal="27dp"
             android:layout_marginTop="51dp"
             android:orientation="vertical">
 
@@ -354,15 +353,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-            <ProgressBar
-                android:id="@+id/loading"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:indeterminate="true"
-                android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
 
         </LinearLayout>
 

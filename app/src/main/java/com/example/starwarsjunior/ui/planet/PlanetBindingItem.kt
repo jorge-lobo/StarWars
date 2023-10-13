@@ -1,13 +1,13 @@
-package com.example.starwarsjunior.ui.personage
+package com.example.starwarsjunior.ui.planet
 
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.starwarsjunior.R
-import com.example.starwarsjunior.data.personage.objects.Personage
+import com.example.starwarsjunior.data.planet.objects.Planet
 import com.mikepenz.fastadapter.items.AbstractItem
 
-class PersonageBindingItem(val personage: Personage) : AbstractItem<PersonageBindingItem.ViewHolder>() {
+class PlanetBindingItem(val planet: Planet) : AbstractItem<PlanetBindingItem.ViewHolder>()  {
 
     /**
      * defines the type defining this item. must be unique, preferably an id
@@ -33,7 +33,7 @@ class PersonageBindingItem(val personage: Personage) : AbstractItem<PersonageBin
     override fun bindView(holder: ViewHolder, payloads: List<Any>) {
         super.bindView(holder, payloads)
 
-        holder.name.text = personage.name.lowercase()
+        holder.name.text = planet.name.lowercase()
     }
 
     override fun unbindView(holder: ViewHolder) {

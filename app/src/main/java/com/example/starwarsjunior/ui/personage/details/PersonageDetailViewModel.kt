@@ -71,7 +71,7 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
             val planetID = extractPlanetID(planetUrl)
 
             planetID?.let {
-                val planetObject = PlanetRepository.getCachedPlanet(it)
+                val planetObject = PlanetRepository.getCachedPlanetName(it)
                 val planetName = planetObject?.name?.lowercase() ?: "n/a"
                 personageHomeWorld.value = planetName
             }

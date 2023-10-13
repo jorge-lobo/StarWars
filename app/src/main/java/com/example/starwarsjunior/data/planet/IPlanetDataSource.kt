@@ -22,6 +22,6 @@ interface IPlanetDataSource {
 
     //interfaces specific to the main repository object. (cache operations, for example). Inherits both Remote and Local as those are accessed by use cases via the repository.
     interface Main : Remote, Local {
-        suspend fun getCachedPlanet(planetID: Int) : Planet?
+        suspend fun getCachedPlanetName(planetID: Int) : Planet?
     }
 }

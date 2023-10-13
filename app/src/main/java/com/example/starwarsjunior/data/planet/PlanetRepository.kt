@@ -24,13 +24,6 @@ object PlanetRepository : IPlanetDataSource.Main {
         return result
     }
 
-    suspend fun getCachedPlanets(): List<Planet>? {
-        if (cachedPlanetResponse != null) {
-            return cachedPlanetResponse
-        }
-        return null
-    }
-
     override suspend fun getCachedPlanetName(planetID: Int): Planet? {
         for (item in cachedPlanetResponse.orEmpty()) {
             //Extract ID number from URL
@@ -39,5 +32,15 @@ object PlanetRepository : IPlanetDataSource.Main {
             }
         }
         return null
+    }
+
+    fun getCachedPlanet(planetID: Int): ResultWrapper<Planet?> {
+        for (item in cachedPlanetResponse.orEmpty()) {
+            //Extract ID number from URL
+            if (Utils.extractIdFromUrl(item.url) == planetID) {
+                return ResultWrapper(item, null)
+            }
+        }
+        return ResultWrapper(null, null)
     }
 }

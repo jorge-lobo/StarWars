@@ -73,4 +73,14 @@
     <string name="ewok">ewok</string>
     <string name="n_a">n/a</string>
     <string name="size">size</string>
+    <string name="planet_characteristics">planet characteristics</string>
+    <string name="rotation_period">rotation period</string>
+    <string name="orbital_period">orbital period</string>
+    <string name="gravity">gravity</string>
+    <string name="geography">geography</string>
+    <string name="climate">climate</string>
+    <string name="terrain">terrain</string>
+    <string name="surface_water">surface water</string>
+    <string name="demographics">demographics</string>
+    <string name="population">population</string>
 </resources>

@@ -31,13 +31,13 @@ object ShipRepository : IShipDataSource.Main {
         return null
     }
 
-    override suspend fun getCachedShip(shipID: Int): Ship? {
+    override suspend fun getCachedShip(shipID: Int): ResultWrapper<Ship?> {
         for (item in cachedShipResponse.orEmpty()) {
             //Extract ID number from URL
             if (Utils.extractIdFromUrl(item.url) == shipID) {
-                return item
+                return ResultWrapper(item, null)
             }
         }
-        return null
+        return ResultWrapper(null, null)
     }
 }

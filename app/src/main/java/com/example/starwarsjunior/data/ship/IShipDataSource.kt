@@ -22,6 +22,6 @@ class IShipDataSource {
 
     //interfaces specific to the main repository object. (cache operations, for example). Inherits both Remote and Local as those are accessed by use cases via the repository.
     interface Main : Remote, Local {
-        suspend fun getCachedShip(shipID: Int) : Ship?
+        suspend fun getCachedShip(shipID: Int) : ResultWrapper<Ship?>
     }
 }

@@ -12,7 +12,7 @@ interface IPlanetDataSource {
 
     //Interfaces specific to remote data source
     interface Remote : Common {
-        suspend fun getPlanets() : ResultWrapper<PlanetListResponse>
+        suspend fun getPlanets(): ResultWrapper<PlanetListResponse>
     }
 
     //interfaces specific to local data source
@@ -22,6 +22,7 @@ interface IPlanetDataSource {
 
     //interfaces specific to the main repository object. (cache operations, for example). Inherits both Remote and Local as those are accessed by use cases via the repository.
     interface Main : Remote, Local {
-        suspend fun getCachedPlanetName(planetID: Int) : Planet?
+        suspend fun getCachedPlanetName(planetID: Int): Planet?
+        suspend fun getCachedPlanet(planetID: Int): ResultWrapper<Planet?>
     }
 }

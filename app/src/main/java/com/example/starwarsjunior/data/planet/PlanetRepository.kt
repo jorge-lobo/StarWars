@@ -34,7 +34,7 @@ object PlanetRepository : IPlanetDataSource.Main {
         return null
     }
 
-    fun getCachedPlanet(planetID: Int): ResultWrapper<Planet?> {
+    override suspend fun getCachedPlanet(planetID: Int): ResultWrapper<Planet?> {
         for (item in cachedPlanetResponse.orEmpty()) {
             //Extract ID number from URL
             if (Utils.extractIdFromUrl(item.url) == planetID) {

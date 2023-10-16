@@ -101,6 +101,25 @@ class ShipActivity : AppCompatActivity() {
             }
         )
 
+        //list with filtered ships
+        mShipViewModel.filteredShips.observe(
+            this,
+            Observer { shipList ->
+
+                val items = ArrayList<ShipBindingItem>()
+                mShipItemAdapter.clear()
+
+                items.clear()
+                if (shipList != null) {
+                    for (ship in shipList) {
+                        val item = ShipBindingItem(ship)
+                        items.add(item)
+                    }
+                    mShipItemAdapter.add(items)
+                }
+            }
+        )
+
         binding.resetButton.setOnClickListener {
             binding.searchBox.setText("")
         }
@@ -125,7 +144,7 @@ class ShipActivity : AppCompatActivity() {
             if (binding.sortNameButton.isChecked) {
                 mShipViewModel.toggleSortNameOrder()
             } else {
-                mShipViewModel.toggleSortLenghtOrder()
+                mShipViewModel.toggleSortLengthOrder()
             }
         }
 
@@ -138,7 +157,7 @@ class ShipActivity : AppCompatActivity() {
             if (binding.sortNameButton.isChecked) {
                 mShipViewModel.toggleSortNameOrder()
             } else {
-                mShipViewModel.toggleSortLenghtOrder()
+                mShipViewModel.toggleSortLengthOrder()
             }
         }
 
@@ -155,7 +174,7 @@ class ShipActivity : AppCompatActivity() {
             binding.sortNameButton.isClickable = true
             binding.sortNameButton.isChecked = false
 
-            mShipViewModel.toggleSortLenghtOrder()
+            mShipViewModel.toggleSortLengthOrder()
         }
 
     }

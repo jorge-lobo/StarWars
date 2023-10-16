@@ -52,7 +52,7 @@ class PersonageDetailViewModel(application: Application) : BaseViewModel(applica
                             getHomeWorldName(data.homeWorld)
 
                             if (data.species.isNullOrEmpty()) {
-                                personageSpecie.value = "human"
+                                personageSpecie.value = "n/a"
                             } else {
                                 getSpeciesNames(data.species)
                             }

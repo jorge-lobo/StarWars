@@ -19,7 +19,7 @@ class ShipViewModel(application: Application) : BaseViewModel(application),
     val searchQuery = MutableLiveData<String>()
     private var isDataPreloaded = false
 
-    val sortedShips = MutableLiveData<List<Ship>>()
+    val sortedShips = MutableLiveData<List<Ship>?>()
     private var sortBy = "name"
     private var isDescending = false
 
@@ -100,8 +100,8 @@ class ShipViewModel(application: Application) : BaseViewModel(application),
         updateSortedShips()
     }
 
-    fun toggleSortLenghtOrder() {
-        sortBy = "lenght"
+    fun toggleSortLengthOrder() {
+        sortBy = "length"
         isDescending = !isDescending
         updateSortedShips()
     }
@@ -113,7 +113,7 @@ class ShipViewModel(application: Application) : BaseViewModel(application),
                 else sortedShips.value?.sortedBy { it.name }
             }
 
-            "lenght" -> {
+            "length" -> {
                 if (isDescending) sortedShips.value?.sortedByDescending { it.length }
                 else sortedShips.value?.sortedBy { it.length }
             }

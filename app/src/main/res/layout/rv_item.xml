@@ -10,8 +10,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
+        android:ellipsize="end"
         android:fontFamily="@font/starjedi_special_edition"
         android:gravity="center"
+        android:lines="1"
         android:text="@string/name"
         android:textAppearance="@style/text_yellow"
         android:textSize="@dimen/text_size_small_title" />

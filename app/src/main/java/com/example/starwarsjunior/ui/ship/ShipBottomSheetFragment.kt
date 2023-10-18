@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.ToggleButton
+import androidx.core.view.forEach
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.starwarsjunior.R
@@ -51,6 +53,19 @@ class ShipBottomSheetFragment(private val mainViewModel: ShipViewModel) :
 
         //Filter buttons
 
+        //Reset button
+        binding.reset.setOnClickListener {
+            binding.crewToggleGroup.forEach { view ->
+                if (view is ToggleButton) {
+                    view.isChecked = false
+                }
+                binding.hyperdriveToggleGroup.forEach { view ->
+                    if (view is ToggleButton) {
+                        view.isChecked = false
+                    }
+                }
+            }
+        }
 
         //SearchButton
         binding.searchButton.setOnClickListener {

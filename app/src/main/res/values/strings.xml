@@ -83,4 +83,18 @@
     <string name="surface_water">surface water</string>
     <string name="demographics">demographics</string>
     <string name="population">population</string>
+    <string name="description">description</string>
+    <string name="model">model</string>
+    <string name="starship_class">starship class</string>
+    <string name="manufacturer">manufacturer</string>
+    <string name="specifications">specifications</string>
+    <string name="max_speed">max speed</string>
+    <string name="hyperdrive_rating">hyperdrive rating</string>
+    <string name="mglt">mglt</string>
+    <string name="cost_in_credits">cost in credits</string>
+    <string name="capacity">capacity</string>
+    <string name="crew">crew</string>
+    <string name="passengers">passengers</string>
+    <string name="cargo_capacity">cargo capacity</string>
+    <string name="consumables">consumables</string>
 </resources>

@@ -92,7 +92,7 @@ class ShipViewModel(application: Application) : BaseViewModel(application),
         updateSortedShips()
     }
 
-    private fun updateSortedShips() {
+    fun updateSortedShips() {
         val sortedList = when (sortBy) {
             "name" -> {
                 if (isDescending) sortedShips.value?.sortedByDescending { it.name }
@@ -105,6 +105,7 @@ class ShipViewModel(application: Application) : BaseViewModel(application),
                 }
                 if (isDescending) numericSortedList?.asReversed() else numericSortedList
             }
+
             else -> sortedShips.value
         }
         sortedShips.value = sortedList

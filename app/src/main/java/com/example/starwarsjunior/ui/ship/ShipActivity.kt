@@ -1,10 +1,13 @@
 package com.example.starwarsjunior.ui.ship
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -26,6 +29,8 @@ class ShipActivity : AppCompatActivity() {
     private lateinit var mShipViewModel: ShipViewModel
 
     private val mShipItemAdapter = FastItemAdapter<ShipBindingItem>()
+
+    private lateinit var launcher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,11 +72,19 @@ class ShipActivity : AppCompatActivity() {
         val selectExtension = fastItemAdapter.getSelectExtension()
         selectExtension.isSelectable = true
 
+        //when returning from ShipDetail, load preview sort list values
+        launcher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    mShipViewModel.updateSortedShips()
+                }
+            }
+
         fastItemAdapter.onClickListener = { _, _, item, _ ->
             val intent = Intent(this, ShipDetailActivity::class.java)
             val idFromUrl = Utils.extractIdFromUrl(item.ship.url)
             intent.putExtra(ShipDetailActivity.EXTRA_SHIP_ID, idFromUrl)
-            startActivity(intent)
+            launcher.launch(intent)
             binding.searchBox.setText("")
             false
         }

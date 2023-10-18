@@ -100,4 +100,11 @@
     <string name="ship_description">ship description</string>
     <string name="technical_specifications">technical specifications</string>
     <string name="ship_capacity">ship capacity</string>
+    <string name="reset">reset</string>
+    <string name="little">little</string>
+    <string name="medium">medium</string>
+    <string name="large">large</string>
+    <string name="slow">slow</string>
+    <string name="average">average</string>
+    <string name="fast">fast</string>
 </resources>

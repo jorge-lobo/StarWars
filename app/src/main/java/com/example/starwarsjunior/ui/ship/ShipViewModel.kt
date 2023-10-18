@@ -4,10 +4,8 @@ import android.app.Application
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.starwarsjunior.data.error.CallbackWrapper
 import com.example.starwarsjunior.data.ship.ShipRepository
 import com.example.starwarsjunior.data.ship.objects.Ship
-import com.example.starwarsjunior.data.ship.objects.ShipListResponse
 import com.example.starwarsjunior.ui.common.BaseViewModel
 import kotlinx.coroutines.launch
 
@@ -37,17 +35,12 @@ class ShipViewModel(application: Application) : BaseViewModel(application),
         isDataPreloaded = preloaded
     }
 
-    fun onRefresh() {
-        //isRefreshing.value = true
-        getShips(refresh = false)
-    }
-
     fun onStart() {
         //getShips(forceRefresh)
-        getShips(true)
+        getCachedShips(true)
     }
 
-    fun getShips(refresh: Boolean) {
+    fun getCachedShips(refresh: Boolean) {
         if (refresh) {
             isLoading.value = true
 
@@ -55,22 +48,15 @@ class ShipViewModel(application: Application) : BaseViewModel(application),
             ships.value = emptyList()
 
             viewModelScope.launch {
-                val shipsResponse = ShipRepository.getShips()
-                var result = object : CallbackWrapper<ShipListResponse>(
-                    this@ShipViewModel,
-                    shipsResponse
-                ) {
-                    override fun onSuccess(data: ShipListResponse) {
-                        //sort list by ship's name
-                        ships.value = data.results.sortedBy { it.name }
-                        sortedShips.value = ships.value
-                        isLoading.value = false
-                        isRefreshing.value = false
-                        data.let {
-                            if (it.results.isEmpty()) {
-                                noDataAvailable.value = true
-                            }
-                        }
+                val result = ShipRepository.getCachedShips()
+
+                ships.value = result?.sortedBy { it.name }
+                sortedShips.value = ships.value
+                isLoading.value = false
+                isRefreshing.value = false
+                result?.let {
+                    if (it.isEmpty()) {
+                        noDataAvailable.value = true
                     }
                 }
             }

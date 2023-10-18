@@ -12,7 +12,7 @@ class IShipDataSource {
 
     //Interfaces specific to remote data source
     interface Remote : Common {
-        suspend fun getShips() : ResultWrapper<ShipListResponse>
+        suspend fun getShips(pagination: Int) : ResultWrapper<ShipListResponse>
     }
 
     //interfaces specific to local data source

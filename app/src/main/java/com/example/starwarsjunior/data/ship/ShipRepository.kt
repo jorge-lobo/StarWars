@@ -7,19 +7,14 @@ import com.example.starwarsjunior.data.ship.remote.ShipRemoteDataSource
 import com.example.starwarsjunior.utils.Utils
 
 object ShipRepository : IShipDataSource.Main {
-    private var cachedShipResponse: List<Ship>? = null
+    private var cachedShipResponse = mutableListOf<Ship>()
 
-    override suspend fun getShips(): ResultWrapper<ShipListResponse> {
-        //check if the data is already cached
-        cachedShipResponse?.let {
-            return ResultWrapper(ShipListResponse(it), null)
-        }
-        //if not cached, make a call to API
-        val result = ShipRemoteDataSource.getShips()
+    override suspend fun getShips(pagination: Int): ResultWrapper<ShipListResponse> {
+        val result = ShipRemoteDataSource.getShips(pagination)
 
         result.result?.let {
             //saveDetails(it)
-            cachedShipResponse = it.results
+            cachedShipResponse.addAll(it.results)
         }
         return result
     }

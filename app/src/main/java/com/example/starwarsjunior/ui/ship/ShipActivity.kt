@@ -42,7 +42,7 @@ class ShipActivity : AppCompatActivity() {
         if (mShipViewModel.isDataPreloaded()) {
             mShipViewModel.onStart()
         } else {
-            mShipViewModel.getShips(true)
+            mShipViewModel.getCachedShips(true)
         }
 
         //search box

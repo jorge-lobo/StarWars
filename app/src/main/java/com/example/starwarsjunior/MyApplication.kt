@@ -16,8 +16,8 @@ class MyApplication: Application() {
 
         var userPermission = ""
 
-        val BASE_URL = "https://swapi.dev/api/"
-        /*val BASE_URL = "https://swapi.py4e.com/api/"*/
+        /*val BASE_URL = "https://swapi.dev/api/"*/
+        val BASE_URL = "https://swapi.py4e.com/api/"
     }
 
     override fun onCreate() {

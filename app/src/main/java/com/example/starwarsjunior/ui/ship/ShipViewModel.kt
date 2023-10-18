@@ -100,10 +100,11 @@ class ShipViewModel(application: Application) : BaseViewModel(application),
             }
 
             "length" -> {
-                if (isDescending) sortedShips.value?.sortedByDescending { it.length }
-                else sortedShips.value?.sortedBy { it.length }
+                val numericSortedList = sortedShips.value?.sortedBy {
+                    it.length.toDoubleOrNull() ?: 0.0
+                }
+                if (isDescending) numericSortedList?.asReversed() else numericSortedList
             }
-
             else -> sortedShips.value
         }
         sortedShips.value = sortedList

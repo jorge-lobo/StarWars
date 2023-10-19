@@ -12,13 +12,20 @@ import kotlinx.coroutines.launch
 class ShipViewModel(application: Application) : BaseViewModel(application),
     LifecycleObserver {
 
-    var ships = MutableLiveData<List<Ship>?>()
+    private var ships = MutableLiveData<List<Ship>?>()
     val filteredShips = MutableLiveData<List<Ship>?>()
+    val sortedShips = MutableLiveData<List<Ship>?>()
+
     val searchQuery = MutableLiveData<String>()
+    val resultsNotFoundMessage = MutableLiveData<Boolean>(false)
+
     private var isDataPreloaded = false
 
-    val sortedShips = MutableLiveData<List<Ship>?>()
-    private var sortBy = "name"
+    enum class SortBy {
+        NAME, LENGTH
+    }
+
+    private var sortBy = SortBy.NAME
     private var isDescending = false
 
     private val selectedFilters = mutableSetOf<String>()
@@ -66,10 +73,20 @@ class ShipViewModel(application: Application) : BaseViewModel(application),
     //SearchBox
     private fun observerSearchQuery() {
         searchQuery.observeForever { query ->
-            val filteredList = ships.value?.filter { ship ->
-                ship.name.contains(query, ignoreCase = true)
+            if (selectedFilters.isEmpty()) {
+                val filteredList = ships.value?.filter { ship ->
+                    ship.name.contains(query, ignoreCase = true)
+                }
+                filteredShips.value = filteredList
+            } else {
+                val filteredList = filteredShips.value?.filter { ship ->
+                    ship.name.contains(query, ignoreCase = true)
+                }
+                filteredShips.value = filteredList
             }
-            filteredShips.value = filteredList
+
+            //after applying filters, verify if there are results
+            resultsNotFoundMessage.value = filteredShips.value?.isEmpty() == true
         }
     }
 
@@ -81,37 +98,43 @@ class ShipViewModel(application: Application) : BaseViewModel(application),
 
     //Order Buttons
     fun toggleSortNameOrder() {
-        sortBy = "name"
+        sortBy = SortBy.NAME
         isDescending = !isDescending
         updateSortedShips()
     }
 
     fun toggleSortLengthOrder() {
-        sortBy = "length"
+        sortBy = SortBy.LENGTH
         isDescending = !isDescending
         updateSortedShips()
     }
 
     fun updateSortedShips() {
-        val sortedList = when (sortBy) {
-            "name" -> {
-                if (isDescending) sortedShips.value?.sortedByDescending { it.name }
-                else sortedShips.value?.sortedBy { it.name }
-            }
+        val listToSort = if (selectedFilters.isEmpty()) {
+            ships.value
+        } else {
+            filteredShips.value
+        }
 
-            "length" -> {
-                val numericSortedList = sortedShips.value?.sortedBy {
+        val sortedList = when (sortBy) {
+            SortBy.NAME -> {
+                if (isDescending) listToSort?.sortedByDescending { it.name }
+                else listToSort?.sortedBy { it.name }
+            }
+            SortBy.LENGTH -> {
+                val numericSortedList = listToSort?.sortedBy {
                     it.length.toDoubleOrNull() ?: 0.0
                 }
                 if (isDescending) numericSortedList?.asReversed() else numericSortedList
             }
-
-            else -> sortedShips.value
         }
-        sortedShips.value = sortedList
-    }
 
-    //Filter Buttons
+        if (selectedFilters.isEmpty()) {
+            sortedShips.value = sortedList
+        } else {
+            filteredShips.value = sortedList
+        }
+    }
 
     //add or remove a selected filter
     fun toggleFilter(filter: String) {
@@ -127,41 +150,47 @@ class ShipViewModel(application: Application) : BaseViewModel(application),
         return ship.hyperdriveRating.toDoubleOrNull() ?: 0.0
     }
 
+    //convert crew to Int
+    private fun convertCrew(ship: Ship): Int {
+        val crewString = ship.crew
+        val cleanedCrewString = crewString.replace(",", "")
+        return cleanedCrewString.toIntOrNull() ?: 0
+    }
+
+    private fun filterShipsByProperty(
+        filterFunction: (Ship) -> Boolean
+    ): List<Ship> {
+        return ships.value?.filter { filterFunction(it) } ?: emptyList()
+    }
+
     private fun filterByHyperdriveRating(): List<Ship> {
-        return ships.value?.filter { ship ->
+        return filterShipsByProperty { ship ->
             val hyperdriveRating = convertHyperdriveRating(ship)
             selectedFilters.isEmpty() ||
                     (selectedFilters.contains("slow") && hyperdriveRating < 1.0) ||
                     (selectedFilters.contains("average") && hyperdriveRating == 1.0) ||
                     (selectedFilters.contains("fast") && hyperdriveRating > 1.0)
-        } ?: emptyList()
-    }
-
-    //convert crew to Int
-    private fun convertCrew(ship: Ship): Int {
-        val crewString = ship.crew ?: "0"
-        val cleanedCrewString = crewString.replace(",", "")
-        return cleanedCrewString.toIntOrNull() ?: 0
+        }
     }
 
     private fun filterByCrew(): List<Ship> {
-        return ships.value?.filter { ship ->
+        return filterShipsByProperty { ship ->
             val crew = convertCrew(ship)
             selectedFilters.isEmpty() ||
                     (selectedFilters.contains("little") && crew < 10) ||
                     (selectedFilters.contains("medium") && crew in 10..1000) ||
                     (selectedFilters.contains("large") && crew > 1000)
-        } ?: emptyList()
+        }
     }
 
     fun applyFilters() {
         val hyperdriveRatingFiltered = filterByHyperdriveRating()
         val crewFiltered = filterByCrew()
 
-       //check if are selected filters on both groups
+        //check if there are selected filters on both groups
         if (hyperdriveRatingFiltered.isNotEmpty() && crewFiltered.isNotEmpty()) {
             //find the intersection of both groups
-            val result = hyperdriveRatingFiltered.intersect(crewFiltered)
+            val result = hyperdriveRatingFiltered.intersect(crewFiltered.toSet())
             filteredShips.value = result.toList()
             //if just one group is selected
         } else if (hyperdriveRatingFiltered.isNotEmpty()) {
@@ -171,6 +200,9 @@ class ShipViewModel(application: Application) : BaseViewModel(application),
         } else {
             filteredShips.value = ships.value
         }
+
+        //after applying filters, verify if there are results
+        resultsNotFoundMessage.value = filteredShips.value?.isEmpty() == true
     }
 
     fun isFilterSelected(filter: String): Boolean {

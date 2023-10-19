@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.EditText
+import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.starwarsjunior.R
+import com.example.starwarsjunior.data.ship.objects.Ship
 import com.example.starwarsjunior.databinding.ActivityShipBinding
 import com.example.starwarsjunior.ui.ship.details.ShipDetailActivity
 import com.example.starwarsjunior.utils.Utils
@@ -51,9 +52,7 @@ class ShipActivity : AppCompatActivity() {
         }
 
         //search box
-        val searchBox = findViewById<EditText>(R.id.search_box)
-
-        searchBox.addTextChangedListener(object : TextWatcher {
+        binding.searchBox.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -72,7 +71,7 @@ class ShipActivity : AppCompatActivity() {
         val selectExtension = fastItemAdapter.getSelectExtension()
         selectExtension.isSelectable = true
 
-        //when returning from ShipDetail, load preview sort list values
+        //when returning from ShipDetail, this function will load preview sort list values
         launcher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
@@ -98,19 +97,7 @@ class ShipActivity : AppCompatActivity() {
         mShipViewModel.sortedShips.observe(
             this,
             Observer { shipList ->
-
-                val items = ArrayList<ShipBindingItem>()
-                mShipItemAdapter.clear()
-
-                items.clear()
-                if (shipList != null) {
-                    for (ship in shipList) {
-                        val item = ShipBindingItem(ship)
-                        items.add(item)
-                    }
-                    mShipItemAdapter.add(items)
-                }
-
+                updateShipAdapter(shipList)
             }
         )
 
@@ -118,23 +105,23 @@ class ShipActivity : AppCompatActivity() {
         mShipViewModel.filteredShips.observe(
             this,
             Observer { shipList ->
-
-                val items = ArrayList<ShipBindingItem>()
-                mShipItemAdapter.clear()
-
-                items.clear()
-                if (shipList != null) {
-                    for (ship in shipList) {
-                        val item = ShipBindingItem(ship)
-                        items.add(item)
-                    }
-                    mShipItemAdapter.add(items)
-                }
+                updateShipAdapter(shipList)
             }
         )
 
-        binding.resetButton.setOnClickListener {
+        //toggle the visibility of the no results message,
+        //applied both in the search bar and in the filters
+        mShipViewModel.resultsNotFoundMessage.observe(this, Observer { notFound ->
+            if (notFound) {
+                binding.resultsNotFound.visibility = View.VISIBLE
+            } else {
+                binding.resultsNotFound.visibility = View.GONE
+            }
+        })
+
+        binding.resetSearchButton.setOnClickListener {
             binding.searchBox.setText("")
+            mShipViewModel.applyFilters()
         }
 
         binding.backButton.setOnClickListener {
@@ -189,6 +176,18 @@ class ShipActivity : AppCompatActivity() {
 
             mShipViewModel.toggleSortLengthOrder()
         }
+    }
 
+    private fun updateShipAdapter(shipList: List<Ship>?) {
+        val items = ArrayList<ShipBindingItem>()
+        mShipItemAdapter.clear()
+        items.clear()
+        if (shipList != null) {
+            for (ship in shipList) {
+                val item = ShipBindingItem(ship)
+                items.add(item)
+            }
+            mShipItemAdapter.add(items)
+        }
     }
 }

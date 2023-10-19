@@ -107,4 +107,7 @@
     <string name="slow">slow</string>
     <string name="average">average</string>
     <string name="fast">fast</string>
+    <string name="attention">attention</string>
+    <string name="results_not_found">results not found</string>
+    <string name="stormtrooper">stormtrooper</string>
 </resources>

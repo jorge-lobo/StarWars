@@ -176,4 +176,8 @@ class ShipViewModel(application: Application) : BaseViewModel(application),
     fun isFilterSelected(filter: String): Boolean {
         return selectedFilters.contains(filter)
     }
+
+    fun resetFilters() {
+        selectedFilters.clear()
+    }
 }

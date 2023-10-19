@@ -105,6 +105,7 @@ class ShipBottomSheetFragment(private val mainViewModel: ShipViewModel) :
                     view.isChecked = false
                 }
             }
+            mainViewModel.resetFilters()
         }
 
         //SearchButton

@@ -53,16 +53,56 @@ class ShipBottomSheetFragment(private val mainViewModel: ShipViewModel) :
 
         //Filter buttons
 
+        //filter by hyperdriveRating
+        binding.slowButton.isChecked = mainViewModel.isFilterSelected("slow")
+        binding.averageButton.isChecked = mainViewModel.isFilterSelected("average")
+        binding.fastButton.isChecked = mainViewModel.isFilterSelected("fast")
+
+        binding.slowButton.setOnClickListener {
+            mainViewModel.toggleFilter("slow")
+            binding.slowButton.isChecked = mainViewModel.isFilterSelected("slow")
+        }
+
+        binding.averageButton.setOnClickListener {
+            mainViewModel.toggleFilter("average")
+            binding.averageButton.isChecked = mainViewModel.isFilterSelected("average")
+        }
+
+        binding.fastButton.setOnClickListener {
+            mainViewModel.toggleFilter("fast")
+            binding.fastButton.isChecked = mainViewModel.isFilterSelected("fast")
+        }
+
+        //filter by crew
+        binding.littleButton.isChecked = mainViewModel.isFilterSelected("little")
+        binding.mediumButton.isChecked = mainViewModel.isFilterSelected("medium")
+        binding.largeButton.isChecked = mainViewModel.isFilterSelected("large")
+
+        binding.littleButton.setOnClickListener {
+            mainViewModel.toggleFilter("little")
+            binding.littleButton.isChecked = mainViewModel.isFilterSelected("little")
+        }
+
+        binding.mediumButton.setOnClickListener {
+            mainViewModel.toggleFilter("medium")
+            binding.mediumButton.isChecked = mainViewModel.isFilterSelected("medium")
+        }
+
+        binding.largeButton.setOnClickListener {
+            mainViewModel.toggleFilter("large")
+            binding.largeButton.isChecked = mainViewModel.isFilterSelected("large")
+        }
+
         //Reset button
         binding.reset.setOnClickListener {
-            binding.crewToggleGroup.forEach { view ->
+            binding.crewButtons.forEach { view ->
                 if (view is ToggleButton) {
                     view.isChecked = false
                 }
-                binding.hyperdriveToggleGroup.forEach { view ->
-                    if (view is ToggleButton) {
-                        view.isChecked = false
-                    }
+            }
+            binding.hyperdriveButtons.forEach { view ->
+                if (view is ToggleButton) {
+                    view.isChecked = false
                 }
             }
         }

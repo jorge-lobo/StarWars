@@ -122,12 +122,55 @@ class ShipViewModel(application: Application) : BaseViewModel(application),
         }
     }
 
+    //convert hyperdriveRating to Double
+    private fun convertHyperdriveRating(ship: Ship): Double {
+        return ship.hyperdriveRating.toDoubleOrNull() ?: 0.0
+    }
+
+    private fun filterByHyperdriveRating(): List<Ship> {
+        return ships.value?.filter { ship ->
+            val hyperdriveRating = convertHyperdriveRating(ship)
+            selectedFilters.isEmpty() ||
+                    (selectedFilters.contains("slow") && hyperdriveRating < 1.0) ||
+                    (selectedFilters.contains("average") && hyperdriveRating == 1.0) ||
+                    (selectedFilters.contains("fast") && hyperdriveRating > 1.0)
+        } ?: emptyList()
+    }
+
+    //convert crew to Int
+    private fun convertCrew(ship: Ship): Int {
+        val crewString = ship.crew ?: "0"
+        val cleanedCrewString = crewString.replace(",", "")
+        return cleanedCrewString.toIntOrNull() ?: 0
+    }
+
+    private fun filterByCrew(): List<Ship> {
+        return ships.value?.filter { ship ->
+            val crew = convertCrew(ship)
+            selectedFilters.isEmpty() ||
+                    (selectedFilters.contains("little") && crew < 10) ||
+                    (selectedFilters.contains("medium") && crew in 10..1000) ||
+                    (selectedFilters.contains("large") && crew > 1000)
+        } ?: emptyList()
+    }
+
     fun applyFilters() {
-        // TODO()
-        /*val filteredList = ships.value?.filter { ship ->
-            selectedFilters.isEmpty()  || selectedFilters.contains(ship.TODO)
+        val hyperdriveRatingFiltered = filterByHyperdriveRating()
+        val crewFiltered = filterByCrew()
+
+       //check if are selected filters on both groups
+        if (hyperdriveRatingFiltered.isNotEmpty() && crewFiltered.isNotEmpty()) {
+            //find the intersection of both groups
+            val result = hyperdriveRatingFiltered.intersect(crewFiltered)
+            filteredShips.value = result.toList()
+            //if just one group is selected
+        } else if (hyperdriveRatingFiltered.isNotEmpty()) {
+            filteredShips.value = hyperdriveRatingFiltered
+        } else if (crewFiltered.isNotEmpty()) {
+            filteredShips.value = crewFiltered
+        } else {
+            filteredShips.value = ships.value
         }
-        filteredShips.value = filteredList*/
     }
 
     fun isFilterSelected(filter: String): Boolean {

@@ -42,10 +42,16 @@ class SplashScreenViewModel(application: Application) : BaseViewModel(applicatio
             val personagesResponse = PersonageRepository.getPersonages()
             val planetsResponse = PlanetRepository.getPlanets()
             val speciesResponse = PersonageRepository.getSpecies()
+
             val shipsResponse = ShipRepository.getShips(1)
-            ShipRepository.getShips(2)
-            ShipRepository.getShips(3)
-            ShipRepository.getShips(4)
+            val totalCount = shipsResponse.result?.count
+
+            val itemsPerPage = 10
+            val totalPages = totalCount?.let { calculateTotalPages(it, itemsPerPage) }
+
+            for (page in 1..totalPages!!) {
+                ShipRepository.getShips(page)
+            }
 
             object : CallbackWrapper<PersonageListResponse>(
                 this@SplashScreenViewModel,
@@ -70,7 +76,7 @@ class SplashScreenViewModel(application: Application) : BaseViewModel(applicatio
                 speciesResponse
             ) {
                 override fun onSuccess(data: SpecieListResponse) {
-                    preloadComplete.value = preloadComplete.value!! +1
+                    preloadComplete.value = preloadComplete.value!! + 1
                 }
             }
 
@@ -79,10 +85,14 @@ class SplashScreenViewModel(application: Application) : BaseViewModel(applicatio
                 shipsResponse
             ) {
                 override fun onSuccess(data: ShipListResponse) {
-                    preloadComplete.value = preloadComplete.value!! +1
+                    preloadComplete.value = preloadComplete.value!! + 1
                 }
             }
         }
+    }
+
+    private fun calculateTotalPages(count: Int, itemsPerPage: Int): Int {
+        return (count + itemsPerPage - 1) / itemsPerPage
     }
 
     override fun onError(message: String?, validationErrors: Map<String, ArrayList<String>>?) {

@@ -42,7 +42,10 @@ class SplashScreenViewModel(application: Application) : BaseViewModel(applicatio
             val personagesResponse = PersonageRepository.getPersonages()
             val planetsResponse = PlanetRepository.getPlanets()
             val speciesResponse = PersonageRepository.getSpecies()
-            val shipsResponse = ShipRepository.getShips()
+            val shipsResponse = ShipRepository.getShips(1)
+            ShipRepository.getShips(2)
+            ShipRepository.getShips(3)
+            ShipRepository.getShips(4)
 
             object : CallbackWrapper<PersonageListResponse>(
                 this@SplashScreenViewModel,

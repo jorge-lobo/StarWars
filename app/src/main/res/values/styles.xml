@@ -12,6 +12,11 @@
         <item name="android:fontFamily">"@font/starjedi_special_edition"</item>
     </style>
 
+    <style name="text_white">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">"@font/starjedi_special_edition"</item>
+    </style>
+
     <!-- Button Styles -->
     <style name="button" parent="@android:style/Widget.Button">
         <item name="android:gravity">center_vertical|center_horizontal</item>

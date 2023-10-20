@@ -1,56 +1,631 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".ui.ship.details.ShipDetailActivity">
 
-    <View
-        android:id="@+id/star_wars_bg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/bg_dark_mode" />
+    <data>
 
-    <ImageView
-        android:id="@+id/back_button"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="51dp"
-        android:contentDescription="@string/back_button"
-        android:src="@drawable/arrow_left_yellow" />
+        <import type="android.view.View" />
 
-    <ScrollView
-        android:id="@+id/personage_details"
+        <variable
+            name="viewModel"
+            type="com.example.starwarsjunior.ui.ship.details.ShipDetailViewModel" />
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="33dp"
-        android:layout_marginTop="51dp">
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/star_wars_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_dark_mode" />
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="51dp"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/arrow_left_yellow" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="27dp"
+            android:layout_marginTop="80dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/ship_name"
                 android:layout_width="wrap_content"
-                android:layout_height="32dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|top"
                 android:fontFamily="@font/starjedi_special_edition"
-                android:text="@string/ship_name"
+                android:gravity="center"
+                android:text="@{viewModel.shipName}"
                 android:textAppearance="@style/text_yellow"
                 android:textSize="@dimen/text_size_small_title" />
 
+            <TextView
+                android:id="@+id/description_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:text="@string/ship_description"
+                android:textAppearance="@style/text_yellow"
+                android:textSize="@dimen/text_size_small_title" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/model_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/model"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/model_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.shipModel}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/starship_class_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/starship_class"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/starship_class_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.shipStarshipClass}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/manufacturer_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/manufacturer"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/manufacturer_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.shipManufacturer}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/specifications"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="17dp"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:text="@string/technical_specifications"
+                android:textAppearance="@style/text_yellow"
+                android:textSize="@dimen/text_size_small_title" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/length_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/length"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/length_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.shipLength}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/max_speed_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/max_speed"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/max_speed_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.shipMaxAthmospheringSpeed}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/hyperdrive_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/hyperdrive_rating"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/hyperdrive_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.shipHyperdriveRating}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/mglt_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/mglt"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/mglt_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.shipMglt}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/cost_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/cost_in_credits"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/cost_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.shipCostInCredits}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/capacity_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="17dp"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:text="@string/ship_capacity"
+                android:textAppearance="@style/text_yellow"
+                android:textSize="@dimen/text_size_small_title" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/crew_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/crew"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/crew_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.shipCrew}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/passengers_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/passengers"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/passengers_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.shipPassengers}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/cargo_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/cargo_capacity"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/cargo_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.shipCargoCapacity}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/consumables_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/consumables"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/consumables_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.shipConsumables}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </ScrollView>
+    </RelativeLayout>
 
-
-</RelativeLayout>
+</layout>

@@ -12,9 +12,9 @@ object ShipRemoteDataSource : IShipDataSource.Remote {
     private val shipAPI = HTTPClient(ShipAPI::class.java).get()
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 
-    override suspend fun getShips(pagination: Int): ResultWrapper<ShipListResponse> {
+    override suspend fun getShips(page: Int): ResultWrapper<ShipListResponse> {
         return ResultWrapper.safeApiCall(dispatcher) {
-            shipAPI.getShips(pagination)
+            shipAPI.getShips(page)
         }
     }
 }

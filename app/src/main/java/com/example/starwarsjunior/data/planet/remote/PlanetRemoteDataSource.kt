@@ -12,9 +12,9 @@ object PlanetRemoteDataSource: IPlanetDataSource.Remote {
     private val planetAPI = HTTPClient(PlanetAPI::class.java).get()
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 
-    override suspend fun getPlanets(): ResultWrapper<PlanetListResponse> {
+    override suspend fun getPlanets(page: Int): ResultWrapper<PlanetListResponse> {
         return ResultWrapper.safeApiCall(dispatcher) {
-            planetAPI.getPlanets()
+            planetAPI.getPlanets(page)
         }
     }
 }

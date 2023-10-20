@@ -4,22 +4,22 @@ import android.app.Application
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.starwarsjunior.data.error.CallbackWrapper
 import com.example.starwarsjunior.data.planet.PlanetRepository
 import com.example.starwarsjunior.data.planet.objects.Planet
-import com.example.starwarsjunior.data.planet.objects.PlanetListResponse
 import com.example.starwarsjunior.ui.common.BaseViewModel
 import kotlinx.coroutines.launch
 
 class PlanetViewModel(application: Application) : BaseViewModel(application),
     LifecycleObserver {
 
-    var planets = MutableLiveData<List<Planet>>()
+    var planets = MutableLiveData<List<Planet>?>()
     val filteredPlanets = MutableLiveData<List<Planet>?>()
+    val sortedPlanets = MutableLiveData<List<Planet>?>()
+
     val searchQuery = MutableLiveData<String>()
+
     private var isDataPreloaded = false
 
-    val sortedPlanets = MutableLiveData<List<Planet>?>()
     private var sortBy = "name"
     private var isDescending = false
 
@@ -37,17 +37,12 @@ class PlanetViewModel(application: Application) : BaseViewModel(application),
         isDataPreloaded = preloaded
     }
 
-    fun onRefresh() {
-        //isRefreshing.value = true
-        getPlanets(refresh = false)
-    }
-
     fun onStart() {
         //getPlanets(forceRefresh)
-        getPlanets(true)
+        getCachedPlanets(true)
     }
 
-    fun getPlanets(refresh: Boolean) {
+    fun getCachedPlanets(refresh: Boolean) {
         if (refresh) {
             isLoading.value = true
         }
@@ -56,22 +51,15 @@ class PlanetViewModel(application: Application) : BaseViewModel(application),
         planets.value = emptyList()
 
         viewModelScope.launch {
-            val planetsResponse = PlanetRepository.getPlanets()
-            var result = object : CallbackWrapper<PlanetListResponse>(
-                this@PlanetViewModel,
-                planetsResponse
-            ) {
-                override fun onSuccess(data: PlanetListResponse) {
-                    //sort list by planet's name
-                    planets.value = data.results.sortedBy { it.name }
-                    sortedPlanets.value = planets.value
-                    isLoading.value = false
-                    isRefreshing.value = false
-                    data.let {
-                        if (it.results.isEmpty()) {
-                            noDataAvailable.value = true
-                        }
-                    }
+            val result = PlanetRepository.getCachedPlanets()
+            //sort list by planet's name
+            planets.value = result?.sortedBy { it.name }
+            sortedPlanets.value = planets.value
+            isLoading.value = false
+            isRefreshing.value = false
+            result?.let {
+                if (it.isEmpty()) {
+                    noDataAvailable.value = true
                 }
             }
         }
@@ -123,7 +111,7 @@ class PlanetViewModel(application: Application) : BaseViewModel(application),
         sortedPlanets.value = sortedList
     }
 
-    //Filter Buttons
+//Filter Buttons
 
     //add or remove a selected filter
     fun toggleFilter(filter: String) {
@@ -145,5 +133,4 @@ class PlanetViewModel(application: Application) : BaseViewModel(application),
     fun isFilterSelected(filter: String): Boolean {
         return selectedFilters.contains(filter)
     }
-
 }

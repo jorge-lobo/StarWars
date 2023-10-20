@@ -7,21 +7,23 @@ import com.example.starwarsjunior.data.planet.remote.PlanetRemoteDataSource
 import com.example.starwarsjunior.utils.Utils
 
 object PlanetRepository : IPlanetDataSource.Main {
-    private var cachedPlanetResponse: List<Planet>? = null
+    private var cachedPlanetResponse = mutableListOf<Planet>()
 
-    override suspend fun getPlanets(): ResultWrapper<PlanetListResponse> {
-        //check if the data is already cached
-        cachedPlanetResponse?.let {
-            return ResultWrapper(PlanetListResponse(it), null)
-        }
-        //if not cached, make a call to API
-        val result = PlanetRemoteDataSource.getPlanets()
+    override suspend fun getPlanets(page: Int): ResultWrapper<PlanetListResponse> {
+        val result = PlanetRemoteDataSource.getPlanets(page)
 
         result.result?.let {
             //saveDetails(it)
-            cachedPlanetResponse = it.results
+            cachedPlanetResponse.addAll(it.results)
         }
         return result
+    }
+
+    suspend fun getCachedPlanets(): List<Planet>? {
+        if (cachedPlanetResponse != null) {
+            return cachedPlanetResponse
+        }
+        return null
     }
 
     override suspend fun getCachedPlanetName(planetID: Int): Planet? {

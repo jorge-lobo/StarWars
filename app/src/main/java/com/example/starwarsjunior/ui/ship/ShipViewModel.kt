@@ -118,9 +118,12 @@ class ShipViewModel(application: Application) : BaseViewModel(application),
 
         val sortedList = when (sortBy) {
             SortBy.NAME -> {
-                if (isDescending) listToSort?.sortedByDescending { it.name }
-                else listToSort?.sortedBy { it.name }
+                val alphabeticSortedList = listToSort?.sortedBy {
+                    it.name.lowercase()
+                }
+                if (isDescending) alphabeticSortedList?.asReversed() else alphabeticSortedList
             }
+
             SortBy.LENGTH -> {
                 val numericSortedList = listToSort?.sortedBy {
                     it.length.toDoubleOrNull() ?: 0.0

@@ -1,12 +1,13 @@
 package com.example.starwarsjunior.ui.planet
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.EditText
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -51,9 +52,7 @@ class PlanetActivity : AppCompatActivity() {
         }
 
         //search box
-        val searchBox = findViewById<EditText>(R.id.search_box)
-
-        searchBox.addTextChangedListener(object : TextWatcher {
+        binding.searchBox.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -72,11 +71,19 @@ class PlanetActivity : AppCompatActivity() {
         val selectExtension = fastItemAdapter.getSelectExtension()
         selectExtension.isSelectable = true
 
+        //when returning from PlanetDetail, this function will load preview sort list values
+        launcher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    mPlanetViewModel.updateSortedPlanets()
+                }
+            }
+
         fastItemAdapter.onClickListener = { _, _, item, _ ->
             val intent = Intent(this, PlanetDetailActivity::class.java)
             val idFromUrl = Utils.extractIdFromUrl(item.planet.url)
             intent.putExtra(PlanetDetailActivity.EXTRA_PLANET_ID, idFromUrl)
-            startActivity(intent)
+            launcher.launch(intent)
             binding.searchBox.setText("")
             false
         }
@@ -90,18 +97,7 @@ class PlanetActivity : AppCompatActivity() {
         mPlanetViewModel.sortedPlanets.observe(
             this,
             Observer { planetList ->
-
-                val items = ArrayList<PlanetBindingItem>()
-                mPlanetItemAdapter.clear()
-
-                items.clear()
-                if (planetList != null) {
-                    for (planet in planetList) {
-                        val item = PlanetBindingItem(planet)
-                        items.add(item)
-                    }
-                    mPlanetItemAdapter.add(items)
-                }
+                updatePlanetAdapter(planetList)
             }
         )
 

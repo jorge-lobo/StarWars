@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 class PlanetViewModel(application: Application) : BaseViewModel(application),
     LifecycleObserver {
 
-    var planets = MutableLiveData<List<Planet>?>()
+    private var planets = MutableLiveData<List<Planet>?>()
     val filteredPlanets = MutableLiveData<List<Planet>?>()
     val sortedPlanets = MutableLiveData<List<Planet>?>()
 
@@ -73,10 +73,20 @@ class PlanetViewModel(application: Application) : BaseViewModel(application),
     //SearchBox
     private fun observerSearchQuery() {
         searchQuery.observeForever { query ->
-            val filteredList = planets.value?.filter { planet ->
-                planet.name.contains(query, ignoreCase = true)
+            if (selectedFilters.isEmpty()) {
+                val filteredList = planets.value?.filter { planet ->
+                    planet.name.contains(query, ignoreCase = true)
+                }
+                filteredPlanets.value = filteredList
+            } else {
+                val filteredList = filteredPlanets.value?.filter { planet ->
+                    planet.name.contains(query, ignoreCase = true)
+                }
+                filteredPlanets.value = filteredList
             }
-            filteredPlanets.value = filteredList
+
+            //after applying filters, verify if there are results
+            resultsNotFoundMessage.value = filteredPlanets.value?.isEmpty() == true
         }
     }
 

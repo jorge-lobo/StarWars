@@ -4,5 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 
 data class PersonageListResponse (
-    @SerializedName("results") val results : List<Personage>
+    @SerializedName("results") val results : List<Personage>,
+    @SerializedName("count") val count : Int
 )

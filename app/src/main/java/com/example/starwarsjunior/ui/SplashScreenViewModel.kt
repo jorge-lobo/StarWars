@@ -40,7 +40,13 @@ class SplashScreenViewModel(application: Application) : BaseViewModel(applicatio
             val itemsPerPage = 10
 
             // Personages
-            val personagesResponse = PersonageRepository.getPersonages()
+            val personagesResponse = PersonageRepository.getPersonages(1)
+            val totalPersonagesCount = personagesResponse.result?.count
+            val totalPersonagesPages = totalPersonagesCount?.let { calculateTotalPages(it, itemsPerPage) }
+
+            for (page in 2..totalPersonagesPages!!) {
+                PersonageRepository.getPersonages(page)
+            }
 
             object : CallbackWrapper<PersonageListResponse>(
                 this@SplashScreenViewModel,
@@ -70,7 +76,13 @@ class SplashScreenViewModel(application: Application) : BaseViewModel(applicatio
             }
 
             //Species
-            val speciesResponse = PersonageRepository.getSpecies()
+            val speciesResponse = PersonageRepository.getSpecies(1)
+            val totalSpeciesCount = speciesResponse.result?.count
+            val totalSpeciesPages = totalSpeciesCount?.let { calculateTotalPages(it, itemsPerPage) }
+
+            for (page in 2..totalSpeciesPages!!) {
+                PersonageRepository.getSpecies(page)
+            }
 
             object : CallbackWrapper<SpecieListResponse>(
                 this@SplashScreenViewModel,

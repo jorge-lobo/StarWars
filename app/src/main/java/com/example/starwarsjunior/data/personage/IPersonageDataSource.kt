@@ -14,8 +14,8 @@ interface IPersonageDataSource {
 
     //Interfaces specific to remote data source
     interface Remote : Common {
-        suspend fun getPersonages() : ResultWrapper<PersonageListResponse>
-        suspend fun getSpecies() : ResultWrapper<SpecieListResponse>
+        suspend fun getPersonages(page: Int) : ResultWrapper<PersonageListResponse>
+        suspend fun getSpecies(page: Int) : ResultWrapper<SpecieListResponse>
     }
 
     //interfaces specific to local data source

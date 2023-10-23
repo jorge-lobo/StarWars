@@ -13,15 +13,15 @@ object PersonageRemoteDataSource: IPersonageDataSource.Remote {
     private val personageAPI = HTTPClient(PersonageAPI::class.java).get()
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 
-    override suspend fun getPersonages(): ResultWrapper<PersonageListResponse> {
+    override suspend fun getPersonages(page: Int): ResultWrapper<PersonageListResponse> {
         return ResultWrapper.safeApiCall(dispatcher) {
-            personageAPI.getPersonages()
+            personageAPI.getPersonages(page)
         }
     }
 
-    override suspend fun getSpecies(): ResultWrapper<SpecieListResponse> {
+    override suspend fun getSpecies(page: Int): ResultWrapper<SpecieListResponse> {
         return ResultWrapper.safeApiCall(dispatcher) {
-            personageAPI.getSpecies()
+            personageAPI.getSpecies(page)
         }
     }
 }

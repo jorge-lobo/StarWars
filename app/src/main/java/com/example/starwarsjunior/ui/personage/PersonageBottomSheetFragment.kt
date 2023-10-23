@@ -24,7 +24,7 @@ const val ARG_ITEM_COUNT = "item_count"
  *    BottomSheetFragment.newInstance(30).show(supportFragmentManager, "dialog")
  * </pre>
  */
-class BottomSheetFragment(private val mainViewModel: PersonageViewModel) : BottomSheetDialogFragment() {
+class PersonageBottomSheetFragment(private val mainViewModel: PersonageViewModel) : BottomSheetDialogFragment() {
 
     private var _binding: FragmentPersonageBottomSheetDialogBinding? = null
 
@@ -111,8 +111,8 @@ class BottomSheetFragment(private val mainViewModel: PersonageViewModel) : Botto
     companion object {
 
         // TODO: Customize parameters
-        fun newInstance(itemCount: Int, mainViewModel: PersonageViewModel): BottomSheetFragment =
-            BottomSheetFragment(mainViewModel).apply {
+        fun newInstance(itemCount: Int, mainViewModel: PersonageViewModel): PersonageBottomSheetFragment =
+            PersonageBottomSheetFragment(mainViewModel).apply {
                 arguments = Bundle().apply {
                     putInt(ARG_ITEM_COUNT, itemCount)
                 }

@@ -17,6 +17,7 @@ class PlanetViewModel(application: Application) : BaseViewModel(application),
     val sortedPlanets = MutableLiveData<List<Planet>?>()
 
     val searchQuery = MutableLiveData<String>()
+    val resultsNotFoundMessage = MutableLiveData<Boolean>(false)
 
     private var isDataPreloaded = false
 
@@ -122,15 +123,55 @@ class PlanetViewModel(application: Application) : BaseViewModel(application),
         }
     }
 
-    fun applyFilters() {
-        // TODO()
-        /*val filteredList = planets.value?.filter { planet ->
-            selectedFilters.isEmpty() || selectedFilters.contains(planet.TODO)
+    private fun filterPlanetsByProperty(
+        filterFunction: (Planet) -> Boolean
+    ): List<Planet> {
+        return planets.value?.filter { filterFunction(it) } ?: emptyList()
+    }
+
+    private fun filterByClimate(): List<Planet> {
+        return filterPlanetsByProperty { planet ->
+            selectedFilters.isEmpty() || selectedFilters.any { filter ->
+                planet.climate.contains(filter)
+            }
         }
-        filteredPlanets.value = filteredList*/
+    }
+
+    private fun filterByTerrain(): List<Planet> {
+        return filterPlanetsByProperty { planet ->
+            selectedFilters.isEmpty() || selectedFilters.any { filter ->
+                planet.terrain.contains(filter)
+            }
+        }
+    }
+
+    fun applyFilters() {
+        val climateFiltered = filterByClimate()
+        val terrainFiltered = filterByTerrain()
+
+        //check if there are selected filters on both groups
+        if (climateFiltered.isNotEmpty() && terrainFiltered.isNotEmpty()) {
+            //find the intersection of both groups
+            val result = climateFiltered.intersect(terrainFiltered.toSet())
+            filteredPlanets.value = result.toList()
+            //if just one group is selected
+        } else if (climateFiltered.isNotEmpty()) {
+            filteredPlanets.value = climateFiltered
+        } else if (terrainFiltered.isNotEmpty()) {
+            filteredPlanets.value = terrainFiltered
+        } else {
+            filteredPlanets.value = planets.value
+        }
+
+        //after apllying filters, verify if there are results
+        resultsNotFoundMessage.value = filteredPlanets.value?.isEmpty() == true
     }
 
     fun isFilterSelected(filter: String): Boolean {
         return selectedFilters.contains(filter)
+    }
+
+    fun resetFilters() {
+        selectedFilters.clear()
     }
 }

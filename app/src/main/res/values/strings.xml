@@ -110,4 +110,16 @@
     <string name="attention">attention</string>
     <string name="results_not_found">results not found</string>
     <string name="stormtrooper">stormtrooper</string>
+    <string name="artic">artic</string>
+    <string name="arid">arid</string>
+    <string name="hot">hot</string>
+    <string name="temperate">temperate</string>
+    <string name="tropical">tropical</string>
+    <string name="windy">windy</string>
+    <string name="desert">desert</string>
+    <string name="forest">forest</string>
+    <string name="jungle">jungle</string>
+    <string name="mountain">mountain</string>
+    <string name="ocean">ocean</string>
+    <string name="plains">plains</string>
 </resources>

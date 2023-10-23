@@ -11,6 +11,10 @@
         <variable
             name="viewModel"
             type="com.example.starwarsjunior.ui.planet.PlanetViewModel" />
+
+        <variable
+            name="resultsNotFoundMessage"
+            type="Boolean" />
     </data>
 
     <RelativeLayout
@@ -41,7 +45,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="51dp"
             android:contentDescription="@string/back_button"
-            android:src="@drawable/arrow_left_yellow" />
+            android:src="@drawable/arrow_left" />
 
         <TextView
             android:id="@+id/title_planets"
@@ -72,7 +76,7 @@
             tools:ignore="LabelFor" />
 
         <ImageView
-            android:id="@+id/reset_button"
+            android:id="@+id/reset_search_button"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_alignParentTop="true"
@@ -158,22 +162,66 @@
                 android:focusable="true"
                 android:src="@drawable/arrow_down_yellow_group" />
 
-            <ProgressBar
-                android:id="@+id/loading"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerInParent="true"
-                android:indeterminate="true"
-                android:indeterminateTint="@color/yellow"
-                android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
-
         </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/resultsNotFound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/order_buttons_container"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="91dp"
+            android:orientation="vertical"
+            android:visibility="@{resultsNotFoundMessage ? View.VISIBLE : View.GONE}">
+
+            <TextView
+                android:id="@+id/attention_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center"
+                android:text="@string/attention"
+                android:textAppearance="@style/text_white"
+                android:textSize="@dimen/text_size_medium" />
+
+            <ImageView
+                android:id="@+id/stormtrooper"
+                android:layout_width="96dp"
+                android:layout_height="279dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/stormtrooper"
+                android:src="@drawable/stormtrooper" />
+
+            <TextView
+                android:id="@+id/results_not_found_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center"
+                android:text="@string/results_not_found"
+                android:textAppearance="@style/text_white"
+                android:textSize="@dimen/text_size_small_title" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/yellow"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/planets_list_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="39dp"
             android:layout_below="@+id/order_buttons_container"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="50dp" />

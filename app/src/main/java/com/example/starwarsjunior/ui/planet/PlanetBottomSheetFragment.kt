@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.ToggleButton
+import androidx.core.view.forEach
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.starwarsjunior.R
@@ -51,6 +53,106 @@ class PlanetBottomSheetFragment(private val mainViewModel: PlanetViewModel) :
 
         //Filter buttons
 
+        //filter by climate
+        binding.aridButton.isChecked = mainViewModel.isFilterSelected("arid")
+        binding.articButton.isChecked = mainViewModel.isFilterSelected("artic")
+        binding.hotButton.isChecked = mainViewModel.isFilterSelected("hot")
+        binding.temperateButton.isChecked = mainViewModel.isFilterSelected("temperate")
+        binding.tropicalButton.isChecked = mainViewModel.isFilterSelected("tropical")
+        binding.windyButton.isChecked = mainViewModel.isFilterSelected("windy")
+
+        binding.aridButton.setOnClickListener {
+            mainViewModel.toggleFilter("arid")
+            binding.aridButton.isChecked = mainViewModel.isFilterSelected("arid")
+        }
+
+        binding.articButton.setOnClickListener {
+            mainViewModel.toggleFilter("artic")
+            binding.articButton.isChecked = mainViewModel.isFilterSelected("artic")
+        }
+
+        binding.hotButton.setOnClickListener {
+            mainViewModel.toggleFilter("hot")
+            binding.hotButton.isChecked = mainViewModel.isFilterSelected("hot")
+        }
+
+        binding.temperateButton.setOnClickListener {
+            mainViewModel.toggleFilter("temperate")
+            binding.temperateButton.isChecked = mainViewModel.isFilterSelected("temperate")
+        }
+
+        binding.tropicalButton.setOnClickListener {
+            mainViewModel.toggleFilter("tropical")
+            binding.tropicalButton.isChecked = mainViewModel.isFilterSelected("tropical")
+        }
+
+        binding.windyButton.setOnClickListener {
+            mainViewModel.toggleFilter("windy")
+            binding.windyButton.isChecked = mainViewModel.isFilterSelected("windy")
+        }
+
+        //filter by terrain
+        binding.desertButton.isChecked = mainViewModel.isFilterSelected("desert")
+        binding.forestButton.isChecked = mainViewModel.isFilterSelected("forest")
+        binding.jungleButton.isChecked = mainViewModel.isFilterSelected("jungle")
+        binding.mountainButton.isChecked = mainViewModel.isFilterSelected("mountain")
+        binding.oceanButton.isChecked = mainViewModel.isFilterSelected("ocean")
+        binding.plainsButton.isChecked = mainViewModel.isFilterSelected("plains")
+
+        binding.desertButton.setOnClickListener {
+            mainViewModel.toggleFilter("desert")
+            binding.desertButton.isChecked = mainViewModel.isFilterSelected("desert")
+        }
+
+        binding.forestButton.setOnClickListener {
+            mainViewModel.toggleFilter("forest")
+            binding.forestButton.isChecked = mainViewModel.isFilterSelected("forest")
+        }
+
+        binding.jungleButton.setOnClickListener {
+            mainViewModel.toggleFilter("jungle")
+            binding.jungleButton.isChecked = mainViewModel.isFilterSelected("jungle")
+        }
+
+        binding.mountainButton.setOnClickListener {
+            mainViewModel.toggleFilter("mountain")
+            binding.mountainButton.isChecked = mainViewModel.isFilterSelected("mountain")
+        }
+
+        binding.oceanButton.setOnClickListener {
+            mainViewModel.toggleFilter("ocean")
+            binding.oceanButton.isChecked = mainViewModel.isFilterSelected("ocean")
+        }
+
+        binding.plainsButton.setOnClickListener {
+            mainViewModel.toggleFilter("plains")
+            binding.plainsButton.isChecked = mainViewModel.isFilterSelected("plains")
+        }
+
+        //Reset button
+        binding.reset.setOnClickListener {
+            binding.climateGroup1.forEach { view ->
+                if (view is ToggleButton) {
+                    view.isChecked = false
+                }
+            }
+            binding.climateGroup2.forEach { view ->
+                if (view is ToggleButton) {
+                    view.isChecked = false
+                }
+            }
+            binding.terrainGroup1.forEach { view ->
+                if (view is ToggleButton) {
+                    view.isChecked = false
+                }
+            }
+            binding.terrainGroup2.forEach { view ->
+                if (view is ToggleButton) {
+                    view.isChecked = false
+                }
+            }
+            mainViewModel.resetFilters()
+        }
 
         //SearchButton
         binding.searchButton.setOnClickListener {

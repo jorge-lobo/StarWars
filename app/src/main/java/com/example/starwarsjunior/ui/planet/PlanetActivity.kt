@@ -42,7 +42,7 @@ class PlanetActivity : AppCompatActivity() {
         if (mPlanetViewModel.isDataPreloaded()) {
             mPlanetViewModel.onStart()
         } else {
-            mPlanetViewModel.getPlanets(true)
+            mPlanetViewModel.getCachedPlanets(true)
         }
 
         //search box

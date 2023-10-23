@@ -13,7 +13,7 @@ android {
         applicationId = "com.axians.starshutai"
         minSdk = 24
         targetSdk = 33
-        versionCode = 3
+        versionCode = 4
         versionName = "0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -49,11 +49,11 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
+    implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.2")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.2")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.4")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.4")
 
 
     implementation("androidx.recyclerview:recyclerview:1.3.1")
@@ -66,7 +66,7 @@ dependencies {
     implementation("com.jakewharton.threetenabp:threetenabp:1.4.6")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.3")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.4")
 
     implementation ("com.squareup.okhttp3:okhttp:4.9.1")
 
@@ -91,7 +91,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
     implementation("com.google.firebase:firebase-analytics-ktx")
 
-    implementation("androidx.databinding:databinding-common:8.1.1")
+    implementation("androidx.databinding:databinding-common:8.1.2")
 
     kapt("com.android.databinding:compiler:3.1.4")
 }

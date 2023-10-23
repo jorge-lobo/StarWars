@@ -9,8 +9,8 @@ import com.example.starwarsjunior.utils.Utils
 object ShipRepository : IShipDataSource.Main {
     private var cachedShipResponse = mutableListOf<Ship>()
 
-    override suspend fun getShips(pagination: Int): ResultWrapper<ShipListResponse> {
-        val result = ShipRemoteDataSource.getShips(pagination)
+    override suspend fun getShips(page: Int): ResultWrapper<ShipListResponse> {
+        val result = ShipRemoteDataSource.getShips(page)
 
         result.result?.let {
             //saveDetails(it)

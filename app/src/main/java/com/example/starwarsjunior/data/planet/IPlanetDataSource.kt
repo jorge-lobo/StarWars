@@ -12,7 +12,7 @@ interface IPlanetDataSource {
 
     //Interfaces specific to remote data source
     interface Remote : Common {
-        suspend fun getPlanets(): ResultWrapper<PlanetListResponse>
+        suspend fun getPlanets(page: Int): ResultWrapper<PlanetListResponse>
     }
 
     //interfaces specific to local data source

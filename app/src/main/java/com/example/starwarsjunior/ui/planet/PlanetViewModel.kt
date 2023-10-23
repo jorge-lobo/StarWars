@@ -21,7 +21,11 @@ class PlanetViewModel(application: Application) : BaseViewModel(application),
 
     private var isDataPreloaded = false
 
-    private var sortBy = "name"
+    enum class SortBy {
+        NAME, DIAMETER
+    }
+
+    private var sortBy = SortBy.NAME
     private var isDescending = false
 
     private val selectedFilters = mutableSetOf<String>()
@@ -84,32 +88,45 @@ class PlanetViewModel(application: Application) : BaseViewModel(application),
 
     //Order Buttons
     fun toggleSortNameOrder() {
-        sortBy = "name"
+        sortBy = SortBy.NAME
         isDescending = !isDescending
         updateSortedPlanets()
     }
 
     fun toggleSortedSizeOrder() {
-        sortBy = "diameter"
+        sortBy = SortBy.DIAMETER
         isDescending = !isDescending
         updateSortedPlanets()
     }
 
-    private fun updateSortedPlanets() {
-        val sortedList = when (sortBy) {
-            "name" -> {
-                if (isDescending) sortedPlanets.value?.sortedByDescending { it.name }
-                else sortedPlanets.value?.sortedBy { it.name }
-            }
-
-            "diameter" -> {
-                if (isDescending) sortedPlanets.value?.sortedByDescending { it.diameter }
-                else sortedPlanets.value?.sortedBy { it.diameter }
-            }
-
-            else -> sortedPlanets.value
+    fun updateSortedPlanets() {
+        val listToSort = if (selectedFilters.isEmpty()) {
+            planets.value
+        } else {
+            filteredPlanets.value
         }
-        sortedPlanets.value = sortedList
+        val sortedList = when (sortBy) {
+            SortBy.NAME -> {
+                val alphabeticSortedList = listToSort?.sortedBy {
+                    it.name.lowercase()
+                }
+                if (isDescending) alphabeticSortedList?.asReversed() else alphabeticSortedList
+            }
+
+            SortBy.DIAMETER -> {
+                val numericSortedList = listToSort?.sortedBy {
+                    it.diameter.toDoubleOrNull() ?: 0.0
+                }
+                if (isDescending) numericSortedList?.asReversed() else numericSortedList
+            }
+        }
+
+        if (selectedFilters.isEmpty()) {
+
+            sortedPlanets.value = sortedList
+        } else {
+            filteredPlanets.value = sortedList
+        }
     }
 
 //Filter Buttons

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -22,13 +21,11 @@ import com.mikepenz.fastadapter.select.getSelectExtension
 
 class PersonageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPersonageBinding
-    lateinit var personageBottomSheetButton: Button
-    lateinit var bottomSheetFragment: BottomSheetFragment
+    private lateinit var personageBottomSheetFragment: PersonageBottomSheetFragment
 
     private lateinit var mPersonageViewModel: PersonageViewModel
 
     private val mPersonageItemAdapter = FastItemAdapter<PersonageBindingItem>()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +44,7 @@ class PersonageActivity : AppCompatActivity() {
         if (mPersonageViewModel.isDataPreloaded()) {
             mPersonageViewModel.onStart()
         } else {
-            mPersonageViewModel.getPersonages(true)
+            mPersonageViewModel.getCachedPersonages(true)
         }
 
         //search box
@@ -134,8 +131,8 @@ class PersonageActivity : AppCompatActivity() {
 
         //fragment bottom sheet
         binding.personageBottomSheetButton.setOnClickListener {
-            bottomSheetFragment = BottomSheetFragment(mPersonageViewModel)
-            bottomSheetFragment.show(supportFragmentManager, "BSDialogFragment")
+            personageBottomSheetFragment = PersonageBottomSheetFragment(mPersonageViewModel)
+            personageBottomSheetFragment.show(supportFragmentManager, "BSDialogFragment")
 
         }
 

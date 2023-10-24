@@ -9,39 +9,41 @@ import com.example.starwarsjunior.data.personage.remote.PersonageRemoteDataSourc
 import com.example.starwarsjunior.utils.Utils
 
 object PersonageRepository : IPersonageDataSource.Main {
-    private var cachedPersonageResponse: List<Personage>? = null
-    private var cachedSpecieResponse: List<Specie>? = null
+    private var cachedPersonageResponse = mutableListOf<Personage>()
+    private var cachedSpecieResponse = mutableListOf<Specie>()
 
-    override suspend fun getPersonages(): ResultWrapper<PersonageListResponse> {
-        //check if the data is already cached
-        cachedPersonageResponse?.let {
-            return ResultWrapper(PersonageListResponse(it), null)
-        }
-
-        //if not cached, make a call to API
-        val result = PersonageRemoteDataSource.getPersonages()
+    override suspend fun getPersonages(page: Int): ResultWrapper<PersonageListResponse> {
+        val result = PersonageRemoteDataSource.getPersonages(page)
 
         result.result?.let {
             //saveDetails(it)
-            cachedPersonageResponse = it.results
+            cachedPersonageResponse.addAll(it.results)
         }
         return result
     }
 
-    override suspend fun getSpecies(): ResultWrapper<SpecieListResponse> {
-        //check if the data is already cached
-        cachedSpecieResponse?.let {
-            return ResultWrapper(SpecieListResponse(it), null)
+    suspend fun getCachedPersonages(): List<Personage>? {
+        if (cachedPersonageResponse != null) {
+            return cachedPersonageResponse
         }
+        return null
+    }
 
-        //if not cached, make a call to API
-        val result = PersonageRemoteDataSource.getSpecies()
+    override suspend fun getSpecies(page: Int): ResultWrapper<SpecieListResponse> {
+        val result = PersonageRemoteDataSource.getSpecies(page)
 
         result.result?.let {
             //saveDetails(it)
-            cachedSpecieResponse = it.results
+            cachedSpecieResponse.addAll(it.results)
         }
         return result
+    }
+
+    suspend fun getCachedSpecies(): List<Specie>? {
+        if (cachedSpecieResponse != null) {
+            return cachedSpecieResponse
+        }
+        return null
     }
 
     override suspend fun getCachedPersonage(personageID: Int): ResultWrapper<Personage?> {
@@ -63,5 +65,4 @@ object PersonageRepository : IPersonageDataSource.Main {
         }
         return null; null
     }
-
 }

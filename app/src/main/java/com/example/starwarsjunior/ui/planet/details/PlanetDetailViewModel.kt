@@ -42,9 +42,9 @@ class PlanetDetailViewModel(application: Application) : BaseViewModel(applicatio
                             planetRotationPeriod.value = data.rotationPeriod.lowercase()
                             planetOrbitalPeriod.value = formatter(data.orbitalPeriod.lowercase())
                             planetDiameter.value = formatter(data.diameter.lowercase())
-                            planetGravity.value = data.gravity.lowercase()
-                            planetClimate.value = data.climate.lowercase()
-                            planetTerrain.value = data.terrain.lowercase()
+                            planetGravity.value = getList(data.gravity.lowercase())
+                            planetClimate.value = getList(data.climate.lowercase())
+                            planetTerrain.value = getList(data.terrain.lowercase())
                             planetSurfaceWater.value = data.surfaceWater.lowercase()
                             planetPopulation.value = formatter(data.population.lowercase())
 
@@ -58,9 +58,14 @@ class PlanetDetailViewModel(application: Application) : BaseViewModel(applicatio
     }
 
     fun formatter(n: String): String? = runCatching {
-        val population = n.replace(",", "").toInt()
-        DecimalFormat("#,###").format(population)
+        val numberSeparator = n.replace(",", "").toInt()
+        DecimalFormat("#,###").format(numberSeparator)
     }.getOrElse { n }
+
+    fun getList(n: String): String {
+        val value = n.replace(",\\s+".toRegex(), ",")
+        return value.split(",").joinToString("\n")
+    }
 
     override fun onError(message: String?, validationErrors: Map<String, ArrayList<String>>?) {
         isLoading.value = false

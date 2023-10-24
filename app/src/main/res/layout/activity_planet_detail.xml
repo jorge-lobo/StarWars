@@ -38,21 +38,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="27dp"
-            android:layout_marginTop="51dp"
+            android:layout_marginTop="80dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/planet_name"
                 android:layout_width="wrap_content"
-                android:layout_height="32dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|top"
                 android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center"
                 android:text="@{viewModel.planetName}"
                 android:textAppearance="@style/text_yellow"
-                android:textSize="@dimen/text_size_small_title" />
+                android:textSize="@dimen/text_size_small_title"
+                tools:text="@string/planet" />
 
             <TextView
-                android:id="@+id/planet_characteristics_textview"
+                android:id="@+id/planet_characteristics"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:layout_gravity="start"
@@ -80,41 +82,8 @@
                         android:layout_height="22dp"
                         android:layout_marginEnd="12dp"
                         android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
                         android:text="@string/rotation_period"
-                        android:textAlignment="viewEnd"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
-                    <TextView
-                        android:id="@+id/orbital_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginEnd="12dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:text="@string/orbital_period"
-                        android:textAlignment="viewEnd"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
-                    <TextView
-                        android:id="@+id/diameter_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginEnd="12dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:text="@string/diameter"
-                        android:textAlignment="viewEnd"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
-                    <TextView
-                        android:id="@+id/gravity_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginEnd="12dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:text="@string/gravity"
-                        android:textAlignment="viewEnd"
                         android:textAppearance="@style/text_yellow"
                         android:textSize="@dimen/text_size_small" />
 
@@ -129,54 +98,157 @@
                     <TextView
                         android:id="@+id/rotation_info"
                         android:layout_width="match_parent"
-                        android:layout_height="22dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.planetRotationPeriod}"
                         android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/orbital_info"
+                        android:id="@+id/orbital_textview"
                         android:layout_width="match_parent"
                         android:layout_height="22dp"
-                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
                         android:fontFamily="@font/starjedi_special_edition"
-                        android:gravity="start"
-                        android:text="@{viewModel.planetOrbitalPeriod}"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
-                    <TextView
-                        android:id="@+id/diameter_info"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginStart="12dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:gravity="start"
-                        android:text="@{viewModel.planetDiameter}"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
-                    <TextView
-                        android:id="@+id/gravity_info"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginStart="12dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:gravity="start"
-                        android:justificationMode="inter_word"
-                        android:text="@{viewModel.planetGravity}"
+                        android:gravity="end"
+                        android:text="@string/orbital_period"
                         android:textAppearance="@style/text_yellow"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/orbital_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.planetOrbitalPeriod}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/diameter_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/diameter"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/diameter_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.planetDiameter}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/gravity_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/gravity"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/gravity_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.planetGravity}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <TextView
-                android:id="@+id/geography_textview"
+                android:id="@+id/geography"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:layout_gravity="start"
@@ -204,30 +276,8 @@
                         android:layout_height="22dp"
                         android:layout_marginEnd="12dp"
                         android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
                         android:text="@string/climate"
-                        android:textAlignment="viewEnd"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
-                    <TextView
-                        android:id="@+id/terrain_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginEnd="12dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:text="@string/terrain"
-                        android:textAlignment="viewEnd"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
-                    <TextView
-                        android:id="@+id/surface_water_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginEnd="12dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:text="@string/surface_water"
-                        android:textAlignment="viewEnd"
                         android:textAppearance="@style/text_yellow"
                         android:textSize="@dimen/text_size_small" />
 
@@ -242,38 +292,106 @@
                     <TextView
                         android:id="@+id/climate_info"
                         android:layout_width="match_parent"
-                        android:layout_height="22dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
-                        android:justificationMode="inter_word"
                         android:text="@{viewModel.planetClimate}"
                         android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/terrain_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/terrain"
+                        android:textAppearance="@style/text_yellow"
                         android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/terrain_info"
                         android:layout_width="match_parent"
-                        android:layout_height="22dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
-                        android:justificationMode="inter_word"
                         android:text="@{viewModel.planetTerrain}"
                         android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/surface_water_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/surface_water"
+                        android:textAppearance="@style/text_yellow"
                         android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/surface_water_info"
                         android:layout_width="match_parent"
-                        android:layout_height="22dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.planetSurfaceWater}"
                         android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -307,8 +425,8 @@
                         android:layout_height="22dp"
                         android:layout_marginEnd="12dp"
                         android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
                         android:text="@string/population"
-                        android:textAlignment="viewEnd"
                         android:textAppearance="@style/text_yellow"
                         android:textSize="@dimen/text_size_small" />
 
@@ -323,15 +441,14 @@
                     <TextView
                         android:id="@+id/population_info"
                         android:layout_width="match_parent"
-                        android:layout_height="22dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
-                        android:justificationMode="inter_word"
                         android:text="@{viewModel.planetPopulation}"
                         android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
                 </LinearLayout>
 
             </LinearLayout>

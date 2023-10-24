@@ -50,7 +50,8 @@
                 android:gravity="center"
                 android:text="@{viewModel.shipName}"
                 android:textAppearance="@style/text_yellow"
-                android:textSize="@dimen/text_size_small_title" />
+                android:textSize="@dimen/text_size_small_title"
+                tools:text="@string/ship_name" />
 
             <TextView
                 android:id="@+id/description_textview"
@@ -103,7 +104,8 @@
                         android:gravity="start"
                         android:text="@{viewModel.shipModel}"
                         android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -147,7 +149,8 @@
                         android:gravity="start"
                         android:text="@{viewModel.shipStarshipClass}"
                         android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -192,7 +195,8 @@
                         android:gravity="start"
                         android:text="@{viewModel.shipManufacturer}"
                         android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -248,7 +252,8 @@
                         android:gravity="start"
                         android:text="@{viewModel.shipLength}"
                         android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -293,7 +298,8 @@
                         android:gravity="start"
                         android:text="@{viewModel.shipMaxAthmospheringSpeed}"
                         android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -338,7 +344,8 @@
                         android:gravity="start"
                         android:text="@{viewModel.shipHyperdriveRating}"
                         android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -383,7 +390,8 @@
                         android:gravity="start"
                         android:text="@{viewModel.shipMglt}"
                         android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -428,7 +436,8 @@
                         android:gravity="start"
                         android:text="@{viewModel.shipCostInCredits}"
                         android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -484,7 +493,8 @@
                         android:gravity="start"
                         android:text="@{viewModel.shipCrew}"
                         android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -529,7 +539,8 @@
                         android:gravity="start"
                         android:text="@{viewModel.shipPassengers}"
                         android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -574,7 +585,8 @@
                         android:gravity="start"
                         android:text="@{viewModel.shipCargoCapacity}"
                         android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -619,7 +631,8 @@
                         android:gravity="start"
                         android:text="@{viewModel.shipConsumables}"
                         android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
                 </LinearLayout>
 
             </LinearLayout>

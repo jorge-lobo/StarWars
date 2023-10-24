@@ -1,5 +1,7 @@
 package com.example.starwarsjunior.ui.personage.details
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -34,6 +36,9 @@ class PersonageDetailActivity : AppCompatActivity() {
         mPersonageDetailViewModel.initialize(personageID)
 
         binding.backButton.setOnClickListener {
+            //to load preview sort list values
+            val returnIntent = Intent()
+            setResult(Activity.RESULT_OK, returnIntent)
             finish()
         }
     }

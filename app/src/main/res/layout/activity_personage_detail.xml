@@ -38,21 +38,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="27dp"
-            android:layout_marginTop="51dp"
+            android:layout_marginTop="80dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/personage_name"
                 android:layout_width="wrap_content"
-                android:layout_height="32dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|top"
                 android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center"
                 android:text="@{viewModel.personageName}"
                 android:textAppearance="@style/text_yellow"
-                android:textSize="@dimen/text_size_small_title" />
+                android:textSize="@dimen/text_size_small_title"
+                tools:text="@string/name" />
 
             <TextView
-                android:id="@+id/bio_info_textview"
+                android:id="@+id/biographical_info"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:layout_gravity="start"
@@ -80,30 +82,8 @@
                         android:layout_height="22dp"
                         android:layout_marginEnd="12dp"
                         android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
                         android:text="@string/born"
-                        android:textAlignment="viewEnd"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
-                    <TextView
-                        android:id="@+id/gender_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginEnd="12dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:text="@string/gender"
-                        android:textAlignment="viewEnd"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
-                    <TextView
-                        android:id="@+id/species_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginEnd="12dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:text="@string/species"
-                        android:textAlignment="viewEnd"
                         android:textAppearance="@style/text_yellow"
                         android:textSize="@dimen/text_size_small" />
 
@@ -116,44 +96,113 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/birthYear_info"
+                        android:id="@+id/born_info"
                         android:layout_width="match_parent"
-                        android:layout_height="22dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.personageBirthYear}"
                         android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/gender_info"
+                        android:id="@+id/gender_textview"
                         android:layout_width="match_parent"
                         android:layout_height="22dp"
-                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
                         android:fontFamily="@font/starjedi_special_edition"
-                        android:gravity="start"
-                        android:text="@{viewModel.personageGender}"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
-                    <TextView
-                        android:id="@+id/species_info"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginStart="12dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:gravity="start"
-                        android:text="@{viewModel.personageSpecie}"
+                        android:gravity="end"
+                        android:text="@string/gender"
                         android:textAppearance="@style/text_yellow"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/gender_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.personageGender}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/species_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/species"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/species_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.personageSpecie}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <TextView
-                android:id="@+id/physical_description_textview"
+                android:id="@+id/physical_description"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:layout_gravity="start"
@@ -181,52 +230,8 @@
                         android:layout_height="22dp"
                         android:layout_marginEnd="12dp"
                         android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
                         android:text="@string/height"
-                        android:textAlignment="viewEnd"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
-                    <TextView
-                        android:id="@+id/mass_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginEnd="12dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:text="@string/mass"
-                        android:textAlignment="viewEnd"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
-                    <TextView
-                        android:id="@+id/hair_color_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginEnd="12dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:text="@string/hair_color"
-                        android:textAlignment="viewEnd"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
-                    <TextView
-                        android:id="@+id/skin_color_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginEnd="12dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:text="@string/skin_color"
-                        android:textAlignment="viewEnd"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
-                    <TextView
-                        android:id="@+id/eye_color_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginEnd="12dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:text="@string/eye_color"
-                        android:textAlignment="viewEnd"
                         android:textAppearance="@style/text_yellow"
                         android:textSize="@dimen/text_size_small" />
 
@@ -241,64 +246,204 @@
                     <TextView
                         android:id="@+id/height_info"
                         android:layout_width="match_parent"
-                        android:layout_height="22dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.personageHeight}"
                         android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/mass_info"
+                        android:id="@+id/mass_textview"
                         android:layout_width="match_parent"
                         android:layout_height="22dp"
-                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
                         android:fontFamily="@font/starjedi_special_edition"
-                        android:gravity="start"
-                        android:text="@{viewModel.personageMass}"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
-                    <TextView
-                        android:id="@+id/hair_color_info"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginStart="12dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:gravity="start"
-                        android:text="@{viewModel.personageHairColor}"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
-                    <TextView
-                        android:id="@+id/skin_color_info"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginStart="12dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:gravity="start"
-                        android:text="@{viewModel.personageSkinColor}"
-                        android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
-                    <TextView
-                        android:id="@+id/eye_color_info"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:layout_marginStart="12dp"
-                        android:fontFamily="@font/starjedi_special_edition"
-                        android:gravity="start"
-                        android:text="@{viewModel.personageEyeColor}"
+                        android:gravity="end"
+                        android:text="@string/mass"
                         android:textAppearance="@style/text_yellow"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/mass_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.personageMass}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/hair_color_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/hair_color"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/hair_color_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.personageHairColor}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/skin_color_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/skin_color"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/skin_color_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.personageSkinColor}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/eye_color_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
+                        android:text="@string/eye_color"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/eye_color_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="start"
+                        android:text="@{viewModel.personageEyeColor}"
+                        android:textAppearance="@style/text_yellow"
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <TextView
-                android:id="@+id/homeworld_textview"
+                android:id="@+id/homeworld"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:layout_gravity="start"
@@ -326,8 +471,8 @@
                         android:layout_height="22dp"
                         android:layout_marginEnd="12dp"
                         android:fontFamily="@font/starjedi_special_edition"
+                        android:gravity="end"
                         android:text="@string/planet"
-                        android:textAlignment="viewEnd"
                         android:textAppearance="@style/text_yellow"
                         android:textSize="@dimen/text_size_small" />
 
@@ -340,16 +485,16 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/homeworld_info"
+                        android:id="@+id/planet_info"
                         android:layout_width="match_parent"
-                        android:layout_height="22dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.personageHomeWorld}"
                         android:textAppearance="@style/text_yellow"
-                        android:textSize="@dimen/text_size_small" />
-
+                        android:textSize="@dimen/text_size_small"
+                        tools:text="text" />
                 </LinearLayout>
 
             </LinearLayout>

@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/transparent"
-    tools:context=".ui.planet.PlanetBottomSheetFragment">
+    tools:context=".ui.ship.PlanetBottomSheetFragment">
 
-    <View
-        android:id="@+id/filters_container"
-        android:layout_width="match_parent"
-        android:layout_height="477dp"
-        android:layout_alignParentTop="true"
-        android:background="@color/black" />
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.starwarsjunior.ui.planet.PlanetViewModel" />
+    </data>
 
     <RelativeLayout
+        android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/black"
         android:paddingBottom="39dp">
 
         <View
@@ -39,7 +37,21 @@
             android:src="@drawable/sliders" />
 
         <TextView
-            android:id="@+id/textview1"
+            android:id="@+id/reset"
+            android:layout_width="148dp"
+            android:layout_height="26dp"
+            android:layout_below="@id/top_edge"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="29dp"
+            android:fontFamily="@font/starjedi_special_edition"
+            android:gravity="end"
+            android:text="@string/reset"
+            android:textAppearance="@style/text_yellow"
+            android:textSize="@dimen/text_size_medium" />
+
+        <TextView
+            android:id="@+id/climate_textview"
             android:layout_width="148dp"
             android:layout_height="26dp"
             android:layout_below="@id/filter_icon"
@@ -47,130 +59,248 @@
             android:layout_marginStart="29dp"
             android:layout_marginTop="25dp"
             android:fontFamily="@font/starjedi_special_edition"
-            android:text="text1"
+            android:text="@string/climate"
             android:textAppearance="@style/text_yellow"
             android:textSize="@dimen/text_size_medium" />
 
         <LinearLayout
-            android:id="@+id/buttons1"
+            android:id="@+id/climate_buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textview1"
+            android:layout_below="@id/climate_textview"
             android:layout_alignParentStart="true"
             android:layout_marginHorizontal="19dp"
             android:layout_marginTop="24dp"
             android:baselineAligned="false"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <ToggleButton
-                android:id="@+id/button1"
-                android:layout_width="0dp"
-                android:layout_height="31dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/filter_buttons"
-                android:fontFamily="@font/starjedi_special_edition"
-                android:gravity="center"
-                android:textAppearance="@style/text_black"
-                android:textOff="button1"
-                android:textOn="button1"
-                android:textSize="@dimen/text_size_medium" />
+            <RadioGroup
+                android:id="@+id/climate_group1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <ToggleButton
-                android:id="@+id/button2"
-                android:layout_width="0dp"
-                android:layout_height="31dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/filter_buttons"
-                android:fontFamily="@font/starjedi_special_edition"
-                android:gravity="center"
-                android:textAppearance="@style/text_black"
-                android:textOff="button2"
-                android:textOn="button2"
-                android:textSize="@dimen/text_size_medium" />
+                <ToggleButton
+                    android:id="@+id/arid_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/arid"
+                    android:textOn="@string/arid"
+                    android:textSize="@dimen/text_size_medium" />
 
-            <ToggleButton
-                android:id="@+id/button3"
-                android:layout_width="0dp"
-                android:layout_height="31dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/filter_buttons"
-                android:fontFamily="@font/starjedi_special_edition"
-                android:gravity="center"
-                android:textAppearance="@style/text_black"
-                android:textOff="button3"
-                android:textOn="button3"
-                android:textSize="@dimen/text_size_medium" />
+                <ToggleButton
+                    android:id="@+id/temperate_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1.2"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/temperate"
+                    android:textOn="@string/temperate"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <ToggleButton
+                    android:id="@+id/hot_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/hot"
+                    android:textOn="@string/hot"
+                    android:textSize="@dimen/text_size_medium" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/climate_group2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/artic_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/artic"
+                    android:textOn="@string/artic"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <ToggleButton
+                    android:id="@+id/tropical_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1.2"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/tropical"
+                    android:textOn="@string/tropical"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <ToggleButton
+                    android:id="@+id/windy_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/windy"
+                    android:textOn="@string/windy"
+                    android:textSize="@dimen/text_size_medium" />
+
+            </RadioGroup>
 
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textview2"
+            android:id="@+id/terrain_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/buttons1"
+            android:layout_below="@id/climate_buttons"
             android:layout_alignParentStart="true"
             android:layout_marginStart="29dp"
             android:layout_marginTop="50dp"
             android:fontFamily="@font/starjedi_special_edition"
-            android:text="text2"
+            android:text="@string/terrain"
             android:textAppearance="@style/text_yellow"
             android:textSize="@dimen/text_size_medium" />
 
         <LinearLayout
-            android:id="@+id/buttons2"
+            android:id="@+id/terrain_buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textview2"
+            android:layout_below="@id/terrain_textview"
             android:layout_alignParentStart="true"
             android:layout_marginHorizontal="19dp"
             android:layout_marginTop="25dp"
             android:baselineAligned="false"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <ToggleButton
-                android:id="@+id/button4"
-                android:layout_width="0dp"
-                android:layout_height="31dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/filter_buttons"
-                android:fontFamily="@font/starjedi_special_edition"
-                android:gravity="center"
-                android:textAppearance="@style/text_black"
-                android:textOff="button4"
-                android:textOn="button4"
-                android:textSize="@dimen/text_size_medium" />
+            <RadioGroup
+                android:id="@+id/terrain_group1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <ToggleButton
-                android:id="@+id/button5"
-                android:layout_width="0dp"
-                android:layout_height="31dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/filter_buttons"
-                android:fontFamily="@font/starjedi_special_edition"
-                android:gravity="center"
-                android:textAppearance="@style/text_black"
-                android:textOff="button5"
-                android:textOn="button5"
-                android:textSize="@dimen/text_size_medium" />
+                <ToggleButton
+                    android:id="@+id/desert_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/desert"
+                    android:textOn="@string/desert"
+                    android:textSize="@dimen/text_size_medium" />
 
-            <ToggleButton
-                android:id="@+id/button6"
-                android:layout_width="0dp"
-                android:layout_height="31dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/filter_buttons"
-                android:fontFamily="@font/starjedi_special_edition"
-                android:gravity="center"
-                android:textAppearance="@style/text_black"
-                android:textOff="button6"
-                android:textOn="button6"
-                android:textSize="@dimen/text_size_medium" />
+                <ToggleButton
+                    android:id="@+id/forest_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1.2"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/forest"
+                    android:textOn="@string/forest"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <ToggleButton
+                    android:id="@+id/ocean_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/ocean"
+                    android:textOn="@string/ocean"
+                    android:textSize="@dimen/text_size_medium" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/terrain_group2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/jungle_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/jungle"
+                    android:textOn="@string/jungle"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <ToggleButton
+                    android:id="@+id/mountain_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1.2"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/mountain"
+                    android:textOn="@string/mountain"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <ToggleButton
+                    android:id="@+id/plains_button"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/filter_buttons"
+                    android:fontFamily="@font/starjedi_special_edition"
+                    android:gravity="center"
+                    android:textAppearance="@style/text_black"
+                    android:textOff="@string/plains"
+                    android:textOn="@string/plains"
+                    android:textSize="@dimen/text_size_medium" />
+
+            </RadioGroup>
 
         </LinearLayout>
 
@@ -179,7 +309,7 @@
             android:id="@+id/search_button"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_below="@id/buttons2"
+            android:layout_below="@id/terrain_buttons"
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="50dp"
@@ -191,5 +321,4 @@
             android:textSize="@dimen/text_size_extra_large" />
 
     </RelativeLayout>
-
-</RelativeLayout>
+</layout>

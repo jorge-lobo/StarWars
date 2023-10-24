@@ -1,10 +1,13 @@
 package com.example.starwarsjunior.ui.planet
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.EditText
+import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -12,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.starwarsjunior.R
+import com.example.starwarsjunior.data.planet.objects.Planet
 import com.example.starwarsjunior.databinding.ActivityPlanetBinding
 import com.example.starwarsjunior.ui.planet.details.PlanetDetailActivity
 import com.example.starwarsjunior.utils.Utils
@@ -26,6 +30,8 @@ class PlanetActivity : AppCompatActivity() {
     private lateinit var mPlanetViewModel: PlanetViewModel
 
     private val mPlanetItemAdapter = FastItemAdapter<PlanetBindingItem>()
+
+    private lateinit var launcher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +52,7 @@ class PlanetActivity : AppCompatActivity() {
         }
 
         //search box
-        val searchBox = findViewById<EditText>(R.id.search_box)
-
-        searchBox.addTextChangedListener(object : TextWatcher {
+        binding.searchBox.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -67,11 +71,19 @@ class PlanetActivity : AppCompatActivity() {
         val selectExtension = fastItemAdapter.getSelectExtension()
         selectExtension.isSelectable = true
 
+        //when returning from PlanetDetail, this function will load preview sort list values
+        launcher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    mPlanetViewModel.updateSortedPlanets()
+                }
+            }
+
         fastItemAdapter.onClickListener = { _, _, item, _ ->
             val intent = Intent(this, PlanetDetailActivity::class.java)
             val idFromUrl = Utils.extractIdFromUrl(item.planet.url)
             intent.putExtra(PlanetDetailActivity.EXTRA_PLANET_ID, idFromUrl)
-            startActivity(intent)
+            launcher.launch(intent)
             binding.searchBox.setText("")
             false
         }
@@ -85,18 +97,7 @@ class PlanetActivity : AppCompatActivity() {
         mPlanetViewModel.sortedPlanets.observe(
             this,
             Observer { planetList ->
-
-                val items = ArrayList<PlanetBindingItem>()
-                mPlanetItemAdapter.clear()
-
-                items.clear()
-                if (planetList != null) {
-                    for (planet in planetList) {
-                        val item = PlanetBindingItem(planet)
-                        items.add(item)
-                    }
-                    mPlanetItemAdapter.add(items)
-                }
+                updatePlanetAdapter(planetList)
             }
         )
 
@@ -104,23 +105,23 @@ class PlanetActivity : AppCompatActivity() {
         mPlanetViewModel.filteredPlanets.observe(
             this,
             Observer { planetList ->
-
-                val items = ArrayList<PlanetBindingItem>()
-                mPlanetItemAdapter.clear()
-
-                items.clear()
-                if (planetList != null) {
-                    for (planet in planetList) {
-                        val item = PlanetBindingItem(planet)
-                        items.add(item)
-                    }
-                    mPlanetItemAdapter.add(items)
-                }
+                updatePlanetAdapter(planetList)
             }
         )
 
-        binding.resetButton.setOnClickListener {
+        //toggle the visibility of the no results message,
+        //applied both in the search bar and in the filters
+        mPlanetViewModel.resultsNotFoundMessage.observe(this, Observer { notFound ->
+            if (notFound) {
+                binding.resultsNotFound.visibility = View.VISIBLE
+            } else {
+                binding.resultsNotFound.visibility = View.GONE
+            }
+        })
+
+        binding.resetSearchButton.setOnClickListener {
             binding.searchBox.setText("")
+            mPlanetViewModel.applyFilters()
         }
 
         binding.backButton.setOnClickListener {
@@ -177,5 +178,18 @@ class PlanetActivity : AppCompatActivity() {
             mPlanetViewModel.toggleSortedSizeOrder()
         }
 
+    }
+
+    private fun updatePlanetAdapter(planetList: List<Planet>?) {
+        val items = ArrayList<PlanetBindingItem>()
+        mPlanetItemAdapter.clear()
+        items.clear()
+        if (planetList != null) {
+            for (planet in planetList) {
+                val item = PlanetBindingItem(planet)
+                items.add((item))
+            }
+            mPlanetItemAdapter.add(items)
+        }
     }
 }

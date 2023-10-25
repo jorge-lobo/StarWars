@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.ToggleButton
+import androidx.core.view.forEach
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.starwarsjunior.R
 import com.example.starwarsjunior.databinding.FragmentBottomSheetListDialogItemBinding
 import com.example.starwarsjunior.databinding.FragmentPersonageBottomSheetDialogBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 // TODO: Customize parameter argument names
@@ -24,7 +27,8 @@ const val ARG_ITEM_COUNT = "item_count"
  *    BottomSheetFragment.newInstance(30).show(supportFragmentManager, "dialog")
  * </pre>
  */
-class PersonageBottomSheetFragment(private val mainViewModel: PersonageViewModel) : BottomSheetDialogFragment() {
+class PersonageBottomSheetFragment(private var mainViewModel: PersonageViewModel) :
+    BottomSheetDialogFragment() {
 
     private var _binding: FragmentPersonageBottomSheetDialogBinding? = null
 
@@ -49,9 +53,11 @@ class PersonageBottomSheetFragment(private val mainViewModel: PersonageViewModel
             arguments?.getInt(ARG_ITEM_COUNT)?.let { ItemAdapter(it) }
 
         //Filter buttons
+
+        //filter by gender
         binding.maleButton.isChecked = mainViewModel.isFilterSelected("male")
         binding.femaleButton.isChecked = mainViewModel.isFilterSelected("female")
-        binding.undefinedButton.isChecked = mainViewModel.isFilterSelected("n/a")
+        binding.unknownButton.isChecked = mainViewModel.isFilterSelected("n/a")
 
         binding.maleButton.setOnClickListener {
             mainViewModel.toggleFilter("male")
@@ -63,9 +69,19 @@ class PersonageBottomSheetFragment(private val mainViewModel: PersonageViewModel
             binding.femaleButton.isChecked = mainViewModel.isFilterSelected("female")
         }
 
-        binding.undefinedButton.setOnClickListener {
+        binding.unknownButton.setOnClickListener {
             mainViewModel.toggleFilter("n/a")
-            binding.undefinedButton.isChecked = mainViewModel.isFilterSelected("n/a")
+            binding.unknownButton.isChecked = mainViewModel.isFilterSelected("n/a")
+        }
+
+        //Reset button
+        binding.reset.setOnClickListener {
+            binding.genderButtons.forEach { view ->
+                if (view is ToggleButton) {
+                    view.isChecked = false
+                }
+            }
+            mainViewModel.resetFilters()
         }
 
         //SearchButton
@@ -76,6 +92,12 @@ class PersonageBottomSheetFragment(private val mainViewModel: PersonageViewModel
             //close BottomSheetFragment
             dismiss()
         }
+
+        //fixes the BottomSheet at the bottom of the view
+        val bottomSheetView = view.parent as View
+        val behavior = BottomSheetBehavior.from(bottomSheetView)
+        val windowHeight = (resources.displayMetrics.heightPixels * 0.8).toInt()
+        behavior.peekHeight = windowHeight
     }
 
     private inner class ViewHolder internal constructor(binding: FragmentBottomSheetListDialogItemBinding) :
@@ -111,7 +133,10 @@ class PersonageBottomSheetFragment(private val mainViewModel: PersonageViewModel
     companion object {
 
         // TODO: Customize parameters
-        fun newInstance(itemCount: Int, mainViewModel: PersonageViewModel): PersonageBottomSheetFragment =
+        fun newInstance(
+            itemCount: Int,
+            mainViewModel: PersonageViewModel
+        ): PersonageBottomSheetFragment =
             PersonageBottomSheetFragment(mainViewModel).apply {
                 arguments = Bundle().apply {
                     putInt(ARG_ITEM_COUNT, itemCount)

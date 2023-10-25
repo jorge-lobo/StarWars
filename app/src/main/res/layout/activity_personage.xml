@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/bg_dark_mode" />
+            android:background="@drawable/background" />
 
         <View
             android:id="@+id/star_wars_logo_small"
@@ -57,7 +57,7 @@
             android:fontFamily="@font/starjedi_special_edition"
             android:gravity="center_horizontal|top"
             android:text="@string/characters"
-            android:textAppearance="@style/text_yellow"
+            android:textColor="@color/titles"
             android:textSize="@dimen/text_size_extra_large"
             tools:ignore="RelativeOverlap" />
 
@@ -73,6 +73,7 @@
             android:background="@drawable/search_box"
             android:inputType="text"
             android:paddingHorizontal="15dp"
+            android:textColor="@color/black"
             tools:ignore="LabelFor" />
 
         <ImageView

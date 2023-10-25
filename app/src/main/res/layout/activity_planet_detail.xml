@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/bg_dark_mode" />
+            android:background="@drawable/background" />
 
         <ImageView
             android:id="@+id/back_button"
@@ -32,7 +32,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="51dp"
             android:contentDescription="@string/back_button"
-            android:src="@drawable/arrow_left_yellow" />
+            android:src="@drawable/arrow_left" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,7 +49,7 @@
                 android:fontFamily="@font/starjedi_special_edition"
                 android:gravity="center"
                 android:text="@{viewModel.planetName}"
-                android:textAppearance="@style/text_yellow"
+                android:textColor="@color/titles"
                 android:textSize="@dimen/text_size_small_title"
                 tools:text="@string/planet" />
 
@@ -61,7 +61,7 @@
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/starjedi_special_edition"
                 android:text="@string/planet_characteristics"
-                android:textAppearance="@style/text_yellow"
+                android:textColor="@color/titles"
                 android:textSize="@dimen/text_size_small_title" />
 
             <LinearLayout
@@ -84,7 +84,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/rotation_period"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -103,7 +103,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.planetRotationPeriod}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -129,7 +129,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/orbital_period"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -148,7 +148,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.planetOrbitalPeriod}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -175,7 +175,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/diameter"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -194,7 +194,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.planetDiameter}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -221,7 +221,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/gravity"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -240,7 +240,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.planetGravity}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -255,7 +255,7 @@
                 android:layout_marginTop="17dp"
                 android:fontFamily="@font/starjedi_special_edition"
                 android:text="@string/geography"
-                android:textAppearance="@style/text_yellow"
+                android:textColor="@color/titles"
                 android:textSize="@dimen/text_size_small_title" />
 
             <LinearLayout
@@ -278,7 +278,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/climate"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -297,7 +297,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.planetClimate}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -324,7 +324,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/terrain"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -343,7 +343,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.planetTerrain}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -370,7 +370,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/surface_water"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -389,7 +389,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.planetSurfaceWater}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -404,7 +404,7 @@
                 android:layout_marginTop="17dp"
                 android:fontFamily="@font/starjedi_special_edition"
                 android:text="@string/demographics"
-                android:textAppearance="@style/text_yellow"
+                android:textColor="@color/titles"
                 android:textSize="@dimen/text_size_small_title" />
 
             <LinearLayout
@@ -427,7 +427,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/population"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -446,7 +446,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.planetPopulation}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>

@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/bg_dark_mode" />
+            android:background="@drawable/background" />
 
         <ImageView
             android:id="@+id/back_button"
@@ -32,7 +32,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="51dp"
             android:contentDescription="@string/back_button"
-            android:src="@drawable/arrow_left_yellow" />
+            android:src="@drawable/arrow_left" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,7 +49,7 @@
                 android:fontFamily="@font/starjedi_special_edition"
                 android:gravity="center"
                 android:text="@{viewModel.shipName}"
-                android:textAppearance="@style/text_yellow"
+                android:textColor="@color/titles"
                 android:textSize="@dimen/text_size_small_title"
                 tools:text="@string/ship_name" />
 
@@ -61,7 +61,7 @@
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/starjedi_special_edition"
                 android:text="@string/ship_description"
-                android:textAppearance="@style/text_yellow"
+                android:textColor="@color/titles"
                 android:textSize="@dimen/text_size_small_title" />
 
             <LinearLayout
@@ -84,7 +84,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/model"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -103,7 +103,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.shipModel}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -129,7 +129,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/starship_class"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -148,7 +148,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.shipStarshipClass}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -175,7 +175,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/manufacturer"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -194,7 +194,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.shipManufacturer}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -209,7 +209,7 @@
                 android:layout_marginTop="17dp"
                 android:fontFamily="@font/starjedi_special_edition"
                 android:text="@string/technical_specifications"
-                android:textAppearance="@style/text_yellow"
+                android:textColor="@color/titles"
                 android:textSize="@dimen/text_size_small_title" />
 
             <LinearLayout
@@ -232,7 +232,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/length"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -251,7 +251,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.shipLength}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -278,7 +278,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/max_speed"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -297,7 +297,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.shipMaxAthmospheringSpeed}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -324,7 +324,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/hyperdrive_rating"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -343,7 +343,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.shipHyperdriveRating}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -370,7 +370,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/mglt"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -389,7 +389,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.shipMglt}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -416,7 +416,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/cost_in_credits"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -435,7 +435,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.shipCostInCredits}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -450,7 +450,7 @@
                 android:layout_marginTop="17dp"
                 android:fontFamily="@font/starjedi_special_edition"
                 android:text="@string/ship_capacity"
-                android:textAppearance="@style/text_yellow"
+                android:textColor="@color/titles"
                 android:textSize="@dimen/text_size_small_title" />
 
             <LinearLayout
@@ -473,7 +473,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/crew"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -492,7 +492,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.shipCrew}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -519,7 +519,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/passengers"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -538,7 +538,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.shipPassengers}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -565,7 +565,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/cargo_capacity"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -584,7 +584,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.shipCargoCapacity}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -611,7 +611,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/consumables"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -630,7 +630,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.shipConsumables}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>

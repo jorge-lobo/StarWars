@@ -15,7 +15,7 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black"
+        android:background="@color/bottomsheet_bg"
         android:paddingBottom="39dp">
 
         <View
@@ -48,7 +48,7 @@
             android:fontFamily="@font/starjedi_special_edition"
             android:gravity="end"
             android:text="@string/reset"
-            android:textAppearance="@style/text_yellow"
+            android:textColor="@color/design_elements"
             android:textSize="@dimen/text_size_medium" />
 
         <TextView
@@ -61,7 +61,7 @@
             android:layout_marginTop="25dp"
             android:fontFamily="@font/starjedi_special_edition"
             android:text="@string/specie"
-            android:textAppearance="@style/text_yellow"
+            android:textColor="@color/titles"
             android:textSize="@dimen/text_size_medium" />
 
         <FrameLayout
@@ -93,7 +93,7 @@
             android:layout_marginTop="50dp"
             android:fontFamily="@font/starjedi_special_edition"
             android:text="@string/gender"
-            android:textAppearance="@style/text_yellow"
+            android:textColor="@color/titles"
             android:textSize="@dimen/text_size_medium" />
 
         <RadioGroup
@@ -161,10 +161,11 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="50dp"
             android:background="@drawable/button_full_width"
+            android:backgroundTint="@color/large_buttons_bg"
             android:fontFamily="@font/starjedi_special_edition"
             android:gravity="center"
             android:text="@string/search"
-            android:textAppearance="@style/text_black"
+            android:textColor="@color/text_buttons"
             android:textSize="@dimen/text_size_extra_large" />
 
     </RelativeLayout>

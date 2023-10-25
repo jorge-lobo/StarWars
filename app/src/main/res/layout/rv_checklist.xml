@@ -11,10 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="9dp"
+        android:checked="false"
         android:fontFamily="@font/starjedi_special_edition"
         android:text=""
-        android:checked="false"
-        android:textAppearance="@style/text_black"
+        android:textColor="@color/text_buttons"
         android:textSize="@dimen/text_size_medium"
         app:buttonTint="@color/yellow"
         tools:text="specie" />

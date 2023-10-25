@@ -2,6 +2,9 @@ package com.example.starwarsjunior.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -18,11 +21,35 @@ class SplashScreenActivity : AppCompatActivity() {
 
         viewModel.preloadDataFromAPI()
 
-        viewModel.preloadComplete.observe(this, Observer { isComplete ->
-            if (isComplete == 4) {
+        startLogoAnimation()
+
+        viewModel.preloadComplete.observe(this, Observer { preloadProgress ->
+            if (preloadProgress == 4) {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
         })
+    }
+
+    //logo animation
+    private fun startLogoAnimation() {
+        val logoView: View = findViewById(R.id.star_wars_logo_small)
+
+        val introAnimation = AnimationUtils.loadAnimation(this, R.anim.logo_animation)
+        introAnimation.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation?) {
+
+            }
+
+            override fun onAnimationEnd(animation: Animation?) {
+
+            }
+
+            override fun onAnimationRepeat(animation: Animation?) {
+
+            }
+        })
+
+        logoView.startAnimation(introAnimation)
     }
 }

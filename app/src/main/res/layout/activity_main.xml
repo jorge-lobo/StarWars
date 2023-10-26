@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/bg_dark_mode" />
+            android:background="@drawable/background" />
 
         <View
             android:id="@+id/star_wars_logo_small"
@@ -30,14 +30,13 @@
             android:background="@drawable/star_wars_logo" />
 
         <ScrollView
-            android:id="@+id/text_box"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_above="@id/buttons_container"
-            android:layout_marginHorizontal="41dp"
-            android:layout_marginTop="144dp"
-            android:paddingTop="25dp"
-            android:paddingBottom="76dp">
+            android:layout_below="@id/star_wars_logo_small"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="32dp"
+            android:paddingBottom="22dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -52,19 +51,18 @@
                     android:fontFamily="@font/starjedi_special_edition"
                     android:gravity="center_horizontal|top"
                     android:text="@string/here_you_will_find_all_the_information_you_need_about_your_favorite_characters_their_ships_and_their_planets"
-                    android:textAppearance="@style/text_yellow"
+                    android:textColor="@color/text"
                     android:textSize="@dimen/text_size_large" />
 
                 <TextView
                     android:id="@+id/slogan_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="102dp"
-                    android:layout_marginTop="73dp"
-                    android:layout_marginBottom="76dp"
+                    android:layout_marginTop="32dp"
                     android:fontFamily="@font/starjedi_special_edition"
                     android:gravity="center_horizontal|top"
                     android:text="@string/may_the_force_be_with_you"
-                    android:textAppearance="@style/text_yellow"
+                    android:textColor="@color/text"
                     android:textSize="@dimen/text_size_extra_large" />
 
             </LinearLayout>
@@ -78,18 +76,20 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:orientation="vertical"
-            android:paddingBottom="61dp">
+            android:paddingBottom="40dp">
 
             <Button
                 android:id="@+id/personages_button"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="22dp"
                 android:background="@drawable/button_full_width"
+                android:backgroundTint="@color/large_buttons_bg"
                 android:fontFamily="@font/starjedi_special_edition"
                 android:gravity="center_horizontal|top"
                 android:text="@string/characters"
-                android:textAppearance="@style/text_black"
+                android:textColor="@color/text_buttons"
                 android:textSize="@dimen/text_size_extra_large" />
 
             <Button
@@ -97,12 +97,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginBottom="22dp"
                 android:background="@drawable/button_full_width"
+                android:backgroundTint="@color/large_buttons_bg"
                 android:fontFamily="@font/starjedi_special_edition"
                 android:gravity="center_horizontal|top"
                 android:text="@string/planets"
-                android:textAppearance="@style/text_black"
+                android:textColor="@color/text_buttons"
                 android:textSize="@dimen/text_size_extra_large" />
 
             <Button
@@ -110,12 +111,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="32dp"
                 android:background="@drawable/button_full_width"
+                android:backgroundTint="@color/large_buttons_bg"
                 android:fontFamily="@font/starjedi_special_edition"
-                android:gravity="center_horizontal|top"
+                android:gravity="center_horizontal"
                 android:text="@string/ships"
-                android:textAppearance="@style/text_black"
+                android:textColor="@color/text_buttons"
                 android:textSize="@dimen/text_size_extra_large" />
 
         </LinearLayout>

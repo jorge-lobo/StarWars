@@ -122,4 +122,5 @@
     <string name="mountain">mountain</string>
     <string name="ocean">ocean</string>
     <string name="plains">plains</string>
+    <string name="unknown">unknown</string>
 </resources>

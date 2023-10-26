@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/bg_dark_mode" />
+            android:background="@drawable/background" />
 
         <ImageView
             android:id="@+id/back_button"
@@ -32,7 +32,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="51dp"
             android:contentDescription="@string/back_button"
-            android:src="@drawable/arrow_left_yellow" />
+            android:src="@drawable/arrow_left" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,7 +49,7 @@
                 android:fontFamily="@font/starjedi_special_edition"
                 android:gravity="center"
                 android:text="@{viewModel.personageName}"
-                android:textAppearance="@style/text_yellow"
+                android:textColor="@color/titles"
                 android:textSize="@dimen/text_size_small_title"
                 tools:text="@string/name" />
 
@@ -61,7 +61,7 @@
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/starjedi_special_edition"
                 android:text="@string/biographical_information"
-                android:textAppearance="@style/text_yellow"
+                android:textColor="@color/titles"
                 android:textSize="@dimen/text_size_small_title" />
 
             <LinearLayout
@@ -84,7 +84,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/born"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -103,7 +103,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.personageBirthYear}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -129,7 +129,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/gender"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -148,7 +148,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.personageGender}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -175,7 +175,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/species"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -194,7 +194,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.personageSpecie}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -209,7 +209,7 @@
                 android:layout_marginTop="17dp"
                 android:fontFamily="@font/starjedi_special_edition"
                 android:text="@string/physical_description"
-                android:textAppearance="@style/text_yellow"
+                android:textColor="@color/titles"
                 android:textSize="@dimen/text_size_small_title" />
 
             <LinearLayout
@@ -232,7 +232,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/height"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -251,7 +251,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.personageHeight}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -278,7 +278,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/mass"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -297,7 +297,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.personageMass}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -324,7 +324,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/hair_color"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -343,7 +343,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.personageHairColor}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -370,7 +370,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/skin_color"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -389,7 +389,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.personageSkinColor}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -416,7 +416,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/eye_color"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -435,7 +435,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.personageEyeColor}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>
@@ -450,7 +450,7 @@
                 android:layout_marginTop="17dp"
                 android:fontFamily="@font/starjedi_special_edition"
                 android:text="@string/homeworld"
-                android:textAppearance="@style/text_yellow"
+                android:textColor="@color/titles"
                 android:textSize="@dimen/text_size_small_title" />
 
             <LinearLayout
@@ -473,7 +473,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="end"
                         android:text="@string/planet"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
@@ -492,7 +492,7 @@
                         android:fontFamily="@font/starjedi_special_edition"
                         android:gravity="start"
                         android:text="@{viewModel.personageHomeWorld}"
-                        android:textAppearance="@style/text_yellow"
+                        android:textColor="@color/text"
                         android:textSize="@dimen/text_size_small"
                         tools:text="text" />
                 </LinearLayout>

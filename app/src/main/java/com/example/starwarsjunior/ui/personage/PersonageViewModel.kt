@@ -12,15 +12,20 @@ import kotlinx.coroutines.launch
 class PersonageViewModel(application: Application) : BaseViewModel(application),
     LifecycleObserver {
 
-    var personages = MutableLiveData<List<Personage>?>()
+    private var personages = MutableLiveData<List<Personage>?>()
     val filteredPersonages = MutableLiveData<List<Personage>?>()
     val sortedPersonages = MutableLiveData<List<Personage>?>()
 
     val searchQuery = MutableLiveData<String>()
+    val resultsNotFoundMessage = MutableLiveData<Boolean>(false)
 
     private var isDataPreloaded = false
 
-    private var sortBy = "name"
+    enum class SortBy {
+        NAME, BIRTHYEAR
+    }
+
+    private var sortBy = SortBy.NAME
     private var isDescending = false
 
     private val selectedFilters = mutableSetOf<String>()
@@ -68,10 +73,20 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
     //SearchBox
     private fun observerSearchQuery() {
         searchQuery.observeForever { query ->
-            val filteredList = personages.value?.filter { personage ->
-                personage.name.contains(query, ignoreCase = true)
+            if (selectedFilters.isEmpty()) {
+                val filteredList = personages.value?.filter { personage ->
+                    personage.name.contains(query, ignoreCase = true)
+                }
+                filteredPersonages.value = filteredList
+            } else {
+                val filteredList = filteredPersonages.value?.filter { personage ->
+                    personage.name.contains(query, ignoreCase = true)
+                }
+                filteredPersonages.value = filteredList
             }
-            filteredPersonages.value = filteredList
+
+            //after applying filters, verify if there are results
+            resultsNotFoundMessage.value = filteredPersonages.value?.isEmpty() == true
         }
     }
 
@@ -83,32 +98,43 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
 
     // Order buttons
     fun toggleSortNameOrder() {
-        sortBy = "name"
+        sortBy = SortBy.NAME
         isDescending = !isDescending
         updateSortedPersonages()
     }
 
     fun toggleSortYearOrder() {
-        sortBy = "birthYear"
+        sortBy = SortBy.BIRTHYEAR
         isDescending = !isDescending
         updateSortedPersonages()
     }
 
-    private fun updateSortedPersonages() {
-        val sortedList = when (sortBy) {
-            "name" -> {
-                if (isDescending) sortedPersonages.value?.sortedByDescending { it.name }
-                else sortedPersonages.value?.sortedBy { it.name }
-            }
-
-            "birthYear" -> {
-                if (isDescending) sortedPersonages.value?.sortedByDescending { it.birthYear }
-                else sortedPersonages.value?.sortedBy { it.birthYear }
-            }
-
-            else -> sortedPersonages.value
+    fun updateSortedPersonages() {
+        val listToSort = if (selectedFilters.isEmpty()) {
+            personages.value
+        } else {
+            filteredPersonages.value
         }
-        sortedPersonages.value = sortedList
+        val sortedList = when (sortBy) {
+            SortBy.NAME -> {
+                val alphabeticSortedList = listToSort?.sortedBy {
+                    it.name.lowercase()
+                }
+                if (isDescending) alphabeticSortedList?.asReversed() else alphabeticSortedList
+            }
+
+            SortBy.BIRTHYEAR -> {
+                val numericSortedList = listToSort?.sortedBy {
+                    it.birthYear.convertBirthYearToDouble()
+                }
+                if (isDescending) numericSortedList?.asReversed() else numericSortedList
+            }
+        }
+        if (selectedFilters.isEmpty()) {
+            sortedPersonages.value = sortedList
+        } else {
+            filteredPersonages.value = sortedList
+        }
     }
 
 // Filter buttons
@@ -122,14 +148,33 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
         }
     }
 
-    fun applyFilters() {
-        val filteredList = personages.value?.filter { personage ->
+    private fun filterPersonagesByProperty(
+        filterFunction: (Personage) -> Boolean
+    ): List<Personage> {
+        return personages.value?.filter { filterFunction(it) } ?: emptyList()
+    }
+
+    private fun filterByGender(): List<Personage> {
+        return filterPersonagesByProperty { personage ->
             selectedFilters.isEmpty() || selectedFilters.contains(personage.gender)
         }
-        filteredPersonages.value = filteredList
+    }
+
+    fun applyFilters() {
+        val genderFiltered = filterByGender()
+        filteredPersonages.value = genderFiltered
     }
 
     fun isFilterSelected(filter: String): Boolean {
         return selectedFilters.contains(filter)
+    }
+
+    fun resetFilters() {
+        selectedFilters.clear()
+    }
+
+    fun String.convertBirthYearToDouble(): Double {
+        val numericValue = this.replace("[^0-9.]".toRegex(), "").toDoubleOrNull() ?: 0.0
+        return if (this.contains("BBY", ignoreCase = true)) -numericValue else numericValue
     }
 }

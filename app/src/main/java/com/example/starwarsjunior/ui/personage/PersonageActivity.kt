@@ -1,10 +1,13 @@
 package com.example.starwarsjunior.ui.personage
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.EditText
+import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -12,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.starwarsjunior.R
+import com.example.starwarsjunior.data.personage.objects.Personage
 import com.example.starwarsjunior.databinding.ActivityPersonageBinding
 import com.example.starwarsjunior.ui.personage.details.PersonageDetailActivity
 import com.example.starwarsjunior.utils.Utils
@@ -26,6 +30,8 @@ class PersonageActivity : AppCompatActivity() {
     private lateinit var mPersonageViewModel: PersonageViewModel
 
     private val mPersonageItemAdapter = FastItemAdapter<PersonageBindingItem>()
+
+    private lateinit var launcher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,9 +54,7 @@ class PersonageActivity : AppCompatActivity() {
         }
 
         //search box
-        val searchBox = findViewById<EditText>(R.id.search_box)
-
-        searchBox.addTextChangedListener(object : TextWatcher {
+        binding.searchBox.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -69,11 +73,19 @@ class PersonageActivity : AppCompatActivity() {
         val selectExtension = fastItemAdapter.getSelectExtension()
         selectExtension.isSelectable = true
 
+        //when returning from PersonageDetail, this function will load preview sort list values
+        launcher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    mPersonageViewModel.updateSortedPersonages()
+                }
+            }
+
         fastItemAdapter.onClickListener = { _, _, item, _ ->
             val intent = Intent(this, PersonageDetailActivity::class.java)
             val idFromUrl = Utils.extractIdFromUrl(item.personage.url)
             intent.putExtra(PersonageDetailActivity.EXTRA_PERSONAGE_ID, idFromUrl)
-            startActivity(intent)
+            launcher.launch(intent)
             binding.searchBox.setText("")
             false
         }
@@ -87,18 +99,7 @@ class PersonageActivity : AppCompatActivity() {
         mPersonageViewModel.sortedPersonages.observe(
             this,
             Observer { personageList ->
-
-                val items = ArrayList<PersonageBindingItem>()
-                mPersonageItemAdapter.clear()
-
-                items.clear()
-                if (personageList != null) {
-                    for (personage in personageList) {
-                        val item = PersonageBindingItem(personage)
-                        items.add(item)
-                    }
-                    mPersonageItemAdapter.add(items)
-                }
+                updatePersonageAdapter(personageList)
             }
         )
 
@@ -106,23 +107,23 @@ class PersonageActivity : AppCompatActivity() {
         mPersonageViewModel.filteredPersonages.observe(
             this,
             Observer { personageList ->
-
-                val items = ArrayList<PersonageBindingItem>()
-                mPersonageItemAdapter.clear()
-
-                items.clear()
-                if (personageList != null) {
-                    for (personage in personageList) {
-                        val item = PersonageBindingItem(personage)
-                        items.add(item)
-                    }
-                    mPersonageItemAdapter.add(items)
-                }
+                updatePersonageAdapter(personageList)
             }
         )
 
+        //toggle the visibility of the no results message
+        //applied both in the search bar and in the filters
+        mPersonageViewModel.resultsNotFoundMessage.observe(this, Observer { notFound ->
+            if (notFound) {
+                binding.resultsNotFound.visibility = View.VISIBLE
+            } else {
+                binding.resultsNotFound.visibility = View.GONE
+            }
+        })
+
         binding.resetButton.setOnClickListener {
             binding.searchBox.setText("")
+            mPersonageViewModel.applyFilters()
         }
 
         binding.backButton.setOnClickListener {
@@ -178,7 +179,18 @@ class PersonageActivity : AppCompatActivity() {
 
             mPersonageViewModel.toggleSortYearOrder()
         }
+    }
 
-        //Filter buttons
+    private fun updatePersonageAdapter(personageList: List<Personage>?) {
+        val items = ArrayList<PersonageBindingItem>()
+        mPersonageItemAdapter.clear()
+        items.clear()
+        if (personageList != null) {
+            for (personage in personageList) {
+                val item = PersonageBindingItem(personage)
+                items.add(item)
+            }
+            mPersonageItemAdapter.add(items)
+        }
     }
 }

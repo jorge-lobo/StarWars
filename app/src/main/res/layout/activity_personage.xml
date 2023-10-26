@@ -11,6 +11,10 @@
         <variable
             name="viewModel"
             type="com.example.starwarsjunior.ui.personage.PersonageViewModel" />
+
+        <variable
+            name="resultsNotFoundMessage"
+            type="Boolean" />
     </data>
 
     <RelativeLayout
@@ -23,7 +27,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/bg_dark_mode" />
+            android:background="@drawable/background" />
 
         <View
             android:id="@+id/star_wars_logo_small"
@@ -53,7 +57,7 @@
             android:fontFamily="@font/starjedi_special_edition"
             android:gravity="center_horizontal|top"
             android:text="@string/characters"
-            android:textAppearance="@style/text_yellow"
+            android:textColor="@color/titles"
             android:textSize="@dimen/text_size_extra_large"
             tools:ignore="RelativeOverlap" />
 
@@ -69,6 +73,7 @@
             android:background="@drawable/search_box"
             android:inputType="text"
             android:paddingHorizontal="15dp"
+            android:textColor="@color/black"
             tools:ignore="LabelFor" />
 
         <ImageView
@@ -162,17 +167,61 @@
                 android:focusable="true"
                 android:src="@drawable/arrow_down_yellow_group" />
 
-            <ProgressBar
-                android:id="@+id/loading"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerInParent="true"
-                android:indeterminate="true"
-                android:indeterminateTint="@color/yellow"
-                android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
-
         </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/resultsNotFound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/order_buttons_container"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="91dp"
+            android:orientation="vertical"
+            android:visibility="@{resultsNotFoundMessage ? View.VISIBLE : View.GONE}">
+
+            <TextView
+                android:id="@+id/attention_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center"
+                android:text="@string/attention"
+                android:textAppearance="@style/text_white"
+                android:textSize="@dimen/text_size_medium" />
+
+            <ImageView
+                android:id="@+id/stormtrooper"
+                android:layout_width="96dp"
+                android:layout_height="279dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/stormtrooper"
+                android:src="@drawable/stormtrooper" />
+
+            <TextView
+                android:id="@+id/results_not_found_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/starjedi_special_edition"
+                android:gravity="center"
+                android:text="@string/results_not_found"
+                android:textAppearance="@style/text_white"
+                android:textSize="@dimen/text_size_small_title" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/design_elements"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/personages_list_rv"

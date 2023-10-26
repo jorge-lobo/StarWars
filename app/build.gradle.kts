@@ -13,7 +13,7 @@ android {
         applicationId = "com.axians.starshutai"
         minSdk = 24
         targetSdk = 33
-        versionCode = 4
+        versionCode = 5
         versionName = "0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

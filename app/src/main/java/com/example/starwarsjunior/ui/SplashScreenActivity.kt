@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -34,6 +35,7 @@ class SplashScreenActivity : AppCompatActivity() {
     //logo animation
     private fun startLogoAnimation() {
         val logoView: View = findViewById(R.id.star_wars_logo_small)
+        val loadingProgressBar: ProgressBar = findViewById(R.id.loading)
 
         val introAnimation = AnimationUtils.loadAnimation(this, R.anim.logo_animation)
         introAnimation.setAnimationListener(object : Animation.AnimationListener {
@@ -42,7 +44,7 @@ class SplashScreenActivity : AppCompatActivity() {
             }
 
             override fun onAnimationEnd(animation: Animation?) {
-
+                loadingProgressBar.visibility = View.VISIBLE
             }
 
             override fun onAnimationRepeat(animation: Animation?) {

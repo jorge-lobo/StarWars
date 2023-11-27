@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.starwarsjunior.data.personage.PersonageRepository
 import com.example.starwarsjunior.data.personage.objects.Personage
+import com.example.starwarsjunior.data.personage.objects.Specie
 import com.example.starwarsjunior.ui.common.BaseViewModel
 import kotlinx.coroutines.launch
 
@@ -68,6 +69,10 @@ class PersonageViewModel(application: Application) : BaseViewModel(application),
                 }
             }
         }
+    }
+
+    suspend fun getCachedSpecies(): List<Specie>? {
+        return PersonageRepository.getCachedSpecies()
     }
 
     //SearchBox

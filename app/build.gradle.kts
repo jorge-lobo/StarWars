@@ -52,11 +52,11 @@ dependencies {
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.4")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.4")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
 
 
-    implementation("androidx.recyclerview:recyclerview:1.3.1")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
 
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -66,10 +66,7 @@ dependencies {
     implementation("com.jakewharton.threetenabp:threetenabp:1.4.6")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.4")
-
     implementation ("com.squareup.okhttp3:okhttp:4.9.1")
-
 
     // FastAdapter
     val latestFastAdapterRelease = "5.7.0"
@@ -91,7 +88,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
     implementation("com.google.firebase:firebase-analytics-ktx")
 
-    implementation("androidx.databinding:databinding-common:8.1.2")
+    implementation("androidx.databinding:databinding-common:8.1.4")
 
     kapt("com.android.databinding:compiler:3.1.4")
 }
